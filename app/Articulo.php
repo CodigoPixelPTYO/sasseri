@@ -8,7 +8,7 @@ class Articulo extends Model
 {
     protected $table = 'articulos';
     protected $fillable =[
-        'id','idcategoria','idcategoria2','codigo','nombre','precio_venta','stock','descripcion','cod_invima','lote','fec_vence','minimo','tipo_articulo','iva','talla','id_und_medida','id_concentracion','id_presentacion','descripcion','condicion','img','id_usuario','id_empresa'
+        'id','idcategoria','idcategoria2','codigo','nombre','precio_venta','stock','descripcion','cod_invima','lote','fec_vence','minimo','tipo_articulo','iva','talla','marca','linea','id_und_medida','id_concentracion','id_presentacion','descripcion','condicion','img','id_usuario','id_empresa'
     ];
     public function categoria(){
         return $this->belongsTo('App\Categoria');

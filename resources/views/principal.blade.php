@@ -15,8 +15,7 @@
     <!-- Icons -->
     <link href="css/plantilla.css" rel="stylesheet">
 </head>
-</div>
-
+<!--kuhgn2CfgiHnDa44IvvKpRZNaoqwKmPKsR1ajX9kSMl6Ge63hM71PbfwKX8Q-->
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
     <div id="app">
     <header class="app-header navbar">

@@ -132,7 +132,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="row">
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Cuenta compra <span style="color:red;" v-show="idCuentaProductos==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
@@ -155,7 +155,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="row">
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Cuenta Donaciones <span style="color:red;" v-show="idCuentaDonaciones==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
@@ -178,7 +178,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="row">
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Cuenta impuesto al consumo en ventas <span style="color:red;" v-show="idCuentaImpuestoConsumoVentas==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
@@ -186,7 +186,43 @@
                                             <button type="button" @click="abrirModalCuentas('impuesto_consumo_ventas')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-8">
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Iva Compras<span style="color:red;" v-show="idIvaCompras==0">(*)</span></label>
+                                        <div class="col-md-9 float-right">
+                                            <select class="form-control" v-model="idIvaCompras">
+                                                <option value="0">Seleccione</option>
+                                                <option v-for="(iva, index) in arrayIvasCompras" :value="iva.id" v-text="iva.nombre"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Iva Ventas<span style="color:red;" v-show="idIvaVentas==0">(*)</span></label>
+                                        <div class="col-md-9 float-right">
+                                            <select class="form-control" v-model="idIvaVentas">
+                                                <option value="0">Seleccione</option>
+                                                <option v-for="(iva, index) in arrayIvasVentas" :value="iva.id" v-text="iva.nombre"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Iva Devolucion En Compras<span style="color:red;" v-show="idIvaDevolucionCompras==0">(*)</span></label>
+                                        <div class="col-md-9 float-right">
+                                            <select class="form-control" v-model="idIvaDevolucionCompras">
+                                                <option value="0">Seleccione</option>
+                                                <option v-for="(iva, index) in arrayIvasDevolucionCompras" :value="iva.id" v-text="iva.nombre"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Iva Devolucion En Ventas<span style="color:red;" v-show="idIvaDevolucionVentas==0">(*)</span></label>
+                                        <div class="col-md-9 float-right">
+                                            <select class="form-control" v-model="idIvaDevolucionVentas">
+                                                <option value="0">Seleccione</option>
+                                                <option v-for="(iva, index) in arrayIvasDevolucionVentas" :value="iva.id" v-text="iva.nombre"></option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div v-show="errorModeloContable" class="form-group row div-error">
@@ -265,6 +301,14 @@
                 nombre : '',
                 descripcion : '',
                 arrayModeloContable : [],
+                idIvaCompras : 0,
+                idIvaVentas : 0,
+                idIvaDevolucionCompras : 0,
+                idIvaDevolucionVentas : 0,
+                arrayIvasCompras : [],
+                arrayIvasVentas : [],
+                arrayIvasDevolucionCompras : [],
+                arrayIvasDevolucionVentas : [],
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
@@ -361,6 +405,20 @@
                     console.log(error);
                 });
             },
+            listarIvas(page,buscar,criterio){
+                let me=this;
+                var url= this.ruta +'/iva?buscar='+buscar+'&criterio='+criterio;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayIvasCompras = respuesta.ivaCompra;
+                    me.arrayIvasVentas = respuesta.ivaVenta;
+                    me.arrayIvasDevolucionCompras = respuesta.ivaDevolucionCompra;
+                    me.arrayIvasDevolucionVentas = respuesta.ivaDevolucionVenta;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
             cambiarPagina(page,buscar,criterio){
                 let me = this;
                 //Actualiza la página actual
@@ -378,6 +436,10 @@
                 axios.post(this.ruta +'/modelo_contable/registrar',{
                     'nombre': this.nombre,
                     'descripcion': this.descripcion,
+                    'idIvaCompras': this.idIvaCompras,
+                    'idIvaVentas': this.idIvaVentas,
+                    'idIvaDevolucionCompras': this.idIvaDevolucionCompras,
+                    'idIvaDevolucionVentas': this.idIvaDevolucionVentas,
                     'idCuentaProductos': this.idCuentaProductos,
                     'idCuentaSalidaProductos': this.idCuentaSalidaProductos,
                     'idCuentaSaldosIniciales': this.idCuentaSaldosIniciales,
@@ -402,6 +464,10 @@
                 axios.put(this.ruta +'/modelo_contable/actualizar',{
                     'nombre': this.nombre,
                     'descripcion': this.descripcion,
+                    'idIvaCompras': this.idIvaCompras,
+                    'idIvaVentas': this.idIvaVentas,
+                    'idIvaDevolucionCompras': this.idIvaDevolucionCompras,
+                    'idIvaDevolucionVentas': this.idIvaDevolucionVentas,
                     'idCuentaProductos': this.idCuentaProductos,
                     'idCuentaSalidaProductos': this.idCuentaSalidaProductos,
                     'idCuentaSaldosIniciales': this.idCuentaSaldosIniciales,
@@ -511,6 +577,11 @@
                 this.tituloModal='';
                 this.nombre='';
                 this.descripcion='';
+                this.idIvaCompras = 0;
+                this.idIvaVentas = 0;
+                this.idIvaDevolucionCompras = 0;
+                this.idIvaDevolucionVentas = 0;
+                this.arrayIvas = [];
                 this.idCuentaProductos = 0;
                 this.cuentaProductos = '';
                 this.codCuentaProductos = '';
@@ -545,6 +616,11 @@
                                 this.tituloModal = 'Registrar modelo contable';
                                 this.nombre= '';
                                 this.descripcion = '';
+                                this.idIvaCompras = 0;
+                                this.idIvaVentas = 0;
+                                this.idIvaDevolucionCompras = 0;
+                                this.idIvaDevolucionVentas = 0;
+                                this.arrayIvas = [];
                                 this.tipoAccion = 1;
                                 break;
                             }
@@ -557,6 +633,10 @@
                                 this.modelo_contable_id=data['id'];
                                 this.nombre = data['nombre'];
                                 this.descripcion= data['descripcion'];
+                                this.idIvaCompras = data['idIvaCompras'];
+                                this.idIvaVentas = data['idIvaVentas'];
+                                this.idIvaDevolucionCompras = data['idIvaDevolucionCompras'];
+                                this.idIvaDevolucionVentas = data['idIvaDevolucionVentas'];
 
                                 this.idCuentaProductos = data['idCuentaProductos'];
                                 this.cuentaProductos = data['cuentaProductos'];
@@ -588,6 +668,7 @@
                                 break;
                             }
                         }
+                        this.listarIvas(1,'','');
                     }
                 }
             },

@@ -183,6 +183,7 @@
                                     <div class="col-md-9 float-right form-inline">
                                         <select class="form-control col-md-10 float-left custom-select" v-model="idcategoria2" v-bind:class="{ 'is-invalid': hasError.idcategoria2==1 }">
                                             <option value="0" disabled>Seleccione</option>
+                                            <option value="." disabled>.</option>
                                             <option v-for="categoria in arrayCategoria2" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                         </select>
                                         <span v-if="modalCrear==0" class="btn btn-primary form-control col-md-2 float-right" @click="abrirModalCrear('categoria2')" title="Nuevo"><i class="fa fa-plus-circle"></i></span>
@@ -223,7 +224,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label class="col-md-3 form-control-label float-left" for="text-input">Cod. invima</label>
+                                    <label class="col-md-3 form-control-label float-left" for="text-input">Cod. interno</label>
                                     <div class="col-md-9 float-right">
                                         <input type="text" v-model="cod_invima" class="form-control" placeholder="Código invima" v-bind:class="{ 'is-invalid': hasError.cod_invima==1 }">
                                     </div>
@@ -353,13 +354,27 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-3 form-control-label float-left">Marca</label>
+                                    <div class="col-md-9 float-left">
+                                        <input type="text" v-model="marca" class="form-control" v-bind:class="{ 'is-invalid': hasError.marca==1 }">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-3 form-control-label float-left">Linea</label>
+                                    <div class="col-md-9 float-right">
+                                        <input type="text" v-model="linea" class="form-control" v-bind:class="{ 'is-invalid': hasError.linea==1 }">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
                                     <label class="col-md-3 form-control-label float-left">Imagen</label>
                                     <div class="col-md-9 float-right">
                                         <input type="file" id="img" name="img" ref="inputFileImg"  @change="cargarImg" class="form-control" v-bind:class="{ 'is-invalid': hasError.img==1 }">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="form-group col-md-6">
                                 </div>
                             </div>
                             <!--<div class="row">
@@ -875,8 +890,8 @@
                 nombre : '',
                 precio_venta : 0,
                 stock : 0,
-                cod_invima : '',
-                lote : '',
+                cod_invima : '.',
+                lote : '.',
                 fec_vence : '',
                 id_und_medida : '',
                 id_concentracion : '',
@@ -888,10 +903,12 @@
                 tipo_articulo : '',
                 iva : 0,
                 descripcion : '',
-                talla : '',
+                talla : '.',
                 tipo_movimiento : 1,
                 img: '',
                 arrayImg: '',
+                marca : '',
+                linea : '',
 
 
                 arrayArticulo : [],
@@ -1029,6 +1046,8 @@
                     minimo : 0,
                     tipo_articulo : 0,
                     talla : 0,
+                    marca : 0,
+                    linea : 0,
                     id_und_medida : 0,
                     id_presentacion : 0,
                     codigo : 0,
@@ -1401,6 +1420,8 @@
                 data.append('iva', this.iva);
                 data.append('descripcion', this.descripcion);
                 data.append('talla', this.talla);
+                data.append('marca', this.marca);
+                data.append('linea', this.linea);
                 data.append('arrayTarifarios', JSON.stringify(this.arrayTarifarios));
                 data.append('idIvaCompra', this.idIvaCompra);
                 data.append('idIvaVenta', this.idIvaVenta);
@@ -1486,6 +1507,8 @@
                 data2.append('iva', this.iva);
                 data2.append('descripcion', this.descripcion);
                 data2.append('talla', this.talla);
+                data2.append('marca', this.marca);
+                data2.append('linea', this.linea);
                 data2.append('arrayTarifarios', JSON.stringify(this.arrayTarifarios));
                 data2.append('idIvaCompra', this.idIvaCompra);
                 data2.append('idIvaVenta', this.idIvaVenta);
@@ -1590,6 +1613,8 @@
                 this.hasError['minimo'] = 0;
                 this.hasError['tipo_articulo'] = 0;
                 this.hasError['talla'] = 0;
+                this.hasError['marca'] = 0;
+                this.hasError['linea'] = 0;
                 this.hasError['id_und_medida'] = 0;
                 this.hasError['id_presentacion'] = 0;
                 this.hasError['codigo'] = 0;
@@ -1608,25 +1633,30 @@
 
                 if(this.tipo_articulo==1){
                     if (!this.stock || this.stock<=0) {error=1; this.hasError['stock']=1;}
-                    if(!this.cod_invima) {error=1; this.hasError['cod_invima']=1;}
-                    if(!this.lote) {error=1; this.hasError['lote']=1;}
+                    // if(!this.cod_invima) {error=1; this.hasError['cod_invima']=1;}
+                    // if(!this.lote) {error=1; this.hasError['lote']=1;}
                     if(!this.fec_vence) {error=1; this.hasError['fec_vence']=1;}
                     if(this.minimo<=0) {error=1; this.hasError['minimo']=1;}
-                    if(!this.talla) {error=1; this.hasError['']=1;}
+                    // if(!this.talla) {error=1; this.hasError['']=1;}
                     if(this.id_und_medida==0) {error=1; this.hasError['id_und_medida']=1;}
+                    if(!this.marca || this.marca=='' || this.marca==null) {error=1; this.hasError['marca']=1;}
+                    if(!this.linea || this.linea=='' || this.linea==null) {error=1; this.hasError['linea']=1;}
                 }
 
                 if(this.tipo_articulo==2){
-                    if(!this.cod_invima) {error=1; this.hasError['cod_invima']=1;}
+                    // if(!this.cod_invima) {error=1; this.hasError['cod_invima']=1;}
+                    if(!this.marca || this.marca=='' || this.marca==null) {error=1; this.hasError['marca']=1;}
                 }
 
                 if(this.tipo_articulo==3){
                     if (!this.stock || this.stock<=0) {error=1; this.hasError['stock']=1;}
-                    if(!this.cod_invima) {error=1; this.hasError['cod_invima']=1;}
-                    if(!this.lote) {error=1; this.hasError['lote']=1;}
+                    // if(!this.cod_invima) {error=1; this.hasError['cod_invima']=1;}
+                    // if(!this.lote) {error=1; this.hasError['lote']=1;}
                     if(this.minimo<=0) {error=1; this.hasError['minimo']=1;}
-                    if(!this.talla) {error=1; this.hasError['talla']=1;}
+                    // if(!this.talla) {error=1; this.hasError['talla']=1;}
                     if(this.id_und_medida==0) {error=1; this.hasError['id_und_medida']=1;}
+                    if(!this.marca || this.marca=='' || this.marca==null) {error=1; this.hasError['marca']=1;}
+                    if(!this.linea || this.linea=='' || this.linea==null) {error=1; this.hasError['linea']=1;}
                 }
 
                 if(!this.id_presentacion) {error=1; this.hasError['id_presentacion']=1;}
@@ -1676,6 +1706,8 @@
                 this.img = '';
                 this.arrayImg = [];
                 this.$refs.inputFileImg.value = '';
+                this.marca = '';
+                this.linea = '';
                 this.errorArticulo=0;
                 
                 this.idArticuloStock = 0;
@@ -1730,6 +1762,8 @@
                                 this.tipo_articulo='';
                                 this.descripcion = '';
                                 this.talla = '';
+                                this.marca = '';
+                                this.linea = '';
                                 this.tipoAccion = 1;
                                 this.listarTarifarios('');
                                 break;
@@ -1757,6 +1791,8 @@
                                 this.tipo_articulo=data['tipo_articulo'];
                                 this.descripcion= data['descripcion'];
                                 this.talla = data['talla'];
+                                this.marca = data['marca'];
+                                this.linea = data['linea'];
                                 this.selectIvaProducto(this.articulo_id);
                                 this.listarTarifarios(data['id']);
                                 break;
