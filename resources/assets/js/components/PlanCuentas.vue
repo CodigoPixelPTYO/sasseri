@@ -181,7 +181,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-2 form-control-label" for="text-input">Tercero</label>
+                                    <label class="col-md-2 form-control-label" for="text-input">Tercero cierre</label>
                                     <div class="form-inline col-md-4">
                                         <input type="text" readonly class="form-control" style="width: 68%;" v-model="tercero">
                                         <button type="button" @click="abrirModal('planCuentas','tercero')" class="btn btn-primary">...</button>
@@ -221,12 +221,12 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Cuenta compra</label>
                                     <div class="col-md-1">                                        
-                                        <input type="radio" v-model="tipo_cuenta" value="Cuenta compra" class="form-control">
+                                        <input type="checkbox" v-model="tipo_cuenta_compra" value="Cuenta compra" class="form-control">
                                     </div>
 
                                     <label class="col-md-3 form-control-label" for="text-input">Cuenta salida de almacen</label>
                                     <div class="col-md-1">                                        
-                                        <input type="radio" v-model="tipo_cuenta" value="Cuenta salida almacen" class="form-control">
+                                        <input type="checkbox" v-model="tipo_cuenta_salida_almacen" value="Cuenta salida almacen" class="form-control">
                                     </div>
                                 </div>
                                 
@@ -258,7 +258,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" v-text="tituloModal2"></h4>
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                            <button type="button" class="close" @click="cerrarModal2()" aria-label="Close">
                                 <span aria-hidden="true" title="Cerrar">×</span>
                             </button>
                         </div>
@@ -289,6 +289,9 @@
                                         </tr>
                                 </table>
                             </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" @click="cerrarModal2()">Cerrar</button>
                         </div>
                     </div>
                 </div>
@@ -408,7 +411,8 @@
                 terc_busq : '',
                 tipoAutoretenedorTercero : '',
 
-                tipo_cuenta : '',
+                tipo_cuenta_compra : '',
+                tipo_cuenta_salida_almacen : '',
             }
         },
         computed:{
@@ -602,7 +606,8 @@
                     'evitar_saldo_negativo': this.evitar_saldo_negativo,
                     'id_categorias': this.id_categoria,
                     'id_tercero': this.tercero_id,
-                    'tipo_cuenta': this.tipo_cuenta,
+                    'tipo_cuenta_compra': this.tipo_cuenta_compra,
+                    'tipo_cuenta_salida_almacen': this.tipo_cuenta_salida_almacen,
                 }).then(function (response) {
                     me.cerrarModal();
                     me.listarPlanCuentas(1,'','codigo');
@@ -632,7 +637,8 @@
                     'evitar_saldo_negativo': this.evitar_saldo_negativo,
                     'id_categorias': this.id_categoria,
                     'id_tercero': this.tercero_id,
-                    'tipo_cuenta': this.tipo_cuenta,
+                    'tipo_cuenta_compra': this.tipo_cuenta_compra,
+                    'tipo_cuenta_salida_almacen': this.tipo_cuenta_salida_almacen,
                     'id': this.cuenta_id
                 }).then(function (response) {
                     me.cerrarModal();
@@ -675,7 +681,12 @@
                 this.cuenta_cierre = '';
                 this.modal2=0;
                 this.id_categoria = [];
-                this.tipo_cuenta = '';
+                this.tipo_cuenta_compra = '';
+                this.tipo_cuenta_salida_almacen = '';
+            },
+            cerrarModal2(){
+                this.modal2 = 0;
+                this.tituloModal2 = '';
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
@@ -721,7 +732,8 @@
                                 this.cuenta_cierre = data['cuenta_cierre'];
                                 this.codigo_cuenta_cierre = data['codigo_cuenta_cierre'];
                                 this.evitar_saldo_negativo = data['evitar_saldo_negativo'];
-                                this.tipo_cuenta = data['tipo_cuenta'];
+                                this.tipo_cuenta_compra = data['tipo_cuenta_compra'];
+                                this.tipo_cuenta_salida = data['tipo_cuenta_salida'];
 
                                 if(data['id_tercero']!=0 && data['id_tercero']!=null){
                                     this.tercero_id = data['id_tercero'];

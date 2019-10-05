@@ -79,7 +79,7 @@ class ArticuloController extends Controller
             $cons_tarifario = '';
         }
 
-        $cons = "SELECT articulos.id,articulos.id as id_articulo,'' as id_asociado,articulos.idcategoria,articulos.idcategoria2,articulos.codigo,articulos.nombre,modelo_contable.nombre as nom_modelo_contable,categorias.nombre as nom_categoria,productos_tarifarios.valor as precio_venta,articulos.stock,articulos.descripcion,articulos.cod_invima,articulos.lote,articulos.minimo,articulos.tipo_articulo,articulos.condicion,articulos.id_presentacion,articulos.talla,articulos.marca,articulos.linea,articulos.img,articulos.id_empresa,presentacion.nombre as nom_presentacion,'' as padre FROM `articulos`,`modelo_contable`,`categorias`,`presentacion`,`productos_tarifarios` WHERE articulos.idcategoria=modelo_contable.id AND articulos.idcategoria2=categorias.id AND articulos.id_presentacion=presentacion.id AND productos_tarifarios.id_producto=articulos.id ".$cons_tarifario." AND productos_tarifarios.asociado=0 AND (articulos.nombre LIKE '%".$buscar."%' OR articulos.codigo LIKE '%".$buscar."%') ".$cons_categoria." AND articulos.id_empresa=".$id_empresa." GROUP BY articulos.id ORDER BY articulos.id DESC";
+        $cons = "SELECT articulos.id,articulos.id as id_articulo,'' as id_asociado,articulos.idcategoria,articulos.idcategoria2,articulos.codigo,articulos.nombre,modelo_contable.nombre as nom_modelo_contable,modelo_contable.idIvaCompras,modelo_contable.idIvaVentas,modelo_contable.idIvaDevolucionCompras,modelo_contable.idIvaDevolucionVentas,categorias.nombre as nom_categoria,productos_tarifarios.valor as precio_venta,articulos.stock,articulos.descripcion,articulos.cod_invima,articulos.lote,articulos.minimo,articulos.tipo_articulo,articulos.condicion,articulos.id_presentacion,articulos.talla,articulos.marca,articulos.linea,articulos.img,articulos.id_empresa,presentacion.nombre as nom_presentacion,'' as padre FROM `articulos`,`modelo_contable`,`categorias`,`presentacion`,`productos_tarifarios` WHERE articulos.idcategoria=modelo_contable.id AND articulos.idcategoria2=categorias.id AND articulos.id_presentacion=presentacion.id AND productos_tarifarios.id_producto=articulos.id ".$cons_tarifario." AND productos_tarifarios.asociado=0 AND (articulos.nombre LIKE '%".$buscar."%' OR articulos.codigo LIKE '%".$buscar."%') ".$cons_categoria." AND articulos.id_empresa=".$id_empresa." GROUP BY articulos.id ORDER BY articulos.id DESC";
 
         $articulos = DB::select($cons);
 
@@ -100,7 +100,7 @@ class ArticuloController extends Controller
                 {
                     foreach($articulos2 as $a2)
                     {
-                        $cons3 = "SELECT articulos.id,articulos.id as id_articulo,productos_asociados.id as id_asociado,articulos.idcategoria,articulos.idcategoria2,articulos.codigo,articulos.nombre,modelo_contable.nombre as nom_modelo_contable,categorias.nombre as nom_categoria,productos_tarifarios.valor as precio_venta,productos_asociados.unidades, articulos.stock,articulos.descripcion,articulos.cod_invima,articulos.lote,articulos.minimo,articulos.tipo_articulo,articulos.condicion,productos_asociados.id_presentacion,articulos.talla,articulos.marca,articulos.linea,articulos.img,articulos.id_empresa,productos_iva.id_iva,iva.nombre as nombre_iva,iva.porcentaje,iva.porcentaje as iva,productos_iva.tipo_iva,presentacion.nombre as nom_presentacion, articulos.id as padre FROM `articulos`,`modelo_contable`,`categorias`,`presentacion`,`productos_iva`,`iva`,`productos_tarifarios`,`productos_asociados` WHERE articulos.idcategoria=modelo_contable.id AND articulos.idcategoria2=categorias.id AND productos_asociados.id_presentacion=presentacion.id AND productos_tarifarios.id_producto=articulos.id ".$cons_tarifario." AND productos_iva.id_producto=articulos.id AND productos_asociados.id=$a2->id AND iva.id=productos_iva.id_iva AND productos_iva.tipo_iva='Compra' AND (articulos.nombre LIKE '%".$buscar."%' OR articulos.codigo LIKE '%".$buscar."%') ".$cons_categoria." AND articulos.id=".$a->id_articulo." AND articulos.id_empresa=".$id_empresa." GROUP BY articulos.id ORDER BY articulos.id DESC";
+                        $cons3 = "SELECT articulos.id,articulos.id as id_articulo,productos_asociados.id as id_asociado,articulos.idcategoria,articulos.idcategoria2,productos_asociados.codigo,articulos.nombre,modelo_contable.nombre as nom_modelo_contable,modelo_contable.idIvaCompras,modelo_contable.idIvaVentas,modelo_contable.idIvaDevolucionCompras,modelo_contable.idIvaDevolucionVentas,categorias.nombre as nom_categoria,productos_tarifarios.valor as precio_venta,productos_asociados.unidades, articulos.stock,articulos.descripcion,articulos.cod_invima,articulos.lote,articulos.minimo,articulos.tipo_articulo,articulos.condicion,productos_asociados.id_presentacion,articulos.talla,articulos.marca,articulos.linea,articulos.img,articulos.id_empresa,iva.nombre as nombre_iva,iva.porcentaje,iva.porcentaje as iva,presentacion.nombre as nom_presentacion, articulos.id as padre FROM `articulos`,`modelo_contable`,`categorias`,`presentacion`,`iva`,`productos_tarifarios`,`productos_asociados` WHERE articulos.idcategoria=modelo_contable.id AND articulos.idcategoria2=categorias.id AND productos_asociados.id_presentacion=presentacion.id AND productos_tarifarios.id_producto=articulos.id ".$cons_tarifario." AND productos_asociados.id=$a2->id AND (articulos.nombre LIKE '%".$buscar."%' OR productos_asociados.codigo LIKE '%".$buscar."%') ".$cons_categoria." AND articulos.id=".$a->id_articulo." AND articulos.id_empresa=".$id_empresa." GROUP BY articulos.id ORDER BY articulos.id DESC";
 
                         $articulos3 = DB::select($cons3);
 
@@ -280,29 +280,32 @@ class ArticuloController extends Controller
             
             $stock->save();
 
+            $consIvasModeloContable = "SELECT * FROM modelo_contable WHERE id=".$request->idcategoria;
+            $ivasModeloContable = DB::select($consIvasModeloContable);
+
             $iva_producto = new IvaProducto();
-            $iva_producto->id_iva = $request->idIvaCompra;
+            $iva_producto->id_iva = $ivasModeloContable[0]->idIvaCompras;
             $iva_producto->tipo_iva = 'Compra';
             $iva_producto->id_producto = $articulo->id;
             $iva_producto->usu_crea = $id_usuario;
             $iva_producto->save();
 
             $iva_producto = new IvaProducto();
-            $iva_producto->id_iva = $request->idIvaVenta;
+            $iva_producto->id_iva = $ivasModeloContable[0]->idIvaVentas;
             $iva_producto->tipo_iva = 'Venta';
             $iva_producto->id_producto = $articulo->id;
             $iva_producto->usu_crea = $id_usuario;
             $iva_producto->save();
 
             $iva_producto = new IvaProducto();
-            $iva_producto->id_iva = $request->idIvaDevolucionCompras;
+            $iva_producto->id_iva = $ivasModeloContable[0]->idIvaDevolucionCompras;
             $iva_producto->tipo_iva = 'Devoluciones compra';
             $iva_producto->id_producto = $articulo->id;
             $iva_producto->usu_crea = $id_usuario;
             $iva_producto->save();
 
             $iva_producto = new IvaProducto();
-            $iva_producto->id_iva = $request->idIvaDevolucionVenta;
+            $iva_producto->id_iva = $ivasModeloContable[0]->idIvaDevolucionVentas;
             $iva_producto->tipo_iva = 'Devoluciones Venta';
             $iva_producto->id_producto = $articulo->id;
             $iva_producto->usu_crea = $id_usuario;
@@ -372,7 +375,6 @@ class ArticuloController extends Controller
                 'fec_vence' => $request->fec_vence,
                 'minimo' => $request->minimo,
                 'tipo_articulo' => $request->tipo_articulo,
-                'iva' => $request->iva,
                 'talla' => $request->talla,
                 'marca' => $request->marca,
                 'linea' => $request->linea,
@@ -407,29 +409,32 @@ class ArticuloController extends Controller
 
             $borrarIvas = IvaProducto::where('id_producto','=',$request->id)->delete();
 
+            $consIvasModeloContable = "SELECT * FROM modelo_contable WHERE id=".$request->idcategoria;
+            $ivasModeloContable = DB::select($consIvasModeloContable);
+
             $iva_compras = new IvaProducto();
-            $iva_compras->id_iva = $request->idIvaCompra;
+            $iva_compras->id_iva = $ivasModeloContable[0]->idIvaCompras;
             $iva_compras->tipo_iva = 'Compra';
             $iva_compras->id_producto = $articulo->id;
             $iva_compras->usu_crea = $id_usuario;
             $iva_compras->save();
 
             $iva_ventas = new IvaProducto();
-            $iva_ventas->id_iva = $request->idIvaVenta;
+            $iva_ventas->id_iva = $ivasModeloContable[0]->idIvaVentas;
             $iva_ventas->tipo_iva = 'Venta';
             $iva_ventas->id_producto = $articulo->id;
             $iva_ventas->usu_crea = $id_usuario;
             $iva_ventas->save();
 
             $iva_dev_compras = new IvaProducto();
-            $iva_dev_compras->id_iva = $request->idIvaDevolucionCompra;
+            $iva_dev_compras->id_iva = $ivasModeloContable[0]->idIvaDevolucionCompras;
             $iva_dev_compras->tipo_iva = 'Devoluciones compra';
             $iva_dev_compras->id_producto = $articulo->id;
             $iva_dev_compras->usu_crea = $id_usuario;
             $iva_dev_compras->save();
 
             $iva_dev_ventas = new IvaProducto();
-            $iva_dev_ventas->id_iva = $request->idIvaDevolucionVenta;
+            $iva_dev_ventas->id_iva = $ivasModeloContable[0]->idIvaDevolucionVentas;
             $iva_dev_ventas->tipo_iva = 'Devoluciones Venta';
             $iva_dev_ventas->id_producto = $articulo->id;
             $iva_dev_ventas->usu_crea = $id_usuario;

@@ -22,7 +22,7 @@ class ProductosAsociadosController extends Controller
         if ($buscar==''){
             $productos_asociados = ProductosAsociados::leftJoin('presentacion','productos_asociados.id_presentacion','=','presentacion.id')
             ->leftJoin('articulos','productos_asociados.id_producto','articulos.id')
-            ->select('productos_asociados.id','productos_asociados.id_presentacion','productos_asociados.unidades','productos_asociados.id_producto','productos_asociados.estado','presentacion.nombre as nom_presentacion','articulos.codigo as codigo_articulo','articulos.nombre as nom_articulo')
+            ->select('productos_asociados.id','productos_asociados.id_presentacion','productos_asociados.codigo','productos_asociados.unidades','productos_asociados.id_producto','productos_asociados.estado','presentacion.nombre as nom_presentacion','articulos.codigo as codigo_articulo','articulos.nombre as nom_articulo')
             ->where('productos_asociados.id_empresa','=',$id_empresa)
             ->orderBy('id', 'desc')
             ->paginate(3);
@@ -30,7 +30,7 @@ class ProductosAsociadosController extends Controller
         else{
             $productos_asociados = ProductosAsociados::leftJoin('presentacion','productos_asociados.id_presentacion','=','presentacion.id')
             ->leftJoin('articulos','productos_asociados.id_producto','articulos.id')
-            ->select('productos_asociados.id','productos_asociados.id_presentacion','productos_asociados.unidades','productos_asociados.id_producto','productos_asociados.estado','presentacion.nombre as nom_presentacion','articulos.codigo as codigo_articulo','articulos.nombre as nom_articulo')
+            ->select('productos_asociados.id','productos_asociados.id_presentacion','productos_asociados.codigo','productos_asociados.unidades','productos_asociados.id_producto','productos_asociados.estado','presentacion.nombre as nom_presentacion','articulos.codigo as codigo_articulo','articulos.nombre as nom_articulo')
             ->where('productos_asociados.id_empresa','=',$id_empresa)->where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(3);
         }
         
@@ -57,7 +57,7 @@ class ProductosAsociadosController extends Controller
         ->leftJoin('articulos','productos_asociados.id_producto','articulos.id')
         ->leftJoin('productos_tarifarios','productos_asociados.id','=','productos_tarifarios.idPresentacionAsociada')
         ->leftJoin('con_tarifarios','productos_tarifarios.id_tarifario','con_tarifarios.id')
-        ->select('productos_asociados.id','productos_asociados.id_presentacion','productos_asociados.unidades','productos_asociados.id_producto','productos_asociados.estado','presentacion.nombre as nom_presentacion','articulos.codigo as codigo_articulo','articulos.nombre as nom_articulo','productos_tarifarios.id_tarifario','productos_tarifarios.idPresentacionAsociada','con_tarifarios.nombre as nom_tarifario','productos_tarifarios.valor')
+        ->select('productos_asociados.id','productos_asociados.id_presentacion','productos_asociados.codigo','productos_asociados.unidades','productos_asociados.id_producto','productos_asociados.estado','presentacion.nombre as nom_presentacion','articulos.codigo as codigo_articulo','articulos.nombre as nom_articulo','productos_tarifarios.id_tarifario','productos_tarifarios.idPresentacionAsociada','con_tarifarios.nombre as nom_tarifario','productos_tarifarios.valor')
         ->where('productos_asociados.id_producto','=',$id_producto)
         ->where('productos_asociados.id_empresa','=',$id_empresa)
         ->orderBy('id', 'desc')
@@ -73,6 +73,7 @@ class ProductosAsociadosController extends Controller
         $id_usuario = Auth::user()->id;
 
         $productos_asociados = new ProductosAsociados();
+        $productos_asociados->codigo = $request->codigo;
         $productos_asociados->id_presentacion = $request->id_presentacion;
         $productos_asociados->id_producto = $request->id_producto;
         $productos_asociados->unidades = $request->unidades;

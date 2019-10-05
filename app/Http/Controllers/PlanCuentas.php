@@ -22,13 +22,13 @@ class PlanCuentas extends Controller
         if ($buscar==''){
             $planCuenta = Plancuentas_model::leftJoin('plan_cuentas as cuentas2','plan_cuentas.id_cuenta_cierre','=','cuentas2.id')
             ->leftJoin('personas','plan_cuentas.id_tercero','=','personas.id')
-            ->select('plan_cuentas.id','plan_cuentas.codigo','plan_cuentas.nombre','plan_cuentas.naturaleza','plan_cuentas.tipo','plan_cuentas.corriente','plan_cuentas.banco','plan_cuentas.diferido','plan_cuentas.tercero','plan_cuentas.niif','plan_cuentas.id_empresa','plan_cuentas.condicion','plan_cuentas.anio','plan_cuentas.id_cuenta_cierre','plan_cuentas.evitar_saldo_negativo','cuentas2.nombre as cuenta_cierre','cuentas2.codigo as codigo_cuenta_cierre','plan_cuentas.id_tercero','plan_cuentas.tipo_cuenta','personas.nombre2 as nom_tercero','personas.apellido1 as apellido_tercero','personas.num_documento as num_doc_tercero')
+            ->select('plan_cuentas.id','plan_cuentas.codigo','plan_cuentas.nombre','plan_cuentas.naturaleza','plan_cuentas.tipo','plan_cuentas.corriente','plan_cuentas.banco','plan_cuentas.diferido','plan_cuentas.tercero','plan_cuentas.niif','plan_cuentas.id_empresa','plan_cuentas.condicion','plan_cuentas.anio','plan_cuentas.id_cuenta_cierre','plan_cuentas.evitar_saldo_negativo','cuentas2.nombre as cuenta_cierre','cuentas2.codigo as codigo_cuenta_cierre','plan_cuentas.id_tercero','plan_cuentas.tipo_cuenta_compra','plan_cuentas.tipo_cuenta_salida_almacen','personas.nombre2 as nom_tercero','personas.apellido1 as apellido_tercero','personas.num_documento as num_doc_tercero')
             ->where('plan_cuentas.id_empresa','=',$id_empresa)->orderBy('plan_cuentas.codigo', 'asc')->paginate(10);
         }
         else{
             $planCuenta = Plancuentas_model::leftJoin('plan_cuentas as cuentas2','plan_cuentas.id_cuenta_cierre','=','cuentas2.id')
             ->leftJoin('personas','plan_cuentas.id_tercero','=','personas.id')
-            ->select('plan_cuentas.id','plan_cuentas.codigo','plan_cuentas.nombre','plan_cuentas.naturaleza','plan_cuentas.tipo','plan_cuentas.corriente','plan_cuentas.banco','plan_cuentas.diferido','plan_cuentas.tercero','plan_cuentas.niif','plan_cuentas.id_empresa','plan_cuentas.condicion','plan_cuentas.anio','plan_cuentas.id_cuenta_cierre','plan_cuentas.evitar_saldo_negativo','cuentas2.nombre as cuenta_cierre','cuentas2.codigo as codigo_cuenta_cierre','plan_cuentas.id_tercero','plan_cuentas.tipo_cuenta','personas.nombre2 as nom_tercero','personas.apellido1 as apellido_tercero','personas.num_documento as num_doc_tercero')
+            ->select('plan_cuentas.id','plan_cuentas.codigo','plan_cuentas.nombre','plan_cuentas.naturaleza','plan_cuentas.tipo','plan_cuentas.corriente','plan_cuentas.banco','plan_cuentas.diferido','plan_cuentas.tercero','plan_cuentas.niif','plan_cuentas.id_empresa','plan_cuentas.condicion','plan_cuentas.anio','plan_cuentas.id_cuenta_cierre','plan_cuentas.evitar_saldo_negativo','cuentas2.nombre as cuenta_cierre','cuentas2.codigo as codigo_cuenta_cierre','plan_cuentas.id_tercero','plan_cuentas.tipo_cuenta_compra','plan_cuentas.tipo_cuenta_salida_almacen','personas.nombre2 as nom_tercero','personas.apellido1 as apellido_tercero','personas.num_documento as num_doc_tercero')
             ->where('plan_cuentas.id_empresa','=',$id_empresa)
             ->where('plan_cuentas.'.$criterio, 'like',  $buscar . '%')
             ->orderBy('plan_cuentas.codigo', 'asc')->paginate(10);
@@ -116,7 +116,8 @@ class PlanCuentas extends Controller
         $planCuenta->id_cuenta_cierre = $request->id_cuenta_cierre;
         $planCuenta->evitar_saldo_negativo = $request->evitar_saldo_negativo;
         $planCuenta->id_tercero = $request->id_tercero;
-        $planCuenta->tipo_cuenta = $request->tipo_cuenta;
+        $planCuenta->tipo_cuenta_compra = $request->tipo_cuenta_compra;
+        $planCuenta->tipo_cuenta_salida_almacen = $request->tipo_cuenta_salida_almacen;
         $planCuenta->condicion = $request->condicion; 
         if($request->banco)
             $planCuenta->banco = 1;
@@ -158,7 +159,8 @@ class PlanCuentas extends Controller
         $planCuenta->evitar_saldo_negativo = $request->evitar_saldo_negativo;
         if($request->banco == 1) 
             $planCuenta->banco = '1';
-        $planCuenta->tipo_cuenta = $request->tipo_cuenta;
+        $planCuenta->tipo_cuenta_compra = $request->tipo_cuenta_compra;
+        $planCuenta->tipo_cuenta_salida_almacen = $request->tipo_cuenta_salida_almacen;
         $planCuenta->id_tercero = $request->id_tercero;        
         $planCuenta->condicion = '1';
         $planCuenta->save();

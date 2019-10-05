@@ -404,7 +404,6 @@
                             <button type="button" v-if="tipoAccion==2" class="btn btn-primary" @click="actualizarArticulo()">Actualizar</button>
                             
                             <button type="button" class="btn btn-success" @click="abrirModal('articulo','tarifarios')">Tarifarios</button>
-                            <button type="button" class="btn btn-success" @click="abrirModal('articulo','iva')">Config IVA</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -547,7 +546,7 @@
             <!--Inicio del modal agregar/actualizar-->
             <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal4}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
-                    <div class="modal-content">
+                    <div class="modal-content" style="width: 1100px !important;margin-left: -10%;">
                         <div class="modal-header">
                             <h4 class="modal-title" v-text="tituloModal4"></h4>
                             <button type="button" class="close" @click="cerrarModal4()" aria-label="Close">
@@ -560,7 +559,7 @@
                                     <div class="col-md-12">
                                         <label class="col-md-1 form-control-label float-left" for="text-input">Nombre</label>
                                         <div class="col-md-11 float-right">
-                                            <input type="text" v-model="nombreModeloContable" class="form-control float-right" style="width: 96%;" placeholder="Nombre de categoría">
+                                            <input type="text" v-model="nombreModeloContable" class="form-control float-right" placeholder="Nombre del modelo contable" v-bind:class="{ 'is-invalid' : hasError.nombreModeloContable==1}">
                                         </div>
                                     </div>
                                 </div>
@@ -568,45 +567,106 @@
                                     <div class="col-md-12">
                                         <label class="col-md-1 form-control-label float-left" for="email-input">Descripción</label>
                                         <div class="col-md-11 float-right">
-                                            <textarea v-model="descripcionModeloContable" class="form-control float-right" style="width: 96%;"></textarea>
+                                            <textarea v-model="descripcionModeloContable" class="form-control float-right"></textarea>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="form-group col-md-6">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta Producto <span style="color:red;" v-show="idCuentaProductos==''">(*Seleccione)</span></label>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Cuenta compra <span style="color:red;" v-show="idCuentaProductos==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
-                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaProductos">
-                                            <button type="button" @click="abrirModalCuentas('productos')" class="btn btn-primary">...</button>
+                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaProductos" v-bind:class="{ 'is-invalid' : hasError.idCuentaProductos==1}">
+                                            <button type="button" @click="abrirModalCuentas('productos')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta Salida <span style="color:red;" v-show="idCuentaSalidaProductos==''">(*Seleccione)</span></label>
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Cuenta Salida <span style="color:red;" v-show="idCuentaSalidaProductos==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
-                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaSalidaProductos">
-                                            <button type="button" @click="abrirModalCuentas('salida_productos')" class="btn btn-primary">...</button>
+                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaSalidaProductos" v-bind:class="{ 'is-invalid' : hasError.idCuentaSalidaProductos==1}">
+                                            <button type="button" @click="abrirModalCuentas('salida_productos')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="form-group col-md-6">
-                                        <label class="col-md-3 form-control-label float-left">Saldos iniciales <span style="color:red;" v-show="idCuentaSaldosIniciales==''">(*Seleccione)</span></label>
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Saldos iniciales <span style="color:red;" v-show="idCuentaSaldosIniciales==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
-                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaSaldosIniciales">
-                                            <button type="button" @click="abrirModalCuentas('saldos_iniciales')" class="btn btn-primary">...</button>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="col-md-3 form-control-label float-left">Cuenta Donaciones <span style="color:red;" v-show="idCuentaDonaciones==''">(*Seleccione)</span></label>
-                                        <div class="form-inline col-md-9 float-right">
-                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDonaciones">
-                                            <button type="button" @click="abrirModalCuentas('donaciones')" class="btn btn-primary">...</button>
+                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaSaldosIniciales" v-bind:class="{ 'is-invalid' : hasError.idCuentaSaldosIniciales==1}">
+                                            <button type="button" @click="abrirModalCuentas('saldos_iniciales')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div v-show="errorArticulo" class="form-group row div-error">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Cuenta Donaciones <span style="color:red;" v-show="idCuentaDonaciones==''">(*)</span></label>
+                                        <div class="form-inline col-md-9 float-right">
+                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDonaciones" v-bind:class="{ 'is-invalid' : hasError.idCuentaDonaciones==1}">
+                                            <button type="button" @click="abrirModalCuentas('donaciones')" title="Agragar cuenta" class="btn btn-primary">...</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Cuenta devoluciones ventas <span style="color:red;" v-show="idCuentaDevolucionesVentas==''">(*)</span></label>
+                                        <div class="form-inline col-md-9 float-right">
+                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDevolucionesVentas" v-bind:class="{ 'is-invalid' : hasError.idCuentaDevolucionesVentas==1}">
+                                            <button type="button" @click="abrirModalCuentas('devoluciones_ventas')" title="Agragar cuenta" class="btn btn-primary">...</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Cuenta devoluciones compras <span style="color:red;" v-show="idCuentaDevolucionesCompras==''">(*)</span></label>
+                                        <div class="form-inline col-md-9 float-right">
+                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDevolucionesCompras" v-bind:class="{ 'is-invalid' : hasError.idCuentaDevolucionesCompras==1}">
+                                            <button type="button" @click="abrirModalCuentas('devoluciones_compras')" title="Agragar cuenta" class="btn btn-primary">...</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Cuenta impuesto al consumo en ventas <span style="color:red;" v-show="idCuentaImpuestoConsumoVentas==''">(*)</span></label>
+                                        <div class="form-inline col-md-9 float-right">
+                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaImpuestoConsumoVentas" v-bind:class="{ 'is-invalid' : hasError.idCuentaImpuestoConsumoVentas==1}">
+                                            <button type="button" @click="abrirModalCuentas('impuesto_consumo_ventas')" title="Agragar cuenta" class="btn btn-primary">...</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Iva Compras<span style="color:red;" v-show="idIvaCompras==0">(*)</span></label>
+                                        <div class="col-md-9 float-right">
+                                            <select class="form-control" v-model="idIvaCompras" v-bind:class="{ 'is-invalid' : hasError.idIvaCompras==1}">
+                                                <option value="0">Seleccione</option>
+                                                <option v-for="(iva, index) in arrayIvasCompras" :value="iva.id" v-text="iva.nombre"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Iva Ventas<span style="color:red;" v-show="idIvaVentas==0">(*)</span></label>
+                                        <div class="col-md-9 float-right">
+                                            <select class="form-control" v-model="idIvaVentas" v-bind:class="{ 'is-invalid' : hasError.idIvaVentas==1}">
+                                                <option value="0">Seleccione</option>
+                                                <option v-for="(iva, index) in arrayIvasVentas" :value="iva.id" v-text="iva.nombre"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Iva Devolucion En Compras<span style="color:red;" v-show="idIvaDevolucionCompras==0">(*)</span></label>
+                                        <div class="col-md-9 float-right">
+                                            <select class="form-control" v-model="idIvaDevolucionCompras" v-bind:class="{ 'is-invalid' : hasError.idIvaDevolucionCompras==1}">
+                                                <option value="0">Seleccione</option>
+                                                <option v-for="(iva, index) in arrayIvasDevolucionCompras" :value="iva.id" v-text="iva.nombre"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="col-md-3 form-control-label float-left">Iva Devolucion En Ventas<span style="color:red;" v-show="idIvaDevolucionVentas==0">(*)</span></label>
+                                        <div class="col-md-9 float-right">
+                                            <select class="form-control" v-model="idIvaDevolucionVentas" v-bind:class="{ 'is-invalid' : hasError.idIvaDevolucionVentas==1}">
+                                                <option value="0">Seleccione</option>
+                                                <option v-for="(iva, index) in arrayIvasDevolucionVentas" :value="iva.id" v-text="iva.nombre"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-show="errorModeloContable" class="form-group row div-error">
                                     <div class="text-center text-error">
-                                        <div v-for="error in errorMostrarMsjCategoria" :key="error" v-text="error">
+                                        <div v-for="error in errorMostrarMsjModeloContable" :key="error" v-text="error">
 
                                         </div>
                                     </div>
@@ -685,7 +745,7 @@
                                     <div class="col-md-6">
                                         <label class="col-md-3 form-control-label float-left" for="text-input">Presentación</label>
                                         <div class="col-md-9 float-right form-inline">
-                                            <select class="form-control col-md-10 float-left custom-select" v-model="idPresentacionAsociada">
+                                            <select class="form-control col-md-10 float-left custom-select" v-model="idPresentacionAsociada" v-bind:class="{ 'is-invalid' : hasError.idPresentacionAsociada==1 }">
                                                 <option value="0" disabled>Seleccione</option>
                                                 <option v-for="id_presentacion in arrayPresentacion" :key="id_presentacion.id" :value="id_presentacion.id" v-text="id_presentacion.nombre"></option>
                                             </select> 
@@ -694,10 +754,20 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="col-md-3 form-control-label float-left" for="text-input">Unidades</label>
-                                        <div class="col-md-9 float-right form-inline">
-                                            <input type="number" v-model="unidadesPresentacionAsociada" class="form-control">
+                                        <label class="col-md-3 form-control-label float-left" for="text-input">Código</label>
+                                        <div class="col-md-9 float-right">
+                                            <input type="text" v-model="codigoPresentacionAsociada" class="form-control" v-bind:class="{ 'is-invalid' : hasError.codigoPresentacionAsociada==1 }">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="col-md-3 form-control-label float-left" for="text-input">Unidades</label>
+                                        <div class="col-md-9 float-right">
+                                            <input type="number" v-model="unidadesPresentacionAsociada" class="form-control" v-bind:class="{ 'is-invalid' : hasError.unidadesPresentacionAsociada==1 }">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
                                     </div>
                                 </div>
                                 <!--<div style="display:none;" :class="{'form-group col-md-12 mostrar-crear' : modalCrear==4}">
@@ -732,7 +802,7 @@
                                             <tbody>
                                                 <tr v-for="(tarifario, index) in arrayTarifarios">
                                                     <td v-text="tarifario.nombre"></td>
-                                                    <td style="text-align: right;"><input type="number" style="text-align: right;" v-model="tarifario.valor"></td>
+                                                    <td style="text-align: right;"><input type="number" style="text-align: right;" v-model="tarifario.valor" :min="0" @blur="function(){ if(tarifario.valor<0){tarifario.valor=0;}}"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -744,12 +814,12 @@
                                         <button type="button" class="btn btn-primary" @click="registrarProductosAsociados()">Guardar</button>
                                     </div>
                                 </div>
-                                <div v-show="errorArticulo" class="form-group row div-error">
+                                <!--<div v-show="errorProductosAsociados" class="form-group row div-error">
                                     <div class="text-center text-error">
-                                        <div v-for="error in errorMostrarMsjCategoria" :key="error" v-text="error">
+                                        <div v-for="error in errorMostrarMsjProductosAsociados" :key="error" v-text="error">
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
 
                             </form>
 
@@ -766,7 +836,7 @@
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody v-if="arrayPresentacionesAsociadas.length">
                                         <tr v-for="presentacionAsociada in arrayPresentacionesAsociadas" :key="presentacionAsociada.id">
                                             <td v-text="presentacionAsociada.codigo_articulo"></td>
                                             <td v-text="presentacionAsociada.nom_articulo"></td>
@@ -780,93 +850,14 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tbody v-else>
+                                        <tr colspan="7">No hay registros para mostrar</tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="cerrarModal6()">Cerrar</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-            </div>
-            <!--Fin del modal-->
-            
-            <!-- Modal iva-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal7}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-primary modal-lg" role="document">
-                    <div class="modal-content" style="width:100% !important;margin-left: 15% !important;">
-                        <div class="modal-header">
-                            <h4 class="modal-title" v-text="tituloModal7"></h4>
-                        </div>
-                        <div class="modal-body">
-                            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                <div class="form-group row">
-                                    <div class="col-md-6">
-                                        <label class="col-md-3 form-control-label float-left" for="text-input">Iva compras</label>
-                                        <div class="col-md-9 float-right form-inline">
-                                            <select class="form-control custom-select col-md-12" v-model="idIvaCompra">
-                                                <option v-for="ivaCompra in arrayIvaCompra" :key="ivaCompra.id" :value="ivaCompra.id" v-text="ivaCompra.nombre"></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="col-md-3 form-control-label float-left" for="text-input">Iva Ventas</label>
-                                        <div class="col-md-9 float-right form-inline">
-                                            <select class="form-control custom-select col-md-12" v-model="idIvaVenta">
-                                                <option v-for="ivaVenta in arrayIvaVenta" :key="ivaVenta.id" :value="ivaVenta.id" v-text="ivaVenta.nombre"></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-6">
-                                        <label class="col-md-3 form-control-label float-left" for="text-input">Iva devolución compras</label>
-                                        <div class="col-md-9 float-right form-inline">
-                                            <select class="form-control custom-select col-md-12" v-model="idIvaDevolucionCompra">
-                                                <option v-for="ivaDevCompra in arrayIvaDevolucionesCompra" :key="ivaDevCompra.id" :value="ivaDevCompra.id" v-text="ivaDevCompra.nombre"></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="col-md-3 form-control-label float-left" for="text-input">Iva devolución Ventas</label>
-                                        <div class="col-md-9 float-right form-inline">
-                                            <select class="form-control custom-select col-md-12" v-model="idIvaDevolucionVenta">
-                                                <option v-for="ivaDevVenta in arrayIvaDevolucionesVenta" :key="ivaDevVenta.id" :value="ivaDevVenta.id" v-text="ivaDevVenta.nombre"></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <!--<div v-if="tipoAccion7==0">
-                                <table class="table table-bordered table-striped table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th>Tipo</th>
-                                            <th>Nombre</th>
-                                            <th>%</th>
-                                            <th class="col-md-1">Opciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="iva_producto in arrayIvaProducto" :key="iva_producto.id">
-                                            <td v-text="iva_producto.tipo"></td>
-                                            <td v-if="iva_producto.id_iva!=0" v-text="iva_producto.nom_iva"></td>
-                                            <td v-else>N/A</td>
-                                            <td v-if="iva_producto.id_iva!=0" v-text="iva_producto.porcentaje_iva"></td>
-                                            <td v-else>N/A</td>
-                                            <td>
-                                                <button type="button" class="btn btn-danger btn-xs" @click="eliminarIvaProducto(iva_producto.id)"><i class="icon-trash"></i></button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>-->
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModal7()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" @click="modal7=0">Guardar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -983,8 +974,8 @@
                 tituloModal4 : '',
                 nombreModeloContable : '',
                 descripcionModeloContable : '',
-                errorArticulo : '',
-                errorMostrarMsjCategoria : [],
+                errorModeloContable : '',
+                errorMostrarMsjModeloContable : [],
                 // variables de cuentas de producto, salida de productos, saldos iniciales y donaciones. Ctegorias1
                 modal5 : 0,
                 tituloModal5 : '',
@@ -1008,6 +999,28 @@
                 cuentaDonaciones: '',
                 codCuentaDonaciones: '',
 
+                idCuentaDevolucionesVentas: 0,
+                cuentaDevolucionesVentas: '',
+                codCuentaDevolucionesVentas: '',
+
+                idCuentaDevolucionesCompras: 0,
+                cuentaDevolucionesCompras: '',
+                codCuentaDevolucionesCompras: '',
+
+                idCuentaImpuestoConsumoVentas: 0,
+                cuentaImpuestoConsumoVentas: '',
+                codCuentaImpuestoConsumoVentas: '',
+
+                idIvaCompras : 0,
+                idIvaVentas : 0,
+                idIvaDevolucionCompras : 0,
+                idIvaDevolucionVentas : 0,
+
+                arrayIvasCompras : [],
+                arrayIvasVentas : [],
+                arrayIvasDevolucionCompras : [],
+                arrayIvasDevolucionVentas : [],
+
                 // variables del modal de productos asociados
                 modal6 : 0,
                 tituloModal6 : '',
@@ -1015,23 +1028,10 @@
                 idProductoPresentacionAsociada : 0,
                 unidadesPresentacionAsociada : 0,
                 idPresentacionAsociada : 0,
+                codigoPresentacionAsociada : '',
                 arrayPresentacionesAsociadas : [],
-
-                // variables de modal ivas
-                modal7 : 0,
-                tituloModal7 : '',
-                tipoAccion7 : 0,
-                idIvaCompra : 0,
-                idIvaVenta : 0,
-                idIvaDevolucionCompra : 0,
-                idIvaDevolucionVenta : 0,
-                arrayIvas : [],
-                arrayIvaProducto : [],
-                arrayIvaCompra : [],
-                arrayIvaVenta : [],
-                arrayIvaDevolucionesCompra : [],
-                arrayIvaDevolucionesVenta : [],
-                errorIva : 0,
+                errorProductosAsociados : 0,
+                errorMostrarMsjProductosAsociados : [],
 
                 active : false,
                 hasError : {
@@ -1052,6 +1052,24 @@
                     id_presentacion : 0,
                     codigo : 0,
                     img : 0,
+
+                    nombreModeloContable : 0,
+                    descripcionModeloContable : 0,
+                    idIvaCompras : 0,
+                    idIvaVentas : 0,
+                    idIvaDevolucionCompras : 0,
+                    idIvaDevolucionVentas : 0,
+                    idCuentaProductos : 0,
+                    idCuentaSalidaProductos : 0,
+                    idCuentaSaldosIniciales : 0,
+                    idCuentaDonaciones : 0,
+                    idCuentaDevolucionesVentas : 0,
+                    idCuentaDevolucionesCompras : 0,
+                    idCuentaImpuestoConsumoVentas : 0,
+
+                    idPresentacionAsociada : 0,
+                    unidadesPresentacionAsociada : 0,
+                    codigoPresentacionAsociada : 0,
                 }
             }
         },
@@ -1111,14 +1129,6 @@
                 return pagesArrayStock;             
 
             },
-            comprobar: function() {
-                let me=this;
-                if(me.active)
-                {
-                    if(!me.nombre || me.nombre==''){me.hasError['nombre']=1;}
-                    if(!me.idcategoria || me.idcategoria==0){me.hasError['idcategoria']=1;}
-                }
-            }
         },
         methods : {
             listarArticulo (page,buscar,criterio){
@@ -1166,6 +1176,20 @@
                     var respuesta= response.data;
                     me.arrayPresentacionesAsociadas = respuesta.productos_asociados;
                     // me.pagination= respuesta.pagination;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            listarIvas(page,buscar,criterio){
+                let me=this;
+                var url= this.ruta +'/iva?buscar='+buscar+'&criterio='+criterio;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayIvasCompras = respuesta.ivaCompra;
+                    me.arrayIvasVentas = respuesta.ivaVenta;
+                    me.arrayIvasDevolucionCompras = respuesta.ivaDevolucionCompra;
+                    me.arrayIvasDevolucionVentas = respuesta.ivaDevolucionVenta;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -1244,67 +1268,6 @@
                     console.log(error);
                 });
             },
-            listarIvas(){
-                let me=this;
-                var url= this.ruta + '/iva';
-                axios.get(url).then(function (response) {
-                    //console.log(response);
-                    var respuesta= response.data;
-                    me.arrayIvas = respuesta.iva.data;
-                    
-                    me.arrayIvaCompra = respuesta.ivaCompra;
-                    me.arrayIvaVenta = respuesta.ivaVenta;
-                    me.arrayIvaDevolucionesCompra = respuesta.ivaDevolucionCompra;
-                    me.arrayIvaDevolucionesVenta = respuesta.ivaDevolucionVenta;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            selectIvaProducto(id){
-                let me=this;
-                var url= this.ruta + '/iva_producto/selectIvaProducto?id_producto='+id;
-                axios.get(url).then(function (response) {
-                    //console.log(response);
-                    var respuesta= response.data;
-                    me.arrayIvaProducto = respuesta.iva_producto;
-
-                    for(var i=0; i<me.arrayIvaProducto.length; i++)
-                    {
-                        if(me.arrayIvaProducto[i]['tipo_iva'] == 'compras')
-                        {
-                            me.idIvaCompra = me.arrayIvaProducto[i]['id_iva'];
-                        }
-                        if(me.arrayIvaProducto[i]['tipo_iva'] == 'ventas')
-                        {
-                            me.idIvaVenta = me.arrayIvaProducto[i]['id_iva'];
-                        }
-                        if(me.arrayIvaProducto[i]['tipo_iva'] == 'devoluciones_compras')
-                        {
-                            me.idIvaDevolucionCompra = me.arrayIvaProducto[i]['id_iva'];
-                        }
-                        if(me.arrayIvaProducto[i]['tipo_iva'] == 'devoluciones_ventas')
-                        {
-                            me.idIvaDevolucionVenta = me.arrayIvaProducto[i]['id_iva'];
-                        }
-                    }
-
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            eliminarIvaProducto(id){
-                let me=this;
-
-                axios.put( this.ruta + '/iva_producto/eliminarIvaProducto',{
-                    'id': id
-                }).then(function (response) {
-                    me.selectIvaProducto(me.articulo_id);
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
-            },
             crearExtras(nombre){
                 if (this.validarExtras()){
                     return;
@@ -1341,6 +1304,42 @@
                 if (this.errorMostrarMsjCrear.length) this.errorCrear = 1;
 
                 return this.errorCrear;
+            },
+            validarModeloContable(){
+                this.hasError['nombreModeloContable'] = 0;
+                this.hasError['idIvaCompras'] = 0;
+                this.hasError['idIvaVentas'] = 0;
+                this.hasError['idIvaDevolucionCompras'] = 0;
+                this.hasError['idIvaDevolucionVentas'] = 0;
+                this.hasError['idCuentaProductos'] = 0;
+                this.hasError['idCuentaSalidaProductos'] = 0;
+                this.hasError['idCuentaSaldosIniciales'] = 0;
+                this.hasError['idCuentaDonaciones'] = 0;
+                this.hasError['idCuentaDevolucionesVentas'] = 0;
+                this.hasError['idCuentaDevolucionesCompras'] = 0;
+                this.hasError['idCuentaImpuestoConsumoVentas'] = 0;
+
+                this.errorModeloContable=0;
+                this.errorMostrarMsjModeloContable =[];
+                var error = 0;
+
+                if(!this.nombreModeloContable) {error=1; this.hasError['nombreModeloContable']=1;}
+                if(!this.idCuentaProductos || this.idCuentaProductos==0){error=1; this.hasError['idCuentaProductos']=1;}
+                if(!this.idCuentaSalidaProductos || this.idCuentaSalidaProductos==0){error=1; this.hasError['idCuentaSalidaProductos']=1;}
+                if(!this.idCuentaSaldosIniciales || this.idCuentaSaldosIniciales==0){error=1; this.hasError['idCuentaSaldosIniciales']=1;}
+                if(!this.idCuentaDonaciones || this.idCuentaDonaciones==0){error=1; this.hasError['idCuentaDonaciones']=1;}
+                if(!this.idCuentaDevolucionesVentas || this.idCuentaDevolucionesVentas==0){error=1; this.hasError['idCuentaDevolucionesVentas']=1;}
+                if(!this.idCuentaDevolucionesCompras || this.idCuentaDevolucionesCompras==0){error=1; this.hasError['idCuentaDevolucionesCompras']=1;}
+                if(!this.idCuentaImpuestoConsumoVentas || this.idCuentaImpuestoConsumoVentas==0){error=1; this.hasError['idCuentaImpuestoConsumoVentas']=1;}
+
+                if(!this.idIvaCompras || this.idIvaCompras==0){error=1; this.hasError['idIvaCompras']=1;}
+                if(!this.idIvaVentas || this.idIvaVentas==0){error=1; this.hasError['idIvaVentas']=1;}
+                if(!this.idIvaDevolucionCompras || this.idIvaDevolucionCompras==0){error=1; this.hasError['idIvaDevolucionCompras']=1;}
+                if(!this.idIvaDevolucionVentas || this.idIvaDevolucionVentas==0){error=1; this.hasError['idIvaDevolucionVentas']=1;}
+
+                if (error=1) this.errorModeloContable = 1;
+
+                return this.errorModeloContable;
             },
             cambiarPagina(page,buscar,criterio){
                 let me = this;
@@ -1417,16 +1416,11 @@
                 data.append('id_presentacion', this.id_presentacion);
                 data.append('minimo', this.minimo);
                 data.append('tipo_articulo', this.tipo_articulo);
-                data.append('iva', this.iva);
                 data.append('descripcion', this.descripcion);
                 data.append('talla', this.talla);
                 data.append('marca', this.marca);
                 data.append('linea', this.linea);
                 data.append('arrayTarifarios', JSON.stringify(this.arrayTarifarios));
-                data.append('idIvaCompra', this.idIvaCompra);
-                data.append('idIvaVenta', this.idIvaVenta);
-                data.append('idIvaDevolucionCompra', this.idIvaDevolucionCompra);
-                data.append('idIvaDevolucionVenta', this.idIvaDevolucionVenta);
                 data.append('tipo_movimiento', 1);
                 data.append('img', this.arrayImg);
 
@@ -1462,26 +1456,6 @@
                     console.log(error);
                 });
             },
-            registrarIvaProducto(){
-                // if (this.validarArticulo()){
-                //     return;
-                // }
-                
-                let me = this;
-
-                axios.post(this.ruta + '/iva_producto/registrar',{
-                    'id_producto' : this.articulo_id,
-                    'idIvaCompra' : this.idIvaCompra,
-                    'idIvaVenta' : this.idIvaVenta,
-                    'idIvaDevolucionCompra' : this.idIvaDevolucionCompra,
-                    'idIvaDevolucionVenta' : this.idIvaDevolucionVenta,
-                }).then(function (response) {
-                    me.selectIvaProducto(me.articulo_id);
-                    me.tipoAccion7=0;
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            },
             actualizarArticulo(){
                 if (this.validarArticulo()){
                     return;
@@ -1504,16 +1478,11 @@
                 data2.append('id_presentacion', this.id_presentacion);
                 data2.append('minimo', this.minimo);
                 data2.append('tipo_articulo', this.tipo_articulo);
-                data2.append('iva', this.iva);
                 data2.append('descripcion', this.descripcion);
                 data2.append('talla', this.talla);
                 data2.append('marca', this.marca);
                 data2.append('linea', this.linea);
                 data2.append('arrayTarifarios', JSON.stringify(this.arrayTarifarios));
-                data2.append('idIvaCompra', this.idIvaCompra);
-                data2.append('idIvaVenta', this.idIvaVenta);
-                data2.append('idIvaDevolucionCompra', this.idIvaDevolucionCompra);
-                data2.append('idIvaDevolucionVenta', this.idIvaDevolucionVenta);
                 data2.append('img', this.arrayImg);
                 data2.append('id', this.articulo_id);
 
@@ -1674,8 +1643,6 @@
 
                 if(this.errorTarifario==1) this.errorMostrarMsjArticulo.push('Debe asignar valores a todos los tarifarios del producto');
 
-                if(this.idIvaCompra==0 || this.idIvaVenta==0 || this.idIvaDevolucionCompra==0 || this.idIvaDevolucionVenta==0) this.errorMostrarMsjArticulo.push('Debe asignar valores a todos los Ivas del producto');
-
                 if (this.errorMostrarMsjArticulo.length || error==1) this.errorArticulo = 1;
 
                 return this.errorArticulo;
@@ -1724,16 +1691,7 @@
                 this.idProductoPresentacionAsociada = 0;
                 this.unidadesPresentacionAsociada = 0;
                 this.idPresentacionAsociada = 0;
-
-                this.idIvaCompra = 0;
-                this.idIvaVenta = 0;
-                this.idIvaDevolucionCompra = 0;
-                this.idIvaDevolucionVenta = 0;
-
-                this.arrayIvaCompra = [];
-                this.arrayIvaVenta = [];
-                this.arrayIvaDevolucionesCompra = [];
-                this.arrayIvaDevolucionesVenta = [];
+                this.codigoPresentacionAsociada = '';
 
                 this.cerrarModalCrear();
                 this.active=false;
@@ -1793,7 +1751,6 @@
                                 this.talla = data['talla'];
                                 this.marca = data['marca'];
                                 this.linea = data['linea'];
-                                this.selectIvaProducto(this.articulo_id);
                                 this.listarTarifarios(data['id']);
                                 break;
                             }
@@ -1809,43 +1766,10 @@
                                 this.tituloModal6 = 'Presentación asociados';
                                 this.idProductoPresentacionAsociada = data['id'];
                                 this.idPresentacionAsociada = data['id_presentacion'];
+                                this.codigoPresentacionAsociada = data['codigo'];
                                 this.listarTarifarios('');
                                 // this.selectPresentacion();
                                 this.listarPresentacionesAsociadas(data['id']);
-                                break;
-                            }
-                            case 'iva':
-                            {
-                                this.modal7 = 1;
-                                this.tituloModal7 = 'Configurar ivas';
-                                this.listarIvas();
-                                // this.selectIvaProducto(this.articulo_id);
-                                break;
-                            }
-                            case 'iva_registrar':
-                            {
-                                this.tipoAccion7 = 1;
-                                
-                                for(var i=0; i<this.arrayIvaProducto.length; i++)
-                                {
-                                    if(this.arrayIvaProducto[i]['tipo_iva'] == 'compras')
-                                    {
-                                        this.idIvaCompra = this.arrayIvaProducto[i]['id_iva'];
-                                    }
-                                    if(this.arrayIvaProducto[i]['tipo_iva'] == 'ventas')
-                                    {
-                                        this.idIvaVenta = this.arrayIvaProducto[i]['id_iva'];
-                                    }
-                                    if(this.arrayIvaProducto[i]['tipo_iva'] == 'devoluciones_compras')
-                                    {
-                                        this.idIvaDevolucionCompra = this.arrayIvaProducto[i]['id_iva'];
-                                    }
-                                    if(this.arrayIvaProducto[i]['tipo_iva'] == 'devoluciones_ventas')
-                                    {
-                                        this.idIvaDevolucionVenta = this.arrayIvaProducto[i]['id_iva'];
-                                    }
-                                }
-                                // console.log('compra: '+this.idIvaCompra+' venta: '+this.idIvaVenta+' dev compras: '+this.idIvaDevolucionCompra+' dev ventas: '+this.idIvaDevolucionVenta);
                                 break;
                             }
                         }
@@ -1872,6 +1796,7 @@
                     {   
                         this.modal4 = 1;
                         this.tituloModal4 = 'Crear Modelo Contable';
+                        this.listarIvas(1,'','');
                         break;
                     }
                     case "categoria2":
@@ -1915,6 +1840,10 @@
             cerrarModal4(){
                 this.modal4 = 0;
                 this.tituloModal4 = '';
+                this.idIvaCompras = 0;
+                this.idIvaVentas = 0;
+                this.idIvaDevolucionCompras = 0;
+                this.idIvaDevolucionVentas = 0;
                 this.idCuentaProductos = 0;
                 this.cuentaProductos = '';
                 this.codCuentaProductos = '';
@@ -1927,6 +1856,29 @@
                 this.idCuentaDonaciones = 0;
                 this.cuentaDonaciones = '';
                 this.codCuentaDonaciones = '';
+
+                this.idCuentaDevolucionesVentas= 0;
+                this.cuentaDevolucionesVentas= '';
+                this.codCuentaDevolucionesVentas= '';
+                this.idCuentaDevolucionesCompras= 0;
+                this.cuentaDevolucionesCompras= '';
+                this.codCuentaDevolucionesCompras= '';
+                this.idCuentaImpuestoConsumoVentas= 0;
+                this.cuentaImpuestoConsumoVentas= '';
+                this.codCuentaImpuestoConsumoVentas= '';
+
+                this.hasError['nombreModeloContable'] = 0;
+                this.hasError['idIvaCompras'] = 0;
+                this.hasError['idIvaVentas'] = 0;
+                this.hasError['idIvaDevolucionCompras'] = 0;
+                this.hasError['idIvaDevolucionVentas'] = 0;
+                this.hasError['idCuentaProductos'] = 0;
+                this.hasError['idCuentaSalidaProductos'] = 0;
+                this.hasError['idCuentaSaldosIniciales'] = 0;
+                this.hasError['idCuentaDonaciones'] = 0;
+                this.hasError['idCuentaDevolucionesVentas'] = 0;
+                this.hasError['idCuentaDevolucionesCompras'] = 0;
+                this.hasError['idCuentaImpuestoConsumoVentas'] = 0;
                 this.cerrarModalCrear();
             },
             cerrarModal6(){
@@ -1936,26 +1888,12 @@
                 this.idProductoPresentacionAsociada = 0;
                 this.unidadesPresentacionAsociada = 0;
                 this.idPresentacionAsociada = 0;
+                this.codigoPresentacionAsociada = '';
                 this.arrayPresentacionesAsociadas = [];
                 this.arrayTarifarios = [];
-                this.cerrarModalCrear();
-            },
-            cerrarModal7(){
-                this.modal7 = 0;
-                this.tituloModal7 = 0;
-                this.arrayIvas = [];
-                this.ivaCompra = 0;
-                this.ivaVenta = 0;
-                this.ivaDevCompra = 0;
-                this.ivaDevVenta = 0;
-                this.cerrarModalCrear();
-            },
-            cerrarModalCrear7(){
-                this.tipoAccion7=0;
-                this.ivaCompra=0;
-                this.ivaVenta=0;
-                this.ivaDevCompra=0;
-                this.ivaDevVenta=0;
+                this.hasError['idPresentacionAsociada'] = 0;
+                this.hasError['unidadesPresentacionAsociada'] = 0;
+                this.hasError['codigoPresentacionAsociada'] = 0;
                 this.cerrarModalCrear();
             },
             cerrarModalStock(){
@@ -2071,38 +2009,50 @@
                 me.cerrarModalCuentas();
             },
             registrarModeloContable(){
-                // if (this.validarCategoria()){
-                //     return;
-                // }
+                if (this.validarModeloContable()){
+                    return;
+                }
                 
                 let me = this;
 
                 axios.post(this.ruta +'/modelo_contable/registrar',{
-                    'nombre': this.nombreModeloContable,
-                    'descripcion': this.descripcionModeloContable,
+                    'nombre': this.nombre,
+                    'descripcion': this.descripcion,
+                    'idIvaCompras': this.idIvaCompras,
+                    'idIvaVentas': this.idIvaVentas,
+                    'idIvaDevolucionCompras': this.idIvaDevolucionCompras,
+                    'idIvaDevolucionVentas': this.idIvaDevolucionVentas,
                     'idCuentaProductos': this.idCuentaProductos,
                     'idCuentaSalidaProductos': this.idCuentaSalidaProductos,
                     'idCuentaSaldosIniciales': this.idCuentaSaldosIniciales,
                     'idCuentaDonaciones': this.idCuentaDonaciones,
+                    'idCuentaDevolucionesVentas': this.idCuentaDevolucionesVentas,
+                    'idCuentaDevolucionesCompras': this.idCuentaDevolucionesCompras,
+                    'idCuentaImpuestoConsumoVentas': this.idCuentaImpuestoConsumoVentas,
                 }).then(function (response) {
-                    me.cerrarModal4();
-                    me.selectModeloContable();
+                    me.cerrarModal();
+                    me.listarModeloContable(1,'','nombre');
                 }).catch(function (error) {
                     console.log(error);
                 });
             },
             registrarProductosAsociados(){
+                if(this.validarProductosAsociados()){
+                    return;
+                }
                 
                 let me = this;
 
                 axios.post(this.ruta +'/productos_asociados/registrar',{
                     'id_presentacion': this.idPresentacionAsociada,
+                    'codigo' : this.codigoPresentacionAsociada,
                     'id_producto': this.idProductoPresentacionAsociada,
                     'unidades': this.unidadesPresentacionAsociada,
                     'arrayTarifarios': this.arrayTarifarios,
                 }).then(function (response) {
                     me.tipoAccion6=0;
                     me.idPresentacionAsociada = 0;
+                    me.codigoPresentacionAsociada = '';
                     me.unidadesPresentacionAsociada = 0;
                     me.arrayTarifarios = [];
                     me.selectPresentacion();
@@ -2110,6 +2060,18 @@
                 }).catch(function (error) {
                     console.log(error);
                 });
+            },
+            validarProductosAsociados(){
+                this.hasError['idPresentacionAsociada'] = 0;
+                this.hasError['unidadesPresentacionAsociada'] = 0;
+                this.hasError['codigoPresentacionAsociada'] = 0;
+                var error = 0;
+
+                if(!this.idPresentacionAsociada || this.idPresentacionAsociada==0){error=1; this.hasError['idPresentacionAsociada']=1;}
+                if(!this.unidadesPresentacionAsociada || this.unidadesPresentacionAsociada==0){error=1; this.hasError['unidadesPresentacionAsociada']=1;}
+                if(!this.codigoPresentacionAsociada || this.codigoPresentacionAsociada==0){error=1; this.hasError['codigoPresentacionAsociada']=1;}
+
+                return error;
             },
             desactivarPresentacionAsociada(id){
                 Swal.fire({
@@ -2134,6 +2096,7 @@
                         }).then(function (response) {
                             me.tipoAccion6=0;
                             me.idPresentacionAsociada = 0;
+                            me.codigoPresentacionAsociada = '';
                             me.unidadesPresentacionAsociada = 0;
                             me.arrayTarifarios = [];
                             me.selectPresentacion();

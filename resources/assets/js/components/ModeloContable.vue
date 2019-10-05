@@ -120,7 +120,7 @@
                                     <div class="col-md-12">
                                         <label class="col-md-1 form-control-label float-left" for="text-input">Nombre</label>
                                         <div class="col-md-11 float-right">
-                                            <input type="text" v-model="nombre" class="form-control float-right" placeholder="Nombre del modelo contable">
+                                            <input type="text" v-model="nombre" class="form-control float-right" placeholder="Nombre del modelo contable" v-bind:class="{ 'is-invalid' : hasError.nombre==1}">
                                         </div>
                                     </div>
                                 </div>
@@ -136,21 +136,21 @@
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Cuenta compra <span style="color:red;" v-show="idCuentaProductos==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
-                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaProductos">
+                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaProductos" v-bind:class="{ 'is-invalid' : hasError.idCuentaProductos==1}">
                                             <button type="button" @click="abrirModalCuentas('productos')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Cuenta Salida <span style="color:red;" v-show="idCuentaSalidaProductos==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
-                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaSalidaProductos">
+                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaSalidaProductos"v-bind:class="{ 'is-invalid' : hasError.idCuentaSalidaProductos==1}">
                                             <button type="button" @click="abrirModalCuentas('salida_productos')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Saldos iniciales <span style="color:red;" v-show="idCuentaSaldosIniciales==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
-                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaSaldosIniciales">
+                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaSaldosIniciales" v-bind:class="{ 'is-invalid' : hasError.idCuentaSaldosIniciales==1}">
                                             <button type="button" @click="abrirModalCuentas('saldos_iniciales')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
@@ -159,21 +159,21 @@
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Cuenta Donaciones <span style="color:red;" v-show="idCuentaDonaciones==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
-                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDonaciones">
+                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDonaciones" v-bind:class="{ 'is-invalid' : hasError.idCuentaDonaciones==1}">
                                             <button type="button" @click="abrirModalCuentas('donaciones')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Cuenta devoluciones ventas <span style="color:red;" v-show="idCuentaDevolucionesVentas==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
-                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDevolucionesVentas">
+                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDevolucionesVentas" v-bind:class="{ 'is-invalid' : hasError.idCuentaDevolucionesVentas==1}">
                                             <button type="button" @click="abrirModalCuentas('devoluciones_ventas')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Cuenta devoluciones compras <span style="color:red;" v-show="idCuentaDevolucionesCompras==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
-                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDevolucionesCompras">
+                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaDevolucionesCompras" v-bind:class="{ 'is-invalid' : hasError.idCuentaDevolucionesCompras==1}">
                                             <button type="button" @click="abrirModalCuentas('devoluciones_compras')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
@@ -182,14 +182,14 @@
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Cuenta impuesto al consumo en ventas <span style="color:red;" v-show="idCuentaImpuestoConsumoVentas==''">(*)</span></label>
                                         <div class="form-inline col-md-9 float-right">
-                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaImpuestoConsumoVentas">
+                                            <input type="text" readonly class="form-control" style="width: 85%;" v-model="cuentaImpuestoConsumoVentas" v-bind:class="{ 'is-invalid' : hasError.idCuentaImpuestoConsumoVentas==1}">
                                             <button type="button" @click="abrirModalCuentas('impuesto_consumo_ventas')" title="Agragar cuenta" class="btn btn-primary">...</button>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Iva Compras<span style="color:red;" v-show="idIvaCompras==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
-                                            <select class="form-control" v-model="idIvaCompras">
+                                            <select class="form-control" v-model="idIvaCompras" v-bind:class="{ 'is-invalid' : hasError.idIvaCompras==1}">
                                                 <option value="0">Seleccione</option>
                                                 <option v-for="(iva, index) in arrayIvasCompras" :value="iva.id" v-text="iva.nombre"></option>
                                             </select>
@@ -198,7 +198,7 @@
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Iva Ventas<span style="color:red;" v-show="idIvaVentas==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
-                                            <select class="form-control" v-model="idIvaVentas">
+                                            <select class="form-control" v-model="idIvaVentas" v-bind:class="{ 'is-invalid' : hasError.idIvaVentas==1}">
                                                 <option value="0">Seleccione</option>
                                                 <option v-for="(iva, index) in arrayIvasVentas" :value="iva.id" v-text="iva.nombre"></option>
                                             </select>
@@ -209,7 +209,7 @@
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Iva Devolucion En Compras<span style="color:red;" v-show="idIvaDevolucionCompras==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
-                                            <select class="form-control" v-model="idIvaDevolucionCompras">
+                                            <select class="form-control" v-model="idIvaDevolucionCompras" v-bind:class="{ 'is-invalid' : hasError.idIvaDevolucionCompras==1}">
                                                 <option value="0">Seleccione</option>
                                                 <option v-for="(iva, index) in arrayIvasDevolucionCompras" :value="iva.id" v-text="iva.nombre"></option>
                                             </select>
@@ -218,20 +218,20 @@
                                     <div class="form-group col-md-4">
                                         <label class="col-md-3 form-control-label float-left">Iva Devolucion En Ventas<span style="color:red;" v-show="idIvaDevolucionVentas==0">(*)</span></label>
                                         <div class="col-md-9 float-right">
-                                            <select class="form-control" v-model="idIvaDevolucionVentas">
+                                            <select class="form-control" v-model="idIvaDevolucionVentas" v-bind:class="{ 'is-invalid' : hasError.idIvaDevolucionVentas==1}">
                                                 <option value="0">Seleccione</option>
                                                 <option v-for="(iva, index) in arrayIvasDevolucionVentas" :value="iva.id" v-text="iva.nombre"></option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div v-show="errorModeloContable" class="form-group row div-error">
+                                <!--<div v-show="errorModeloContable" class="form-group row div-error">
                                     <div class="text-center text-error">
                                         <div v-for="error in errorMostrarMsjModeloContable" :key="error" v-text="error">
 
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
 
                             </form>
                         </div>
@@ -361,6 +361,22 @@
                 idCuentaImpuestoConsumoVentas: 0,
                 cuentaImpuestoConsumoVentas: '',
                 codCuentaImpuestoConsumoVentas: '',
+
+                hasError : {
+                    nombre : 0,
+                    descripcion : 0,
+                    idIvaCompras : 0,
+                    idIvaVentas : 0,
+                    idIvaDevolucionCompras : 0,
+                    idIvaDevolucionVentas : 0,
+                    idCuentaProductos : 0,
+                    idCuentaSalidaProductos : 0,
+                    idCuentaSaldosIniciales : 0,
+                    idCuentaDonaciones : 0,
+                    idCuentaDevolucionesVentas : 0,
+                    idCuentaDevolucionesCompras : 0,
+                    idCuentaImpuestoConsumoVentas : 0,
+                }
             }
         },
         computed:{
@@ -562,13 +578,39 @@
                 }) 
             },
             validarModeloContable(){
+                this.hasError['nombre'] = 0;
+                this.hasError['descripcion'] = 0;
+                this.hasError['idIvaCompras'] = 0;
+                this.hasError['idIvaVentas'] = 0;
+                this.hasError['idIvaDevolucionCompras'] = 0;
+                this.hasError['idIvaDevolucionVentas'] = 0;
+                this.hasError['idCuentaProductos'] = 0;
+                this.hasError['idCuentaSalidaProductos'] = 0;
+                this.hasError['idCuentaSaldosIniciales'] = 0;
+                this.hasError['idCuentaDonaciones'] = 0;
+                this.hasError['idCuentaDevolucionesVentas'] = 0;
+                this.hasError['idCuentaDevolucionesCompras'] = 0;
+                this.hasError['idCuentaImpuestoConsumoVentas'] = 0;
+
                 this.errorModeloContable=0;
                 this.errorMostrarMsjModeloContable =[];
+                var error = 0;
 
-                if (!this.nombre) this.errorMostrarMsjModeloContable.push("El nombre de la categoría no puede estar vacío.");
-                if(this.idCuentaProductos==0 || this.idCuentaSalidaProductos==0 || this.idCuentaSaldosIniciales==0 || this.idCuentaDonaciones==0 || this.idCuentaDevolucionesCompras==0 || this.idCuentaDevolucionesVentas==0 || this.idCuentaImpuestoConsumoVentas==0) this.errorMostrarMsjModeloContable.push("Debe rellenar todos los campos de cuenta");
+                if(!this.nombre) {error=1; this.hasError['nombre']=1;}
+                if(!this.idCuentaProductos || this.idCuentaProductos==0){error=1; this.hasError['idCuentaProductos']=1;}
+                if(!this.idCuentaSalidaProductos || this.idCuentaSalidaProductos==0){error=1; this.hasError['idCuentaSalidaProductos']=1;}
+                if(!this.idCuentaSaldosIniciales || this.idCuentaSaldosIniciales==0){error=1; this.hasError['idCuentaSaldosIniciales']=1;}
+                if(!this.idCuentaDonaciones || this.idCuentaDonaciones==0){error=1; this.hasError['idCuentaDonaciones']=1;}
+                if(!this.idCuentaDevolucionesVentas || this.idCuentaDevolucionesVentas==0){error=1; this.hasError['idCuentaDevolucionesVentas']=1;}
+                if(!this.idCuentaDevolucionesCompras || this.idCuentaDevolucionesCompras==0){error=1; this.hasError['idCuentaDevolucionesCompras']=1;}
+                if(!this.idCuentaImpuestoConsumoVentas || this.idCuentaImpuestoConsumoVentas==0){error=1; this.hasError['idCuentaImpuestoConsumoVentas']=1;}
 
-                if (this.errorMostrarMsjModeloContable.length) this.errorModeloContable = 1;
+                if(!this.idIvaCompras || this.idIvaCompras==0){error=1; this.hasError['idIvaCompras']=1;}
+                if(!this.idIvaVentas || this.idIvaVentas==0){error=1; this.hasError['idIvaVentas']=1;}
+                if(!this.idIvaDevolucionCompras || this.idIvaDevolucionCompras==0){error=1; this.hasError['idIvaDevolucionCompras']=1;}
+                if(!this.idIvaDevolucionVentas || this.idIvaDevolucionVentas==0){error=1; this.hasError['idIvaDevolucionVentas']=1;}
+
+                if (error=1) this.errorModeloContable = 1;
 
                 return this.errorModeloContable;
             },
