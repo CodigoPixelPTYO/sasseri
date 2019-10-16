@@ -733,7 +733,7 @@
                                 this.codigo_cuenta_cierre = data['codigo_cuenta_cierre'];
                                 this.evitar_saldo_negativo = data['evitar_saldo_negativo'];
                                 this.tipo_cuenta_compra = data['tipo_cuenta_compra'];
-                                this.tipo_cuenta_salida = data['tipo_cuenta_salida'];
+                                this.tipo_cuenta_salida_almacen = data['tipo_cuenta_salida_almacen'];
 
                                 if(data['id_tercero']!=0 && data['id_tercero']!=null){
                                     this.tercero_id = data['id_tercero'];

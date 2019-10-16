@@ -37,13 +37,19 @@
                         <table class="table table-bordered table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th class="col-md-11">Nombre</th>
+                                    <th class="col-md-7">Nombre</th>
+                                    <th>Estado</th>
+                                    <th>Tiempo</th>
+                                    <th>Usuario</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody v-if="permisosUser.leer && arrayCajas.length">
                                 <tr v-for="cajas in arrayCajas" :key="cajas.id">
                                     <td v-text="cajas.nombre"></td>
+                                    <td v-text="cajas.estado_caja"></td>
+                                    <td v-text="cajas.tiempo_caja"></td>
+                                    <td v-text="cajas.usuario_caja"></td>
                                     <td>
                                         <button v-if="permisosUser.actualizar && cajas.estado" type="button" @click="abrirModal('cajas','actualizar',cajas)" class="btn btn-warning btn-sm" title="Editar">
                                           <i class="icon-pencil"></i>

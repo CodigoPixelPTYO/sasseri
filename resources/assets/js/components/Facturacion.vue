@@ -838,13 +838,13 @@
                                     <label class="col-md-3 float-left">Vr. Inicial</label>
                                     <div class="col-md-9 float-right">
                                         <input type="number" v-if="tipoAccionCierre==2" disabled class="form-control" v-model="vr_inicial_cierre">
-                                        <input type="number" v-else class="form-control" v-model="vr_inicial_cierre">
+                                        <input type="number" v-else class="form-control" v-model="vr_inicial_cierre" v-bind:class="{ 'is-invalid' : hasError.vr_inicial_cierre==1 }">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="col-md-3 float-left">Obs. Inicial</label>
                                     <div class="col-md-9 float-right">
-                                        <input type="text" class="form-control" v-model="obs_inicial_cierre">
+                                        <input type="text" class="form-control" v-model="obs_inicial_cierre" >
                                     </div>
                                 </div>
                             </div>
@@ -852,7 +852,7 @@
                                 <div class="col-md-6">
                                     <label class="col-md-3 float-left">Vr. Gastos</label>
                                     <div class="col-md-9 float-right">
-                                        <input type="number" class="form-control" v-model="vr_gastos_cierre">
+                                        <input type="number" class="form-control" v-model="vr_gastos_cierre" v-bind:class="{ 'is-invalid' : hasError.vr_gastos_cierre==1 }">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -866,7 +866,7 @@
                                 <div class="col-md-6">
                                     <label class="col-md-3 float-left">Vr. Final</label>
                                     <div class="col-md-9 float-right">
-                                        <input type="number" class="form-control" v-model="vr_final_cierre">
+                                        <input type="number" class="form-control" v-model="vr_final_cierre" v-bind:class="{ 'is-invalid' : hasError.vr_final_cierre==1 }">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -995,7 +995,6 @@
 
 <script>
     import vSelect from 'vue-select';
-    import moment from 'moment';
     export default {
         props : ['ruta','permisosUser'],
         data (){
@@ -1092,8 +1091,6 @@
                 nom_caja_cierre_facturacion : '',
                 id_caja_facturacion : 0,
                 id_cierre_caja_facturacion : 0,
-                vr_inicial_cierre_facturacion : 0,
-                obs_inicial_cierre_facturacion : '',
 
                 arrayFacturacion : [],
                 arrayFacturacionT : [],
@@ -1152,6 +1149,12 @@
                 tituloModalCierre : '',
                 tipoAccionCierre : 0,
                 ban : 0,
+
+                hasError : {
+                    vr_inicial_cierre : 0,
+                    vr_gastos_cierre : 0,
+                    vr_final_cierre : 0,
+                }
             }
         },
         components: {
@@ -1469,9 +1472,9 @@
                 }
             },
             registrarCierreXCaja(){
-                // if (this.validarCierreXCaja()){
-                //     return;
-                // }
+                if (this.validarCierreXCaja()){
+                    return;
+                }
                 
                 let me = this;
 
@@ -1490,9 +1493,9 @@
                 });
             },
             actualizarCierreXCaja(){
-                // if (this.validarCierreXCaja()){
-                //     return;
-                // }
+                if (this.validarCierreXCaja()){
+                    return;
+                }
                 
                 let me = this;
 
@@ -1510,6 +1513,21 @@
                 }).catch(function (error) {
                     console.log(error);
                 }); 
+            },
+            validarCierreXCaja(){
+                this.hasError['vr_inicial_cierre'] = 0;
+                this.hasError['vr_gastos_cierre'] = 0;
+                this.hasError['vr_final_cierre'] = 0;
+                var error = 0;
+
+                if(!this.vr_inicial_cierre || this.vr_inicial_cierre<=0){error=1; this.hasError['vr_inicial_cierre']=1;}
+                if(!this.vr_gastos_cierre || this.vr_gastos_cierre<=0){error=1; this.hasError['vr_gastos_cierre']=1;}
+                if(this.tipoAccionCierre==2)
+                {
+                    if(!this.vr_final_cierre || this.vr_final_cierre<=0){error=1; this.hasError['vr_final_cierre']=1;}
+                }
+
+                return error;
             },
             desactivarCierreXCaja(id){
                Swal.fire({
@@ -1591,54 +1609,51 @@
                 }) 
             },
             cerrarCierreXCaja(id){
+                if(this.validarCierreXCaja()){
+                    return;
+                }
                 let me = this;
-                if(me.id_caja!='' && me.vr_inicial_cierre!=0 && me.vr_final_cierre!=0 && me.vr_gastos_cierre!=0)
-                {
-                    Swal.fire({
-                        title: 'Esta seguro de cerrar esta caja?',
-                        type: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Aceptar!',
-                        cancelButtonText: 'Cancelar',
-                        confirmButtonClass: 'btn btn-success',
-                        cancelButtonClass: 'btn btn-danger',
-                        buttonsStyling: false,
-                        reverseButtons: true
-                    }).then((result) => {
-                        if (result.value) {
-                            let me = this;
+                
+                Swal.fire({
+                    title: 'Esta seguro de cerrar esta caja?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar!',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonClass: 'btn btn-success',
+                    cancelButtonClass: 'btn btn-danger',
+                    buttonsStyling: false,
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        let me = this;
 
-                            axios.put(this.ruta +'/cierres_caja/cerrar',{
-                                'id_caja': this.id_caja_cierre,
-                                'obs_inicial': this.obs_inicial_cierre,
-                                'vr_gastos': this.vr_gastos_cierre,
-                                'obs_gastos': this.obs_gastos_cierre,
-                                'vr_final': this.vr_final_cierre,
-                                'id': this.cierre_caja_id
-                            }).then(function (response) {
-                                me.id_caja_facturacion = 0;
-                                me.nom_caja_cierre_facturacion = '';
-                                me.cerrarModalCierreCaja();
-                                Swal.fire(
-                                'Desactivado!',
-                                'El registro ha sido cerrado con éxito.',
-                                'success')
-                                me.listarCajas();
-                            }).catch(function (error) {
-                                console.log(error);
-                            });
-                        } else if (
-                            // Read more about handling dismissals
-                            result.dismiss === Swal.DismissReason.cancel
-                        ) {}
-                    }) 
-                }
-                else
-                {
-                    alert('error al cerrar la caja');
-                }
+                        axios.put(this.ruta +'/cierres_caja/cerrar',{
+                            'id_caja': this.id_caja_cierre,
+                            'obs_inicial': this.obs_inicial_cierre,
+                            'vr_gastos': this.vr_gastos_cierre,
+                            'obs_gastos': this.obs_gastos_cierre,
+                            'vr_final': this.vr_final_cierre,
+                            'id': this.cierre_caja_id
+                        }).then(function (response) {
+                            me.id_caja_facturacion = 0;
+                            me.nom_caja_cierre_facturacion = '';
+                            me.cerrarModalCierreCaja();
+                            Swal.fire(
+                            'Desactivado!',
+                            'El registro ha sido cerrado con éxito.',
+                            'success')
+                            me.listarCajas();
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    } else if (
+                        // Read more about handling dismissals
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {}
+                }) 
             },
             cerrarModalCierreCaja(){
                 this.modalCierreCaja=0;

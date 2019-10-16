@@ -36,8 +36,8 @@ class CuentasController extends Controller
     public function get_fuentes2(Request $request){
         $id_cuenta = $request->id_cuenta;
         //echo "id_cuenta=$id_cuenta";   
-        $cons="SELECT id,nombre from plan_cuentas where  condicion=1 and tipo_cuenta = 'Cuenta compra' order by nombre";
-        $cons2="SELECT id,nombre from plan_cuentas where  condicion=1 and tipo_cuenta = 'Cuenta salida almacen' order by nombre";
+        $cons="SELECT id,nombre from plan_cuentas where  condicion=1 and tipo_cuenta_compra = 1 order by nombre";
+        $cons2="SELECT id,nombre from plan_cuentas where  condicion=1 and tipo_cuenta_salida_almacen = 1 order by nombre";
         
         $fuentes = DB::select($cons);     
         $fuentes2 = DB::select($cons2);

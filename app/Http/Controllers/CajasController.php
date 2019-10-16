@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 
 use App\Cajas;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CajasController extends Controller
 {
     public function index(Request $request)
     {
-        if (!$request->ajax()) return redirect('/');
+        // if (!$request->ajax()) return redirect('/');
+        $diaAnterior = Carbon::now('America/Bogota')->subDay()->toDateTimeString();
+        $diaActual = Carbon::now('America/Bogota')->toDateTimeString();
 
         $buscar = $request->buscar;
         $criterio = $request->criterio;
@@ -22,6 +26,26 @@ class CajasController extends Controller
         }
         else{
             $cajas = Cajas::where('id_empresa','=',$id_empresa)->where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(15);
+        }
+
+        if(!empty($cajas))
+        {
+            foreach($cajas as $c)
+            {
+                $c['estado_caja'] = '0';
+                $c['tiempo_caja'] = '0000-00-00 00:00:00';
+                $c['usuario_caja'] = '';
+
+                $sql = "SELECT cajas_cierres.id, cajas_cierres.id_caja, cajas_cierres.vr_inicial, cajas_cierres.obs_inicial, cajas_cierres.vr_gastos, cajas_cierres.obs_gastos, cajas_cierres.vr_software, cajas_cierres.vr_final, cajas_cierres.estado, cajas_cierres.usu_crea, cajas_cierres.id_empresa, cajas_cierres.created_at, cajas_cierres.updated_at, users.usuario as nom_usuario FROM cajas_cierres,users WHERE id_caja=".$c->id." AND cajas_cierres.usu_crea=users.id ORDER BY id desc LIMIT 1";
+                $cierres = DB::select($sql);
+
+                if(!empty($cierres))
+                {
+                    $c['estado_caja'] = $cierres[0]->estado;
+                    $c['tiempo_caja'] = $cierres[0]->created_at;
+                    $c['usuario_caja'] = $cierres[0]->nom_usuario;
+                }
+            }
         }
         
 

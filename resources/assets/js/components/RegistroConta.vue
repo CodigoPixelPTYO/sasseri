@@ -153,7 +153,7 @@
                                         </td>
                                         <td style="width:178px !important">
                                             
-                                            <button v-if="permisosUser.leer" type="button" style=" margin-right: -8px;" @click="verFormato(registro.id)" class="btn btn-success btn-sm" title='Ver formato'>
+                                            <button v-if="permisosUser.leer" type="button" style=" margin-right: -8px;" @click="verFormato(registro)" class="btn btn-success btn-sm" title='Ver formato'>
                                                 <i class="icon-eye"></i>
                                             </button>
                                             <button v-else type="button" style=" margin-right: -8px;" class="btn btn-secondary btn-sm" title='Ver formato (Deshabilitado)'>
@@ -211,6 +211,25 @@
                                 </li>
                             </ul>
                         </nav>              
+                    </div>
+                </template>
+                <template v-if="listado==2">
+                    <div class="card-body">
+                        <div class="row border">
+                            <div class="col-md-6">
+                                <label class="col-md-4">Fecha: </label>
+                                <label class="col-md-8" v-text="fecha"></label>
+                                
+                                <label class="col-md-4">Terceo: </label>
+                                <label class="col-md-8" v-text="nom_tercero"></label>
+                                <label>jfalsjdlajflj</label>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="button" @click="ocultarDetalle()" class="btn btn-danger btn-sm float-right">Atrás</button>
+                        </div>
                     </div>
                 </template>
                 <!-- modal para agregar registro-->
@@ -1406,24 +1425,43 @@ export default {
                 }
             }) 
         },
-        verFormato(id){
+        verFormato(registros){
             let me=this;
             me.listado=2;
+
+            console.log(registros);
             
             //Obtener los datos del ingreso
-            var arrayFormatosT=[];
+            /*var arrayFormatosT=[];
             var url= this.ruta +'/formatos/obtenerCabecera?id=' + id;
             
             axios.get(url).then(function (response) {
                 var respuesta= response.data;
-                arrayVentaT = respuesta.venta;
-
-                me.cliente = arrayVentaT[0]['nombre'];
-                me.tipo_comprobante=arrayVentaT[0]['tipo_comprobante'];
-                me.serie_comprobante=arrayVentaT[0]['serie_comprobante'];
-                me.num_comprobante=arrayVentaT[0]['num_comprobante'];
-                me.impuesto=arrayVentaT[0]['impuesto'];
-                me.total=arrayVentaT[0]['total'];
+                var AuxFormato = respuesta.formato;
+                //console.log(AuxFormato[0]['formato']);
+                me.fecha = AuxFormato[0]['fecha'];
+                me.tercero_id = AuxFormato[0]['id_persona'],
+                me.tercero_doc = AuxFormato[0]['num_doc'],
+                me.tercero = AuxFormato[0]['nombre1']+' - '+AuxFormato[0]['apellido1'],
+                me.tipo_formato_new = AuxFormato[0]['formato'],                
+                me.subtotal = AuxFormato[0]['subtotal'],
+                me.total = AuxFormato[0]['total'],
+                me.impuesto = AuxFormato[0]['impuesto'],
+                me.debitos = AuxFormato[0]['debes'],
+                me.creditos = AuxFormato[0]['haberes'],
+                me.detalle = AuxFormato[0]['detalle'],
+                me.banco = AuxFormato[0]['banco'],
+                me.forma_pago = AuxFormato[0]['forma_pago'],
+                me.num_cheque = AuxFormato[0]['num_cheque'],
+                
+                //me.arrayAfectados = AuxFormato[0]['fecha'],
+                me.numero = AuxFormato[0]['numero'],
+                me.doc_afecta_long = AuxFormato[0]['doc_afecta_long'],
+                me.cambiar_tipo_f();
+                // me.selectCliente2(me.id_tercero);
+                
+                me.id_retencion = AuxFormato[0]['id_retencion'];
+                me.retencion = AuxFormato[0]['retencion'];
             })
             .catch(function (error) {
                 console.log(error);
@@ -1433,13 +1471,20 @@ export default {
             var urld= this.ruta +'/formatos/obtenerDetalles?id=' + id;
             
             axios.get(urld).then(function (response) {
-                console.log(response);
+                
                 var respuesta= response.data;
-                me.arrayDetalle = respuesta.detalles;
+                //console.log(response.data.detalles);
+                me.arrayDetalle = response.data.detalles;
+                
+                // campo checked = true en arrayDetalle para que se marque el checkbox en el modulo de retenciones
+                for(var i=0; i<me.arrayDetalle.length; i++)
+                {
+                    me.arrayDetalle[i].checked = true;
+                }
             })
             .catch(function (error) {
                 console.log(error);
-            });               
+            });*/
         },
         selectCliente2(id){
             let me=this;

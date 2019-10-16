@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-08-2019 a las 22:43:03
+-- Tiempo de generación: 04-10-2019 a las 23:48:21
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.4
 
@@ -19,8 +19,87 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `dbsistemalaravel2`
+-- Base de datos: `dbsislaravel2`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `abono_cobrar`
+--
+
+CREATE TABLE `abono_cobrar` (
+  `id` int(11) NOT NULL,
+  `num_pago` int(250) NOT NULL DEFAULT '1',
+  `id_pago` int(250) NOT NULL,
+  `abono` int(250) NOT NULL,
+  `estado_abono` tinyint(1) NOT NULL,
+  `fecha_cobro` date NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `usu_crea` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `abono_cobrar`
+--
+
+INSERT INTO `abono_cobrar` (`id`, `num_pago`, `id_pago`, `abono`, `estado_abono`, `fecha_cobro`, `id_empresa`, `usu_crea`, `created_at`, `updated_at`) VALUES
+(1, 1, 60, 40000, 1, '2019-09-18', 1, 1, '2019-09-19 21:17:31', '2019-09-20 02:17:31'),
+(2, 1, 61, 4200, 0, '2019-09-18', 1, 1, '2019-09-19 22:09:52', '2019-09-20 03:09:52'),
+(3, 1, 62, 4000, 1, '2019-09-19', 1, 1, '2019-09-20 00:39:54', '2019-09-20 00:39:54'),
+(4, 2, 60, 20000, 1, '2019-09-18', 1, 1, '2019-09-19 21:17:31', '2019-09-20 02:17:31'),
+(6, 3, 60, 20000, 1, '2019-09-18', 1, 1, '2019-09-19 21:17:31', '2019-09-20 02:17:31'),
+(7, 4, 60, 10000, 1, '2019-09-18', 1, 1, '2019-09-19 21:17:31', '2019-09-20 02:17:31'),
+(8, 2, 61, 1300, 0, '2019-09-18', 1, 1, '2019-09-19 21:17:07', '2019-09-20 02:17:07'),
+(9, 2, 62, 6000, 1, '2019-09-19', 1, 1, '2019-09-20 02:06:13', '2019-09-20 02:06:13'),
+(10, 5, 60, 10000, 1, '2019-09-18', 1, 1, '2019-09-19 21:17:31', '2019-09-20 02:17:31'),
+(11, 3, 61, 5000, 0, '2019-09-18', 1, 1, '2019-09-19 21:15:20', '2019-09-20 02:15:20'),
+(12, 4, 61, 5000, 0, '2019-09-18', 1, 1, '2019-09-19 21:15:43', '2019-09-20 02:15:43'),
+(13, 3, 62, 54000, 1, '2019-09-19', 1, 1, '2019-09-20 02:16:23', '2019-09-20 02:16:23'),
+(14, 1, 66, 2000, 1, '2019-09-19', 1, 1, '2019-09-19 21:26:32', '0000-00-00 00:00:00'),
+(15, 2, 66, 20000, 1, '2019-09-19', 1, 1, '2019-09-20 02:27:05', '2019-09-20 02:27:05'),
+(16, 3, 66, 5000, 1, '2019-09-19', 1, 1, '2019-09-20 02:29:30', '2019-09-20 02:29:30'),
+(17, 1, 67, 100, 1, '2019-09-19', 1, 1, '2019-09-20 02:31:31', '2019-09-20 02:31:31'),
+(18, 2, 67, 200, 1, '2019-09-19', 1, 1, '2019-09-20 02:34:43', '2019-09-20 02:34:43'),
+(19, 3, 67, 500, 1, '2019-09-19', 1, 1, '2019-09-20 02:34:52', '2019-09-20 02:34:52'),
+(20, 4, 67, 1000, 1, '2019-09-19', 1, 1, '2019-09-20 02:35:06', '2019-09-20 02:35:06'),
+(21, 1, 69, 1000, 1, '2019-09-25', 1, 1, '2019-09-25 21:58:21', '2019-09-26 02:58:21'),
+(23, 2, 69, 3000, 0, '2019-09-25', 1, 1, '2019-09-26 21:44:06', '2019-09-27 02:44:06');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `abono_pagar`
+--
+
+CREATE TABLE `abono_pagar` (
+  `id` int(11) NOT NULL,
+  `num_pago` int(250) NOT NULL DEFAULT '1',
+  `id_pago` int(250) NOT NULL,
+  `abono` int(250) NOT NULL,
+  `estado_abono` tinyint(1) NOT NULL,
+  `fecha_pago` date NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `usu_crea` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `abono_pagar`
+--
+
+INSERT INTO `abono_pagar` (`id`, `num_pago`, `id_pago`, `abono`, `estado_abono`, `fecha_pago`, `id_empresa`, `usu_crea`, `created_at`, `updated_at`) VALUES
+(34, 1, 100, 4500, 0, '2019-09-19', 1, 1, '2019-09-19 21:43:38', '2019-09-20 02:43:38'),
+(35, 1, 101, 2500, 1, '2019-09-19', 1, 1, '2019-09-20 02:42:08', '2019-09-20 02:42:08'),
+(36, 2, 100, 600, 1, '2019-09-19', 1, 1, '2019-09-20 02:43:10', '2019-09-20 02:43:10'),
+(37, 2, 101, 3500, 1, '2019-09-19', 1, 1, '2019-09-20 02:43:30', '2019-09-20 02:43:30'),
+(38, 3, 100, 1200, 1, '2019-09-19', 1, 1, '2019-09-20 02:47:11', '2019-09-20 02:47:11'),
+(41, 4, 100, 400, 1, '2019-09-19', 1, 1, '2019-09-20 02:48:38', '2019-09-20 02:48:38'),
+(42, 1, 102, 100000, 1, '2019-09-25', 1, 1, '2019-09-26 21:46:05', '2019-09-27 02:46:05'),
+(43, 2, 102, 1000, 1, '2019-09-25', 1, 1, '2019-09-26 21:46:05', '2019-09-27 02:46:05');
 
 -- --------------------------------------------------------
 
@@ -37,13 +116,15 @@ CREATE TABLE `articulos` (
   `precio_venta` decimal(11,2) NOT NULL,
   `stock` int(11) DEFAULT NULL,
   `descripcion` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cod_invima` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cod_invima` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `lote` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fec_vence` date DEFAULT NULL,
   `minimo` int(11) DEFAULT NULL,
   `tipo_articulo` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
   `iva` int(11) NOT NULL,
   `talla` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `marca` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `linea` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_und_medida` int(11) DEFAULT NULL,
   `id_concentracion` int(11) DEFAULT NULL,
   `id_presentacion` int(11) DEFAULT NULL,
@@ -54,6 +135,26 @@ CREATE TABLE `articulos` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `img` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `articulos`
+--
+
+INSERT INTO `articulos` (`id`, `idcategoria`, `idcategoria2`, `codigo`, `nombre`, `precio_venta`, `stock`, `descripcion`, `cod_invima`, `lote`, `fec_vence`, `minimo`, `tipo_articulo`, `iva`, `talla`, `marca`, `linea`, `id_und_medida`, `id_concentracion`, `id_presentacion`, `id_usuario`, `id_empresa`, `condicion`, `created_at`, `updated_at`, `img`) VALUES
+(1, 5, 1, '90202', 'Articulo 1', '1000.00', 1010, 'faljfl', 'afjlk', 'null', '2019-05-30', 1, '2', 0, 'null', NULL, NULL, 0, 0, 1, 1, 1, 1, '2019-05-30 20:04:19', '2019-08-28 03:09:47', 'team03.jpg'),
+(2, 6, 1, '9203902', 'Articulo 2', '500.00', 1010, 'ajlkjf', 'ajflkj', 'aslfjl', '2019-05-30', 1, '1', 0, 'jkllkjlkjlj', NULL, NULL, 1, 0, 1, 1, 1, 1, '2019-05-30 20:06:27', '2019-07-20 03:15:22', 'images.jpg'),
+(7, 5, 1, '902020', 'Articulo 1', '1000.00', 1010, 'faljfl', 'afjlk', NULL, '2019-05-30', 1, '2', 0, NULL, NULL, NULL, NULL, NULL, 1, 1, 2, 0, '2019-05-30 20:04:19', '2019-06-04 21:31:21', 'default.png'),
+(8, 3, 1, '92039020', 'Articulo 2 2', '500.00', 1010, 'ajlkjf', 'ajflkj', 'aslfjl', '2019-05-30', 1, '1', 0, NULL, NULL, NULL, 1, NULL, 1, 1, 2, 1, '2019-05-30 20:06:27', '2019-05-31 22:25:18', 'default.png'),
+(19, 6, 1, '0949380', 'Articulo 3', '2000.00', 1010, 'falk', 'jaflk', NULL, '2019-06-28', 1, '2', 0, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 1, '2019-06-29 02:39:06', '2019-06-29 02:39:06', 'default.png'),
+(20, 5, 2, '203', 'Articulo 4', '1000.00', 1010, 'akfalj', 'aoskfdop', 'null', '2019-06-28', 1, '2', 0, NULL, NULL, NULL, 0, 0, 1, 1, 1, 1, '2019-06-29 02:42:25', '2019-07-09 01:22:51', 'header_bg.jpg'),
+(21, 6, 1, '923849', 'Articulo 55', '400.00', 1010, 'dajkl', '90809', 'null', '2019-06-28', 1, '2', 0, 'a', NULL, NULL, 0, 0, 1, 1, 1, 1, '2019-06-29 02:43:11', '2019-07-09 02:27:45', 'logo.png'),
+(24, 5, 1, '120910', 'Articulo 6', '500.00', 1010, 'lfkajlfpjdkla', 'sadljflkj', NULL, '2019-07-10', 1, '2', 0, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 1, '2019-07-10 21:00:43', '2019-07-13 01:50:14', 'banner1.jpg'),
+(25, 2, 2, '408309', 'Articulo 7', '400.00', 1010, 'aljfdlka', 'jaflskj', 'null', '2019-07-10', 1, '2', 0, 'null', NULL, NULL, 0, 0, 1, 1, 1, 1, '2019-07-10 21:29:55', '2019-07-13 01:50:14', 'folio02.jpg'),
+(30, 6, 1, '399939', 'Articulo 8', '1000.00', 1010, 'null', 'ajf0a', 'null', '2019-07-12', 1, '1', 0, 'null', NULL, NULL, 1, 0, 2, 1, 1, 1, '2019-07-13 02:44:23', '2019-08-15 01:23:50', 'team04.jpg'),
+(31, 2, 5, '55555', 'Fresco Royal', '500.00', 1010, 'yhyhyhyhyh', '1234', '12', '2019-12-30', 10, '3', 0, 'x', NULL, NULL, 1, 0, 3, 1, 1, 1, '2019-07-15 21:32:27', '2019-09-18 21:50:50', 'blusa_blanca.jpg'),
+(33, 2, 1, '9898', 'Articulo 9', '1000.00', 1010, 'JKLF', 'dklfj', 'null', '2019-07-17', 10, '2', 0, 'null', NULL, NULL, 0, 0, 1, 1, 1, 1, '2019-07-18 03:22:04', '2019-09-03 22:18:54', 'bolso.jpg'),
+(34, 6, 1, '899', 'Blusa', '45000.00', 963, 'Blusa, color blanco, mujer, talla s', 'ljfakf', 'afljasfj', '0000-00-00', 1, '3', 0, 'S', 'kkk', 'mm', 2, 0, 1, 1, 1, 1, '2019-09-05 03:01:16', '2019-10-02 20:31:39', 'blusa_blanca.jpg'),
+(35, 10, 11, '29292929', 'Neveras', '650000.00', 10, 'null', 'null', 'null', '0000-00-00', 1, '3', 0, 'null', 'aceb', 'refrigeradores', 10, 0, 1, 1, 1, 1, '2019-10-02 20:40:23', '2019-10-03 21:12:35', 'nevera.jpg');
 
 -- --------------------------------------------------------
 
@@ -79,7 +180,9 @@ INSERT INTO `bancos` (`id`, `nombre`, `id_empresa`, `usu_crea`, `estado`, `creat
 (1, 'Banco 1', 1, 1, 1, '2019-05-23 19:30:03', '2019-05-23 19:30:50'),
 (2, 'Banco 2', 1, 1, 1, '2019-05-23 19:31:06', '2019-05-23 19:31:06'),
 (3, 'Banco 3', 2, 1, 0, '2019-05-23 19:31:17', '2019-05-28 21:55:04'),
-(4, 'Banco 2', 2, 1, 1, '2019-05-23 19:31:06', '2019-05-23 19:31:06');
+(4, 'Banco 2', 2, 1, 1, '2019-05-23 19:31:06', '2019-05-23 19:31:06'),
+(5, 'Banco 3', 1, 1, 1, '2019-08-22 01:53:04', '2019-08-22 01:53:04'),
+(6, 'Banco 4', 1, 1, 1, '2019-08-22 01:53:12', '2019-09-26 21:25:22');
 
 -- --------------------------------------------------------
 
@@ -96,6 +199,17 @@ CREATE TABLE `cajas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `cajas`
+--
+
+INSERT INTO `cajas` (`id`, `nombre`, `estado`, `id_empresa`, `usu_crea`, `created_at`, `updated_at`) VALUES
+(1, 'Caja 1', 1, 1, 1, '2019-07-26 18:26:31', '2019-07-26 18:26:31'),
+(2, 'Caja 2', 1, 1, 1, '2019-07-26 18:26:39', '2019-07-26 18:26:53'),
+(3, 'Caja 3', 1, 1, 1, '2019-07-26 18:27:13', '2019-07-26 18:27:13'),
+(4, 'Caja 4', 1, 1, 1, '2019-07-26 18:27:21', '2019-07-26 18:27:21'),
+(5, 'Caja 5', 0, 1, 1, '2019-07-26 18:27:29', '2019-08-23 20:39:38');
 
 -- --------------------------------------------------------
 
@@ -119,6 +233,14 @@ CREATE TABLE `cajas_cierres` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `cajas_cierres`
+--
+
+INSERT INTO `cajas_cierres` (`id`, `id_caja`, `vr_inicial`, `obs_inicial`, `vr_gastos`, `obs_gastos`, `vr_software`, `vr_final`, `estado`, `usu_crea`, `id_empresa`, `created_at`, `updated_at`) VALUES
+(1, 1, 1000000, NULL, 100000, NULL, 7000, 100, 2, 1, 1, '2019-09-25 05:00:00', '2019-09-29 01:17:03'),
+(2, 3, 1000, NULL, 0, NULL, 0, 0, 1, 1, 1, '2019-10-02 01:17:11', '2019-09-29 01:17:11');
+
 -- --------------------------------------------------------
 
 --
@@ -134,6 +256,23 @@ CREATE TABLE `categorias` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `condicion`, `id_empresa`, `created_at`, `updated_at`) VALUES
+(1, 'Categoria2 1', NULL, 1, 1, '2019-05-22 20:49:33', '2019-05-22 20:49:33'),
+(2, 'Categoria2 2', 'Categoria 2 empresa 1', 1, 1, '2019-05-22 22:28:41', '2019-05-28 01:21:22'),
+(3, 'Categoria2 3', 'Categoria 3', 0, 2, '2019-05-23 18:24:52', '2019-08-09 22:17:56'),
+(4, 'Categoria2 2', 'Categoria 2 empresa 2', 1, 2, '2019-05-22 22:28:41', '2019-05-22 22:28:41'),
+(5, 'Refrescos Polvo', 'Refrescos Polvo', 1, 1, '2019-07-15 21:26:08', '2019-07-15 21:26:08'),
+(6, 'Nueva categoria', 'Categoria nueva lasjff', 1, 1, '2019-08-09 22:18:18', '2019-08-09 22:19:19'),
+(7, 'wsgj', 'laiv', 1, 1, '2019-08-22 02:07:13', '2019-08-22 02:07:13'),
+(8, 'cocacola', '69', 1, 1, '2019-08-22 02:08:21', '2019-08-22 02:08:21'),
+(9, '352', '584561', 0, 1, '2019-08-22 02:13:49', '2019-08-22 02:15:13'),
+(10, 'dhkd', NULL, 0, 1, '2019-08-22 02:14:11', '2019-08-22 02:15:09'),
+(11, '.', NULL, 1, 1, '2019-09-29 02:51:07', '2019-09-29 02:51:07');
 
 -- --------------------------------------------------------
 
@@ -162,7 +301,8 @@ INSERT INTO `colaboradores` (`id`, `colaborador`, `observacion`, `estado`, `vend
 (1, 'Vendedor 1', 'lajflkaj', 1, 1, 0, 1, 1, '2019-05-20 19:34:32', '2019-05-20 19:52:59'),
 (2, 'Vendedor 2', NULL, 1, 1, NULL, 1, 1, '2019-05-20 19:52:52', '2019-05-28 22:21:51'),
 (3, 'Cobrador 1', NULL, 1, NULL, 1, 2, 1, '2019-05-20 19:53:08', '2019-05-20 19:53:08'),
-(4, 'Vendedor 2', NULL, 0, 1, NULL, 2, 1, '2019-05-20 19:52:52', '2019-05-20 19:52:52');
+(4, 'Vendedor 2', NULL, 0, 1, NULL, 2, 1, '2019-05-20 19:52:52', '2019-05-20 19:52:52'),
+(5, 'Vendedor 3', NULL, 1, NULL, NULL, 1, 1, '2019-08-22 01:14:03', '2019-09-26 21:57:33');
 
 -- --------------------------------------------------------
 
@@ -179,6 +319,21 @@ CREATE TABLE `concentraciones` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `concentraciones`
+--
+
+INSERT INTO `concentraciones` (`id`, `nombre`, `estado`, `id_empresa`, `usu_crea`, `created_at`, `updated_at`) VALUES
+(1, '1%', 1, 1, 1, '2019-02-13 02:57:52', '2019-05-28 02:31:28'),
+(2, '16%', 1, 1, 1, '2019-02-13 02:58:22', '2019-02-13 02:58:54'),
+(3, '8Gr', 1, 1, 1, '2019-02-13 02:59:03', '2019-08-09 21:49:01'),
+(4, 'Nueva concentración', 1, 2, 1, '2019-02-15 02:19:04', '2019-02-15 02:19:04'),
+(5, 'sdt', 1, 1, 1, '2019-08-22 01:53:18', '2019-08-22 01:53:18'),
+(6, 'zdg', 1, 1, 1, '2019-08-22 01:53:46', '2019-08-22 01:53:46'),
+(7, 'b', 0, 1, 1, '2019-08-22 01:53:53', '2019-08-22 01:57:34'),
+(8, '45', 1, 1, 1, '2019-08-22 01:54:45', '2019-08-22 01:54:45'),
+(9, '35%', 1, 1, 1, '2019-08-22 01:55:13', '2019-08-22 01:56:27');
 
 -- --------------------------------------------------------
 
@@ -209,7 +364,7 @@ CREATE TABLE `conf_formatos` (
 
 INSERT INTO `conf_formatos` (`id`, `tipo`, `retencion`, `no_inicio`, `cierre`, `acarreo`, `depreciacion`, `fiscal`, `niif`, `id_empresa`, `nombre_formato`, `condicion`, `created_at`, `updated_at`) VALUES
 (1, 'Ingreso', 0, '00001', 0, 0, 0, NULL, 0, 1, 'Recibo de Caja', 1, NULL, '2019-05-06 20:05:27'),
-(2, 'Egreso', NULL, '0001', 0, 0, NULL, NULL, NULL, 1, 'Comprobante de Egreso', 1, '2018-06-15 17:37:17', '2018-06-15 17:38:45'),
+(2, 'Egreso', NULL, '0001', 0, 0, NULL, NULL, NULL, 1, 'Comprobante de Egreso', 1, '2018-06-15 17:37:17', '2019-09-27 01:55:37'),
 (3, 'Contables', 1, '0001', 1, 1, NULL, 1, NULL, 1, 'Nota Contable', 1, '2018-07-26 02:58:24', '2018-07-26 02:58:24'),
 (4, 'Cuentas', 1, '0001', 1, 1, NULL, 1, NULL, 1, 'Cuentas x Pagar', 1, '2018-08-29 23:55:47', '2018-08-29 23:55:47'),
 (5, 'Cuentas', 1, '0001', 1, 1, NULL, 1, NULL, 2, 'Cuentas x Pagar', 1, '2018-08-29 23:55:47', '2018-08-29 23:55:47');
@@ -237,12 +392,7 @@ CREATE TABLE `con_tarifarios` (
 --
 
 INSERT INTO `con_tarifarios` (`id`, `nombre`, `descripcion`, `favorito`, `id_empresa`, `estado`, `usu_crea`, `created_at`, `updated_at`) VALUES
-(1, 'Tarifario 1', 'Descripcion tarifario 1', 0, 1, 1, 1, '2019-05-30 20:04:57', '2019-07-18 21:36:53'),
-(2, 'Tarifario 2', 'Tarifario 2', 1, 1, 1, 1, '2019-05-31 19:19:27', '2019-07-18 21:36:53'),
-(3, 'Tarifario 3', 'lajflkjl', 0, 1, 1, 1, '2019-05-31 19:44:54', '2019-07-18 21:36:53'),
-(4, 'Tarifario 1', 'Descripcion tarifario 1', 0, 2, 1, 1, '2019-05-30 20:04:57', '2019-05-30 20:04:57'),
-(5, 'Tarifario 2', 'Tarifario 2', 0, 2, 1, 1, '2019-05-31 19:19:27', '2019-05-31 19:19:27'),
-(6, 'Tarifario 3', 'lajflkjl', 0, 2, 0, 1, '2019-05-31 19:44:54', '2019-05-31 20:00:00');
+(2, 'Tarifario 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 0, 1, 1, 1, '2019-09-05 01:38:49', '2019-09-05 01:38:49');
 
 -- --------------------------------------------------------
 
@@ -326,7 +476,76 @@ INSERT INTO `cuentas` (`id`, `id_formato`, `numero`, `tercero`, `debe`, `haber`,
 (83, 42, '00001', 11, 3000, 0, NULL, 1, NULL, '2019-06-07', NULL, 1, 0, 1, '2019-08-08 22:30:18', '2019-08-08 22:30:18', 11, '', '\'\'', 0),
 (84, 61, '00012', 11, 1000, 3862, NULL, 9, NULL, '2019-07-04', NULL, 1, 0, 1, '2019-08-09 06:38:10', '2019-08-09 06:38:10', 15, '112005', '\"', NULL),
 (85, 11, '00001', 7, 1000, 0, NULL, 1, NULL, '2019-06-07', NULL, 1, 0, 1, '2019-08-09 06:51:15', '2019-08-09 06:51:15', 9, '', '\'\'', 0),
-(86, 43, '00001', 8, 1000, 0, NULL, 1, NULL, '2019-06-07', NULL, 1, 0, 1, '2019-08-13 21:43:33', '2019-08-13 21:43:33', 1, '', '\'\'', 0);
+(86, 43, '00001', 8, 1000, 0, NULL, 1, NULL, '2019-06-07', NULL, 1, 0, 1, '2019-08-13 21:43:33', '2019-08-13 21:43:33', 1, '', '\'\'', 0),
+(87, 62, '00013', 1, 10, 0, NULL, NULL, 'fldkafjldksj', '2019-09-02', NULL, 1, 0, 1, '2019-09-03 03:21:38', '2019-09-03 03:21:38', 1, '1', NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cuentas_x_cobrar`
+--
+
+CREATE TABLE `cuentas_x_cobrar` (
+  `id` int(11) NOT NULL,
+  `id_tercero` int(11) NOT NULL,
+  `id_pago` int(11) DEFAULT NULL,
+  `num_pago` int(11) NOT NULL DEFAULT '1',
+  `id_factura` int(11) DEFAULT NULL,
+  `valor_deuda` int(11) NOT NULL,
+  `abono` int(11) NOT NULL,
+  `saldo` int(11) DEFAULT NULL,
+  `fecha_cobro` date NOT NULL,
+  `estado_cobro` int(11) NOT NULL,
+  `sin_factura` tinyint(1) DEFAULT '0',
+  `id_empresa` int(11) NOT NULL,
+  `usu_crea` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `cuentas_x_cobrar`
+--
+
+INSERT INTO `cuentas_x_cobrar` (`id`, `id_tercero`, `id_pago`, `num_pago`, `id_factura`, `valor_deuda`, `abono`, `saldo`, `fecha_cobro`, `estado_cobro`, `sin_factura`, `id_empresa`, `usu_crea`, `created_at`, `updated_at`) VALUES
+(60, 6, 60, 2, NULL, 100000, 100000, 0, '2019-09-18', 3, 1, 1, 1, '2019-09-19 02:57:50', '2019-09-20 02:17:31'),
+(61, 4, 61, 2, NULL, 45500, 4200, 41300, '2019-09-18', 1, 1, 1, 1, '2019-09-19 03:05:19', '2019-09-20 02:17:07'),
+(62, 11, 62, 2, NULL, 100000, 64000, 36000, '2019-09-19', 1, 1, 1, 1, '2019-09-20 00:39:54', '2019-09-20 02:16:23'),
+(66, 11, 66, 2, 1, 42000, 27000, 15000, '2019-09-19', 1, 1, 1, 1, NULL, '2019-09-20 02:29:31'),
+(67, 4, 67, 2, NULL, 45000, 1800, 43200, '2019-09-19', 1, 1, 1, 1, '2019-09-20 02:31:31', '2019-09-20 02:35:06'),
+(69, 7, 69, 2, NULL, 1000000, -2000, 991000, '2019-09-25', 1, 1, 1, 1, '2019-09-25 20:41:41', '2019-09-27 02:44:06'),
+(75, 7, NULL, 1, 8, 450000, 2000, 448000, '2019-09-28', 1, 0, 1, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cuentas_x_pagar`
+--
+
+CREATE TABLE `cuentas_x_pagar` (
+  `id` int(250) NOT NULL,
+  `id_tercero` int(250) NOT NULL,
+  `id_pago` int(250) NOT NULL,
+  `num_pago` int(11) NOT NULL DEFAULT '1',
+  `valor_deuda` int(250) NOT NULL,
+  `abono` int(250) NOT NULL,
+  `saldo` int(250) NOT NULL,
+  `fecha_pago` date NOT NULL,
+  `estado_pago` tinyint(1) NOT NULL DEFAULT '1',
+  `usu_crea` int(11) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `cuentas_x_pagar`
+--
+
+INSERT INTO `cuentas_x_pagar` (`id`, `id_tercero`, `id_pago`, `num_pago`, `valor_deuda`, `abono`, `saldo`, `fecha_pago`, `estado_pago`, `usu_crea`, `id_empresa`, `created_at`, `updated_at`) VALUES
+(100, 11, 100, 2, 10000, 2200, 7800, '2019-09-19', 1, 1, 1, '2019-09-20 02:41:42', '2019-09-20 02:48:38'),
+(101, 1, 101, 2, 85000, 6000, 79000, '2019-09-19', 1, 1, 1, '2019-09-20 02:42:08', '2019-09-20 02:43:30'),
+(102, 7, 102, 2, 1000000, 101000, 998000, '2019-09-25', 1, 1, 1, '2019-09-25 20:42:42', '2019-09-27 02:46:05');
 
 -- --------------------------------------------------------
 
@@ -398,6 +617,19 @@ CREATE TABLE `detalle_egresos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Volcado de datos para la tabla `detalle_egresos`
+--
+
+INSERT INTO `detalle_egresos` (`id`, `idegreso`, `idarticulo`, `cantidad`, `precio`, `vr_iva`, `precio_total`, `porcentaje_iva`, `id_usuario`) VALUES
+(1, 1, 2, 50, '1.00', 0, 0, 0, 1),
+(2, 2, 1, 6, '1.00', 0, 0, 0, 1),
+(3, 5, 2, 2, '1.00', 0, 0, 0, 1),
+(7, 8, 1, 1, '1000.00', 160, 1160, 16, 1),
+(8, 8, 2, 2, '500.00', 190, 1190, 19, 1),
+(9, 9, 1, 28, '1000.00', 3862, 28000, 16, 1),
+(11, 11, 33, 2, '1000.00', 319, 2000, 19, 1);
+
+--
 -- Disparadores `detalle_egresos`
 --
 DELIMITER $$
@@ -430,6 +662,24 @@ CREATE TABLE `detalle_facturacion` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `detalle_facturacion`
+--
+
+INSERT INTO `detalle_facturacion` (`id`, `id_factura`, `id_producto`, `padre`, `valor_venta`, `cantidad`, `valor_iva`, `valor_descuento`, `porcentaje_iva`, `valor_subtotal`, `valor_final`, `created_at`, `updated_at`) VALUES
+(17, 2, 25, NULL, 400.00, 10, 552.00, 0.00, 16.00, 3448.00, 4000.00, '2019-07-12 01:16:09', '2019-07-12 01:16:09'),
+(18, 2, 1, NULL, 1000.00, 9, 1241.00, 0.00, 16.00, 7759.00, 9000.00, '2019-07-12 01:16:09', '2019-07-12 01:16:09'),
+(22, 3, 25, NULL, 400.00, 10, 552.00, 0.00, 16.00, 3448.00, 4000.00, '2019-07-12 22:25:14', '2019-07-12 22:25:14'),
+(23, 3, 24, NULL, 500.00, 2, 160.00, 0.00, 19.00, 840.00, 1000.00, '2019-07-12 22:25:14', '2019-07-12 22:25:14'),
+(43, 1, 1, NULL, 1000.00, 1, 0.00, 0.00, 0.00, 1000.00, 1000.00, '2019-07-23 21:00:09', '2019-07-23 21:00:09'),
+(44, 1, 33, NULL, 1000.00, 2, 319.00, 0.00, 19.00, 1681.00, 2000.00, '2019-07-23 21:00:09', '2019-07-23 21:00:09'),
+(45, 4, 1, NULL, 1000.00, 1, 0.00, 0.00, 0.00, 1000.00, 1000.00, '2019-08-15 20:32:09', '2019-08-15 20:32:09'),
+(63, 7, 21, NULL, 400.00, 1, 36.00, 0.00, 10.00, 364.00, 400.00, '2019-09-03 19:08:10', '2019-09-03 19:08:10'),
+(64, 7, 8, 21, 400.00, 2, 73.00, 0.00, 10.00, 727.00, 800.00, '2019-09-03 19:08:10', '2019-09-03 19:08:10'),
+(65, 7, 9, 21, 400.00, 3, 109.00, 0.00, 10.00, 1091.00, 1200.00, '2019-09-03 19:08:10', '2019-09-03 19:08:10'),
+(66, 7, 10, 33, 1000.00, 10, 0.00, 0.00, 0.00, 10000.00, 10000.00, '2019-09-03 19:08:10', '2019-09-03 19:08:10'),
+(68, 8, 34, NULL, 45000.00, 10, 40909.00, 0.00, 10.00, 409091.00, 450000.00, '2019-09-29 01:56:29', '2019-09-29 01:56:29');
+
 -- --------------------------------------------------------
 
 --
@@ -447,6 +697,40 @@ CREATE TABLE `detalle_ingresos` (
   `porcentaje_iva` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `detalle_ingresos`
+--
+
+INSERT INTO `detalle_ingresos` (`id`, `idingreso`, `idarticulo`, `cantidad`, `precio`, `vr_iva`, `precio_total`, `porcentaje_iva`, `id_usuario`) VALUES
+(1, 2, 1, 5, '1.00', 0, 0, 0, 1),
+(2, 2, 2, 10, '1.00', 0, 0, 0, 1),
+(3, 3, 1, 1, '1.00', 0, 0, 0, 1),
+(4, 6, 2, 5, '1.00', 0, 0, 0, 1),
+(5, 7, 2, 10, '1.00', 0, 0, 0, 1),
+(6, 8, 1, 1, '1.00', 0, 0, 0, 1),
+(7, 8, 2, 1, '1.00', 0, 0, 0, 1),
+(25, 21, 1, 10, '1000.00', 0, 0, 0, 1),
+(26, 21, 2, 10, '500.00', 0, 0, 0, 1),
+(28, 23, 1, 1, '1.00', 0, 0, 0, 1),
+(30, 25, 1, 1, '1.00', 0, 0, 0, 1),
+(34, 29, 1, 1, '1.00', 0, 0, 0, 1),
+(35, 31, 1, 1, '1.00', 0, 0, 0, 1),
+(38, 34, 2, 1, '1000.00', 0, 0, 16, 1),
+(41, 20, 2, 1, '1000.00', 0, 0, 16, 1),
+(42, 20, 1, 1, '1.00', 0, 0, 4, 1),
+(57, 33, 2, 1, '1000.00', 160, 1160, 16, 1),
+(58, 33, 1, 1, '1000.00', 160, 1160, 16, 1),
+(59, 33, 19, 2, '500.00', 190, 1190, 19, 1),
+(63, 32, 1, 1, '1000.00', 138, 1000, 16, 1),
+(64, 34, 1, 1, '1000.00', 138, 1000, 16, 1),
+(67, 36, 33, 1, '1000.00', 160, 1000, 19, 1),
+(68, 36, 33, 1, '800.00', 128, 800, 19, 1),
+(77, 41, 33, 1, '1000.00', 160, 1000, 19, 1),
+(78, 41, 33, 2, '900.00', 287, 1800, 19, 1),
+(83, 42, 33, 2, '2000.00', 639, 4000, 19, 1),
+(84, 42, 33, 10, '1000.00', 1597, 10000, 19, 1),
+(85, 43, 1, 1, '1000.00', 138, 1138, 16, 1);
 
 --
 -- Disparadores `detalle_ingresos`
@@ -505,6 +789,20 @@ CREATE TABLE `egresos` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `egresos`
+--
+
+INSERT INTO `egresos` (`id`, `idproveedor`, `idusuario`, `tipo_comprobante`, `serie_comprobante`, `num_comprobante`, `tipo_egreso`, `fecha_hora`, `impuesto`, `total`, `forma_pago`, `flete`, `fecha_egreso`, `detalle`, `saldo_parcial`, `iva_incluido`, `valor_iva`, `estado`, `id_empresa`, `created_at`, `updated_at`) VALUES
+(1, 11, 1, NULL, NULL, NULL, 'Egreso', '2019-05-27 00:00:00', NULL, '50.00', NULL, NULL, '0000-00-00', NULL, NULL, NULL, 0, 'Registrado', 1, '2019-05-27 19:24:22', '2019-05-27 19:24:22'),
+(2, 6, 1, NULL, NULL, NULL, 'Egreso empresa 2', '2019-05-27 00:00:00', NULL, '6.00', NULL, NULL, '0000-00-00', NULL, NULL, NULL, 0, 'Registrado', 1, '2019-05-28 01:07:21', '2019-05-28 01:07:21'),
+(3, 11, 1, NULL, NULL, NULL, 'Egreso', '2019-05-27 00:00:00', NULL, '50.00', NULL, NULL, '0000-00-00', NULL, NULL, NULL, 0, 'Registrado', 2, '2019-05-27 19:24:22', '2019-05-27 19:24:22'),
+(4, 6, 1, NULL, NULL, NULL, 'Egreso empresa 2', '2019-05-27 00:00:00', NULL, '6.00', NULL, NULL, '0000-00-00', NULL, NULL, NULL, 0, 'Anulado', 2, '2019-05-28 01:07:21', '2019-06-05 18:51:07'),
+(5, 11, 1, NULL, NULL, NULL, 'aaaaaaa', '2019-06-05 00:00:00', NULL, '2.00', NULL, NULL, '0000-00-00', NULL, NULL, NULL, 0, 'Cerrado', 1, '2019-06-06 01:39:56', '2019-07-05 01:55:40'),
+(8, 11, 1, NULL, NULL, NULL, 'Bajas', '2019-07-04 00:00:00', NULL, '2350.00', 8, 0, '2019-07-04', 'Detalle', NULL, 0, 350, 'Cerrado', 1, '2019-07-04 21:34:12', '2019-07-05 01:35:46'),
+(9, 11, 1, NULL, NULL, NULL, 'Bajas', '2019-07-04 00:00:00', NULL, '28000.00', NULL, 0, '2019-07-04', NULL, NULL, 1, 3862, 'Cerrado', 1, '2019-07-05 03:01:58', '2019-08-09 06:38:10'),
+(11, 7, 1, NULL, NULL, NULL, 'Ajuste inventario', '2019-08-08 00:00:00', NULL, '2000.00', 8, 0, '2019-08-08', NULL, NULL, 1, 319, 'Registrado', 1, '2019-08-09 06:51:15', '2019-08-09 06:51:15');
+
 -- --------------------------------------------------------
 
 --
@@ -533,7 +831,7 @@ CREATE TABLE `empresas` (
 --
 
 INSERT INTO `empresas` (`id`, `nombre`, `logo`, `repre_legal`, `nit`, `direccion`, `res_fact_elect`, `res_fact_pos`, `correo`, `celular`, `telefono`, `usu_crea`, `created_at`, `updated_at`) VALUES
-(1, 'Empresa 1', 'logo2.jpg', 'repre1', '11111111-0', 'direccion 1', '73892147983798', '39817o47389798', 'empresa1@gmail.com', '300000000', '4222222', 1, '2019-05-08 21:18:09', '2019-05-10 03:42:00'),
+(1, 'Empresa 1', 'f4f72620874a541d0113ea86bcf699a8.jpg', 'repre1', '11111112-0', 'direccion 1', '73892147983798', '39817o47389798', 'empresa1@gmail.com', '300000000', '4222222', 1, '2019-05-08 21:18:09', '2019-09-27 01:43:47'),
 (2, 'Empresa 2', 'logo2.jpg', 'repre2', '2222', 'direccion 2', '4314312', '314312', 'aofijdoifj@gmial.com', '40958029', '390180192', 9, '2019-05-08 21:18:09', '2019-05-10 03:41:23'),
 (4, 'Empresa 3', 'logo3.jpg', 'Repre', '9879799798', '', '87878787', '78878787', '7878787', '7879877', '7878787', 1, '2019-05-10 02:05:19', '2019-05-10 03:41:39'),
 (5, 'Empresa 4', 'logo4.jpg', 'ldajflkj', '999', '', '9', '9', '9', '9', '9', 1, '2019-05-10 02:30:07', '2019-05-10 03:41:49');
@@ -557,6 +855,13 @@ CREATE TABLE `evidencias_egresos` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `evidencias_egresos`
+--
+
+INSERT INTO `evidencias_egresos` (`id`, `nombre`, `observacion`, `link`, `id_egreso`, `id_empresa`, `usu_crea`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 'ijiojoij', 'I figured it out and there are two issues.\n\n#1) In the following line, you attempt to set fav to the value stored in localStorage’s ‘favoList’. When you use getItem, you should use JSON.parse around it, because if not, the value returned is just a string. The JSON.parse will convert it to an object/array.\n\nlet fav = localStorage.getItem(‘favoList’) || [];\n\nWrap it like:\n\nlet fav = JSON.parse(localStorage.getItem(‘favoList’)) || [];\n\n#2) The following is your addFavorite function:', 'oijiojo', 11, 1, 1, 1, '2019-09-27 21:54:32', '2019-09-27 21:54:32');
+
 -- --------------------------------------------------------
 
 --
@@ -575,6 +880,13 @@ CREATE TABLE `evidencias_ingresos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `evidencias_ingresos`
+--
+
+INSERT INTO `evidencias_ingresos` (`id`, `nombre`, `observacion`, `link`, `id_ingreso`, `id_empresa`, `usu_crea`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 'Evidencia 1', NULL, 'https://www.youtube.com/', 43, 1, 1, 1, '2019-09-27 02:41:09', '2019-09-27 02:41:09');
 
 -- --------------------------------------------------------
 
@@ -612,6 +924,80 @@ CREATE TABLE `facturacion` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `facturacion`
+--
+
+INSERT INTO `facturacion` (`id`, `num_factura`, `id_tercero`, `id_usuario`, `fec_crea`, `fec_edita`, `usu_edita`, `subtotal`, `valor_iva`, `total`, `abono`, `saldo`, `detalle`, `descuento`, `lugar`, `fec_registra`, `fec_envia`, `fec_anula`, `usu_registra`, `usu_envia`, `usu_anula`, `fecha`, `id_tarifario`, `id_cierre_caja`, `id_empresa`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 3, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 1, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(3, 0, 11, 1, '2019-07-11 16:55:18', '2019-07-12 12:24:28', 1, 4288.00, 712.00, 5000.00, 5000.00, 0.00, 'AaAaAaAa', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-07-11', 1, 1, 1, 4, '2019-07-12 02:55:18', '2019-07-13 01:50:14'),
+(4, NULL, 11, 1, '2019-08-15 10:32:09', NULL, NULL, 1000.00, 0.00, 1000.00, 500.00, 500.00, NULL, 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-08-15', 1, 1, 1, 1, '2019-08-15 20:32:09', '2019-08-15 20:32:09'),
+(7, NULL, 11, 1, '2019-09-23 00:00:00', '2019-09-03 08:50:41', 1, 12182.00, 218.00, 12400.00, 0.00, 12400.00, NULL, 0.00, 3, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 1, '2019-09-03 03:03:56', '2019-09-03 19:08:10'),
+(8, NULL, 7, 1, '2019-09-28 15:26:19', '2019-09-28 15:56:24', 1, 409091.00, 40909.00, 450000.00, 2000.00, 448000.00, NULL, 0.00, 2, NULL, NULL, NULL, NULL, NULL, NULL, '2019-09-28', 2, 2, 1, 1, '2019-09-29 01:26:19', '2019-09-29 01:56:34');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `facturacion_otra`
+--
+
+CREATE TABLE `facturacion_otra` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `num_factura` int(11) DEFAULT NULL,
+  `id_tercero` int(10) UNSIGNED NOT NULL,
+  `id_usuario` int(10) UNSIGNED NOT NULL,
+  `fec_crea` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fec_edita` datetime DEFAULT NULL,
+  `usu_edita` int(11) DEFAULT NULL,
+  `subtotal` double(15,2) NOT NULL,
+  `valor_iva` double(15,2) NOT NULL,
+  `total` double(15,2) NOT NULL,
+  `abono` double(15,2) NOT NULL,
+  `saldo` double(15,2) NOT NULL,
+  `detalle` text COLLATE utf8mb4_unicode_ci,
+  `descuento` double(15,2) NOT NULL,
+  `lugar` int(11) NOT NULL,
+  `fec_registra` datetime DEFAULT NULL,
+  `fec_envia` datetime DEFAULT NULL,
+  `fec_anula` datetime DEFAULT NULL,
+  `usu_registra` int(10) UNSIGNED DEFAULT NULL,
+  `usu_envia` int(10) UNSIGNED DEFAULT NULL,
+  `usu_anula` int(10) UNSIGNED DEFAULT NULL,
+  `fecha` date NOT NULL,
+  `id_tarifario` int(11) NOT NULL,
+  `id_cierre_caja` int(11) DEFAULT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `facturacion_otra`
+--
+
+INSERT INTO `facturacion_otra` (`id`, `num_factura`, `id_tercero`, `id_usuario`, `fec_crea`, `fec_edita`, `usu_edita`, `subtotal`, `valor_iva`, `total`, `abono`, `saldo`, `detalle`, `descuento`, `lugar`, `fec_registra`, `fec_envia`, `fec_anula`, `usu_registra`, `usu_envia`, `usu_anula`, `fecha`, `id_tarifario`, `id_cierre_caja`, `id_empresa`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 3, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 2, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(3, 0, 11, 1, '2019-07-11 16:55:18', '2019-07-12 12:24:28', 1, 4288.00, 712.00, 5000.00, 5000.00, 0.00, 'AaAaAaAa', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-07-11', 1, 2, 1, 4, '2019-07-12 02:55:18', '2019-07-13 01:50:14'),
+(4, NULL, 11, 1, '2019-08-15 10:32:09', NULL, NULL, 1000.00, 0.00, 1000.00, 500.00, 500.00, NULL, 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-08-15', 1, 3, 1, 1, '2019-08-15 20:32:09', '2019-08-15 20:32:09'),
+(6, 4, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 2, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(7, 5, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 1, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(8, 6, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 1, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(9, 7, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 2, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(10, 8, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 2, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(11, 9, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 2, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(12, 10, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 3, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(13, 11, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 3, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(14, 12, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 2, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(15, 13, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 2, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(16, 14, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 2, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(17, 15, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 4, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(18, 16, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 4, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(19, 17, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 4, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(20, 18, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 2, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(21, 19, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 2, '2019-06-05 19:14:19', '2019-08-28 03:09:48'),
+(22, 20, 11, 1, '2019-06-05 09:14:19', '2019-07-23 10:53:33', 1, 2681.00, 319.00, 3000.00, 1500.00, 1500.00, 'afjdla', 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-05', 2, 1, 1, 2, '2019-06-05 19:14:19', '2019-08-28 03:09:48');
 
 -- --------------------------------------------------------
 
@@ -682,7 +1068,8 @@ INSERT INTO `formatos` (`id`, `numero`, `formato`, `tercero`, `fecha`, `detalle`
 (58, '00010', 4, 11, '2019-08-06', NULL, '2019-08-08 19:38:38', '2019-08-08 19:38:38', 1, 1, 2353, NULL, 447, 2800, 2800, 2800, 41, 'Compras', NULL, NULL, '', NULL, 0, NULL, 1, NULL),
 (59, '00011', 4, 11, '2019-08-06', 'flasfj', '2019-08-08 19:38:46', '2019-08-08 19:38:46', 1, 1, 1512, NULL, 288, 1800, 1800, 1800, 36, 'Compras', NULL, NULL, '', NULL, 0, NULL, 1, NULL),
 (60, '00012', 4, 11, '2019-07-04', 'Detalle', '2019-08-08 19:48:20', '2019-08-08 19:48:20', 1, 1, 862, NULL, 138, 1000, 1000, 1000, 34, 'Compras', NULL, NULL, '', NULL, 0, NULL, 1, NULL),
-(61, '00012', 3, 11, '2019-07-04', NULL, '2019-08-09 06:38:10', '2019-08-09 06:38:10', 1, 1, 24138, NULL, 3862, 28000, 28000, 28000, 9, 'Compras', NULL, NULL, '', NULL, 0, NULL, 1, NULL);
+(61, '00012', 3, 11, '2019-07-04', NULL, '2019-08-09 06:38:10', '2019-08-09 06:38:10', 1, 1, 24138, NULL, 3862, 28000, 28000, 28000, 9, 'Compras', NULL, NULL, '', NULL, 0, NULL, 1, NULL),
+(62, '00013', 3, 1, '2019-09-02', 'fldkafjldksj', '2019-09-03 03:21:38', '2019-09-02 22:21:38', 1, 1, 0, NULL, NULL, 0, 10, 0, NULL, NULL, NULL, 4, 'Efectivo', NULL, 0, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -706,7 +1093,7 @@ CREATE TABLE `formatos_procesos` (
 --
 
 INSERT INTO `formatos_procesos` (`id`, `idFormatoCompras`, `idFormatoVentas`, `idFormatoSalidas`, `id_empresa`, `usu_crea`, `created_at`, `updated_at`) VALUES
-(10, 4, 1, 3, 1, 1, '2019-07-04 22:15:48', '2019-07-04 22:15:48');
+(41, 4, 1, 3, 1, 1, '2019-10-04 01:15:43', '2019-10-04 01:15:43');
 
 -- --------------------------------------------------------
 
@@ -764,6 +1151,26 @@ CREATE TABLE `ingresos` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `ingresos`
+--
+
+INSERT INTO `ingresos` (`id`, `idproveedor`, `idusuario`, `tipo_comprobante`, `serie_comprobante`, `num_comprobante`, `tipo_ingreso`, `fecha_hora`, `impuesto`, `total`, `forma_pago`, `flete`, `fecha_ingreso`, `detalle`, `saldo_parcial`, `iva_incluido`, `valor_iva`, `estado`, `id_empresa`, `created_at`, `updated_at`) VALUES
+(2, 7, 1, NULL, NULL, NULL, 'Compras', '2019-05-27 00:00:00', NULL, '15.00', 1, 0, '0000-00-00', NULL, 0, 0, 0, 'Registrado', 1, '2019-05-27 19:12:03', '2019-05-28 22:11:03'),
+(3, 7, 1, NULL, NULL, NULL, 'Compras', '2019-05-27 00:00:00', NULL, '1.00', 2, 0, '0000-00-00', NULL, 0, 0, 0, 'Registrado', 1, '2019-05-28 01:02:31', '2019-05-28 01:02:31'),
+(4, 7, 1, NULL, NULL, NULL, 'Compras', '2019-05-27 00:00:00', NULL, '15.00', NULL, 0, '0000-00-00', NULL, 0, 0, 0, 'Registrado', 2, '2019-05-27 19:12:03', '2019-05-28 22:11:03'),
+(5, 7, 1, NULL, NULL, NULL, 'Compras', '2019-05-27 00:00:00', NULL, '1.00', 1, 0, '0000-00-00', NULL, 0, 0, 0, 'Registrado', 2, '2019-05-28 01:02:31', '2019-05-28 01:02:31'),
+(6, 7, 1, NULL, NULL, NULL, 'Compras', '2019-06-05 00:00:00', NULL, '5.00', NULL, 0, '0000-00-00', NULL, 0, 0, 0, 'Anulado', 1, '2019-06-06 01:23:54', '2019-06-07 01:44:50'),
+(20, 11, 1, NULL, NULL, NULL, 'Devoluciones', '2019-06-28 00:00:00', NULL, '1001.00', 1, 0, '2019-06-07', NULL, 0, 1, 138, 'Registrado', 1, '2019-06-08 05:44:50', '2019-06-28 19:51:59'),
+(31, 11, 1, NULL, NULL, NULL, 'Compras', '2019-06-17 00:00:00', NULL, '1.00', 4, 0, '2019-06-17', 'Detalle', 1, NULL, 0, 'Registrado', 1, '2019-06-18 03:05:38', '2019-06-18 03:05:38'),
+(32, 7, 1, NULL, NULL, NULL, 'Compras', '2019-07-03 00:00:00', NULL, '1000.00', 4, 0, '2019-06-21', 'Detalle', NULL, 1, 138, 'Registrado', 1, '2019-06-21 21:41:27', '2019-07-04 03:15:16'),
+(33, 11, 1, NULL, NULL, NULL, 'Devoluciones', '2019-07-02 00:00:00', NULL, '3510.00', 1, 0, '2019-06-07', 'Editado', 0, 0, 510, 'Cerrado', 1, '2019-06-27 18:52:40', '2019-07-03 02:09:13'),
+(34, 11, 1, NULL, NULL, NULL, 'Saldos Iniciales', '2019-07-04 00:00:00', NULL, '1000.00', 1, 0, '2019-07-04', 'Detalle', NULL, 1, 138, 'Cerrado', 1, '2019-07-05 03:00:42', '2019-08-08 19:48:20'),
+(36, 11, 1, NULL, NULL, NULL, 'Compras', '2019-08-06 00:00:00', NULL, '1800.00', 1, 0, '2019-08-06', 'flasfj', NULL, 1, 288, 'Cerrado', 1, '2019-08-06 20:56:14', '2019-08-08 19:38:47'),
+(41, 11, 1, NULL, NULL, NULL, 'Devoluciones', '2019-08-06 00:00:00', NULL, '2800.00', NULL, 0, '2019-08-06', NULL, NULL, 1, 447, 'Cerrado', 1, '2019-08-07 02:38:17', '2019-08-08 19:38:38'),
+(42, 11, 1, NULL, NULL, NULL, 'Devoluciones', '2019-08-08 00:00:00', NULL, '14000.00', NULL, 0, '2019-08-08', 'alfjas', NULL, 1, 2236, 'Registrado', 1, '2019-08-08 22:30:18', '2019-08-09 01:22:33'),
+(43, 8, 1, NULL, NULL, NULL, 'Compras', '2019-08-13 00:00:00', NULL, '1000.00', 4, 0, '2019-08-13', NULL, 0, 1, 0, 'Registrado', 1, '2019-08-13 21:43:32', '2019-08-13 21:43:32');
+
 -- --------------------------------------------------------
 
 --
@@ -781,6 +1188,32 @@ CREATE TABLE `iva` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `iva`
+--
+
+INSERT INTO `iva` (`id`, `nombre`, `tipo`, `porcentaje`, `estado`, `usu_crea`, `id_empresa`, `created_at`, `updated_at`) VALUES
+(1, 'Iva Compras', 'compras', 16, 1, 1, 1, '2019-06-18 20:20:02', '2019-06-14 21:16:17'),
+(2, 'Iva Ventas', 'ventas', 10, 1, 1, 1, '2019-06-14 16:16:23', '2019-06-14 21:16:23'),
+(3, 'Iva Devoluciones Compras', 'devoluciones_compras', 5, 1, 1, 1, '2019-06-14 21:16:39', '2019-06-14 21:16:39'),
+(4, 'Iva Devoluciones Ventas', 'devoluciones_ventas', 9, 1, 1, 1, '2019-06-14 21:16:55', '2019-06-14 21:16:55'),
+(5, 'Iva Compras 2', 'compras', 19, 1, 1, 1, '2019-06-14 16:16:17', '2019-06-14 21:16:17'),
+(6, 'Iva Ventas 2', 'ventas', 10, 1, 1, 1, '2019-06-14 16:16:23', '2019-06-14 21:16:23'),
+(7, 'Iva Devoluciones Compras 2', 'devoluciones_compras', 5, 1, 1, 1, '2019-06-14 21:16:39', '2019-06-14 21:16:39'),
+(8, 'Iva Devoluciones Ventas 2', 'devoluciones_ventas', 9, 1, 1, 1, '2019-06-14 21:16:55', '2019-06-14 21:16:55'),
+(9, 'Iva Compra Cero', 'compras', 0, 1, 1, 1, '2019-07-19 02:47:34', '2019-07-19 02:47:34'),
+(10, 'Iva Venta Cero', 'ventas', 0, 1, 1, 1, '2019-07-19 02:47:47', '2019-07-19 02:47:47'),
+(11, 'Iva Devolucion Compras Cero', 'devoluciones_compras', 0, 1, 1, 1, '2019-07-19 02:48:03', '2019-07-19 02:48:03'),
+(12, 'Iva Devolucion Ventas Cero', 'devoluciones_ventas', 0, 1, 1, 1, '2019-09-26 21:41:49', '2019-09-27 02:41:49'),
+(13, 'IVA COMPRAS 19%', 'compras', 19, 1, 1, 1, '2019-09-28 22:01:16', '2019-09-29 03:01:16'),
+(14, 'IVA VENTAS 19%', 'ventas', 19, 1, 1, 1, '2019-09-29 03:01:03', '2019-09-29 03:01:03'),
+(15, 'IVA COMPRAS 5%', 'compras', 5, 1, 1, 1, '2019-09-29 03:01:28', '2019-09-29 03:01:28'),
+(16, 'IVA VENTAS 5%', 'ventas', 5, 1, 1, 1, '2019-09-29 03:01:50', '2019-09-29 03:01:50'),
+(17, 'IVA DEVOLUCIONES EN COMPRAS 5%', 'devoluciones_compras', 5, 1, 1, 1, '2019-09-28 22:04:49', '2019-09-29 03:04:49'),
+(18, 'IVA DEVOLUCIONES EN COMPRAS 19%', 'devoluciones_compras', 19, 1, 1, 1, '2019-09-28 22:04:42', '2019-09-29 03:04:42'),
+(19, 'IVA DEVOLUCIONES EN VETAS 5%', 'devoluciones_ventas', 5, 1, 1, 1, '2019-09-28 22:04:35', '2019-09-29 03:04:35'),
+(20, 'IVA DEVOLUCIONES EN VETAS 19%', 'devoluciones_ventas', 19, 1, 1, 1, '2019-09-28 22:04:28', '2019-09-29 03:04:28');
 
 -- --------------------------------------------------------
 
@@ -814,6 +1247,10 @@ CREATE TABLE `modelo_contable` (
   `id` int(10) UNSIGNED NOT NULL,
   `nombre` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `descripcion` text COLLATE utf8mb4_unicode_ci,
+  `idIvaCompras` int(11) NOT NULL,
+  `idIvaVentas` int(11) NOT NULL,
+  `idIvaDevolucionCompras` int(11) NOT NULL,
+  `idIvaDevolucionVentas` int(11) NOT NULL,
   `idCuentaProductos` int(11) DEFAULT NULL,
   `idCuentaSalidaProductos` int(11) DEFAULT NULL,
   `idCuentaSaldosIniciales` int(11) DEFAULT NULL,
@@ -826,6 +1263,22 @@ CREATE TABLE `modelo_contable` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `modelo_contable`
+--
+
+INSERT INTO `modelo_contable` (`id`, `nombre`, `descripcion`, `idIvaCompras`, `idIvaVentas`, `idIvaDevolucionCompras`, `idIvaDevolucionVentas`, `idCuentaProductos`, `idCuentaSalidaProductos`, `idCuentaSaldosIniciales`, `idCuentaDonaciones`, `idCuentaDevolucionesVentas`, `idCuentaDevolucionesCompras`, `idCuentaImpuestoConsumoVentas`, `condicion`, `id_empresa`, `created_at`, `updated_at`) VALUES
+(1, 'Modelo Contable 12', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 13, 14, 18, 19, 1, 2, 3, 4, 0, 0, 0, 1, 1, '2019-05-22 20:49:33', '2019-08-09 19:51:50'),
+(2, 'Modelo contable', 'Categoria 2 empresa 1', 13, 14, 18, 19, 2, 9, 4, 15, 17, 11, 12, 1, 1, '2019-05-22 22:28:41', '2019-08-07 02:30:52'),
+(3, 'Modelo contable 3', 'Categoria 3', 13, 14, 18, 19, 1, 9, 6, 5, 25, 14, 26, 1, 1, '2019-05-23 18:24:52', '2019-06-18 02:23:31'),
+(4, 'Categoria 2', 'Categoria 2 empresa 2', 13, 14, 18, 19, 2, NULL, NULL, NULL, 0, 0, 0, 1, 2, '2019-05-22 22:28:41', '2019-05-22 22:28:41'),
+(5, 'Modelo contable 1', 'ldjfldjaflkj', 13, 14, 18, 19, 1, 15, 8, 21, 1, 1, 1, 1, 1, '2019-06-01 00:56:03', '2019-06-18 02:22:45'),
+(6, 'Modelo contable 2', 'jjjjpoopopojopj', 13, 14, 18, 19, 4, 9, 4, 5, 24, 6, NULL, 1, 1, '2019-06-01 01:02:36', '2019-06-12 01:38:14'),
+(7, 'Modelo 5', 'lafjlkajsfjaslfjlasjfl', 13, 14, 18, 19, 15, 8, 23, 20, 4, 21, 11, 1, 1, '2019-08-09 21:14:59', '2019-08-09 21:17:18'),
+(8, 'compras', 'cardadores', 13, 14, 18, 19, 17, 21, 6, 13, 15, 4, 22, 0, 1, '2019-08-22 01:12:16', '2019-09-13 19:52:07'),
+(9, 'gjklcd', 'dfyhrc sgrey eryery  r', 13, 14, 18, 19, 22, 12, 16, 24, 21, 18, 15, 1, 1, '2019-08-22 01:21:41', '2019-10-03 01:30:00'),
+(10, 'PRODUCTOS GRAVADOS AL 19%', NULL, 13, 14, 18, 20, 27, 27, 27, 27, 29, 27, 30, 1, 1, '2019-09-29 02:50:09', '2019-10-03 21:03:19');
 
 -- --------------------------------------------------------
 
@@ -873,7 +1326,7 @@ INSERT INTO `modulos` (`id`, `nombre`, `descripcion`, `estado`, `usu_crea`, `com
 (17, 'Compras', NULL, 1, 1, 'Ingresos.vue', 17, 2, 'icon-bag', 'ingreso', 16, '2019-05-25 01:21:08', '2019-06-18 20:02:40'),
 (18, 'Egresos', NULL, 1, 1, 'Egresos.vue', 18, 2, 'icon-bag', 'egreso', 16, '2019-05-25 01:38:49', '2019-05-25 03:28:40'),
 (19, 'Stock', NULL, 1, 1, 'Stock.vue', 19, 2, 'icon-bag', 'stock', 16, '2019-05-25 01:40:38', '2019-05-25 01:40:38'),
-(20, 'Cliente', NULL, 1, 1, 'Cliente.vue', 20, 2, 'icon-bag', 'cliente', 16, '2019-05-25 01:41:46', '2019-05-25 01:41:46'),
+(20, 'Cliente', NULL, 0, 1, 'Cliente.vue', 20, 2, 'icon-bag', 'cliente', 16, '2019-05-25 01:41:46', '2019-09-26 21:54:50'),
 (21, 'Modelo Contable', NULL, 1, 1, 'ModeloContable.vue', 21, 2, 'icon-bag', 'modelo_contable', 16, '2019-05-25 01:58:05', '2019-08-09 19:42:22'),
 (22, 'Presentación', NULL, 1, 1, 'Prenstacion.vue', 22, 2, 'icon-bag', 'presentacion', 16, '2019-05-25 02:27:08', '2019-05-25 02:27:08'),
 (23, 'Unidad de medida', NULL, 1, 1, 'UndMedida.vue', 23, 2, 'icon-bag', 'und_medida', 16, '2019-05-25 02:43:50', '2019-05-25 02:43:50'),
@@ -883,7 +1336,11 @@ INSERT INTO `modulos` (`id`, `nombre`, `descripcion`, `estado`, `usu_crea`, `com
 (27, 'Iva', NULL, 1, 1, 'Iva.vue', 27, 2, 'icon-bag', 'iva', 5, '2019-06-12 19:07:49', '2019-06-12 19:07:49'),
 (28, 'Formatos x proceso', NULL, 1, 1, 'FormatoProceso.vue', 28, 2, 'icon-bag', 'formato_procesos', 5, '2019-06-25 18:45:11', '2019-06-25 18:45:11'),
 (29, 'Cajas', NULL, 1, 1, 'Cajas.vue', 29, 2, 'icon-bag', 'cajas', 5, '2019-07-26 18:21:36', '2019-07-26 18:21:36'),
-(30, 'Cierres X cajas', NULL, 1, 1, 'CierresXCaja.vue', 30, 2, 'icon-bag', 'cierrescaja', 16, '2019-07-26 22:03:58', '2019-07-26 22:07:29');
+(30, 'Cierres X cajas', NULL, 1, 1, 'CierresXCaja.vue', 30, 2, 'icon-bag', 'cierrescaja', 16, '2019-07-26 22:03:58', '2019-07-26 22:07:29'),
+(31, 'Informes', NULL, 1, 1, 'Informes.vue', 31, 2, 'icon-bag', 'informes', 16, '2019-08-28 20:09:58', '2019-08-28 20:09:58'),
+(32, 'Cartera', NULL, 1, 1, 'Cartera.vue', 32, 1, 'icon-bag', 'cartera', NULL, '2019-09-21 00:30:24', '2019-09-21 00:30:24'),
+(33, 'Cuentas por cobrar', NULL, 1, 1, 'CuentasxCobrar.vue', 33, 2, 'icon-bag', 'cuentasxcobrar', 32, '2019-09-21 00:31:14', '2019-09-21 00:31:14'),
+(34, 'Cuentas por pagar', NULL, 1, 1, 'CuentasxPagar.vue', 34, 2, 'icon-bag', 'cuentasxpagar', 32, '2019-09-21 00:31:49', '2019-09-21 00:31:49');
 
 -- --------------------------------------------------------
 
@@ -943,8 +1400,8 @@ INSERT INTO `modulos_empresas` (`id`, `modulos_id`, `empresas_id`, `estado`, `us
 (36, 18, 2, 1, 1, NULL),
 (37, 19, 1, 1, 1, NULL),
 (38, 19, 2, 1, 1, NULL),
-(39, 20, 1, 1, 1, NULL),
-(40, 20, 2, 1, 1, NULL),
+(39, 20, 1, 0, 1, NULL),
+(40, 20, 2, 0, 1, NULL),
 (41, 21, 1, 1, 1, NULL),
 (42, 21, 2, 1, 1, NULL),
 (43, 22, 1, 1, 1, NULL),
@@ -964,7 +1421,15 @@ INSERT INTO `modulos_empresas` (`id`, `modulos_id`, `empresas_id`, `estado`, `us
 (59, 29, 1, 1, 1, NULL),
 (60, 29, 2, 1, 1, NULL),
 (61, 30, 1, 1, 1, NULL),
-(62, 30, 2, 1, 1, NULL);
+(62, 30, 2, 1, 1, NULL),
+(63, 31, 1, 1, 1, NULL),
+(64, 31, 2, 1, 1, NULL),
+(65, 33, 1, 1, 1, NULL),
+(66, 33, 2, 1, 1, NULL),
+(67, 34, 1, 1, 1, NULL),
+(68, 34, 2, 1, 1, NULL),
+(69, 32, 1, 1, 1, NULL),
+(70, 32, 2, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -1032,54 +1497,62 @@ INSERT INTO `modulos_empresas_usuarios` (`id`, `modulos_empresas_id`, `usuarios_
 (594, 8, 9, 0, 0, 0, 0, 1, 9, '2019-06-04 12:12:36'),
 (595, 20, 9, 0, 0, 0, 0, 1, 9, '2019-06-04 12:12:36'),
 (596, 16, 9, 0, 0, 0, 0, 1, 9, '2019-06-04 12:12:36'),
-(685, 29, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(686, 41, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(687, 47, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(688, 39, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(689, 33, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(690, 45, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(691, 35, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(692, 27, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(693, 43, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(694, 37, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(695, 49, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(696, 25, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(697, 53, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(698, 57, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(699, 11, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(700, 55, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(701, 17, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(702, 21, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(703, 23, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(704, 3, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(705, 7, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(706, 19, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(707, 15, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
-(732, 29, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(733, 41, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(734, 47, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(735, 39, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(736, 33, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(737, 45, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(738, 35, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(739, 27, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(740, 43, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(741, 37, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(742, 49, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(743, 25, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(744, 59, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(745, 61, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(746, 53, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(747, 57, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(748, 11, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(749, 55, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(750, 17, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(751, 21, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(752, 23, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(753, 3, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(754, 7, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(755, 19, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01'),
-(756, 15, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 12:06:01');
+(783, 58, 1, 1, 1, 1, 1, 1, 1, '2019-08-28 10:11:47'),
+(784, 58, 9, 0, 0, 0, 0, 1, 1, '2019-06-25 08:46:56'),
+(785, 29, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(786, 47, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(787, 39, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(788, 33, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(789, 45, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(790, 35, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(791, 27, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(792, 63, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(793, 41, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(794, 43, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(795, 37, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(796, 49, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(797, 25, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(798, 59, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(799, 53, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(800, 57, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(801, 11, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(802, 55, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(803, 17, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(804, 21, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(805, 23, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(806, 3, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(807, 7, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(808, 19, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(809, 15, 9, 0, 0, 0, 0, 1, 1, '2019-09-20 14:35:28'),
+(810, 29, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(811, 47, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(812, 61, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(813, 39, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(814, 33, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(815, 45, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(816, 35, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(817, 27, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(818, 63, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(819, 41, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(820, 43, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(821, 37, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(822, 49, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(823, 69, 1, 0, 0, 0, 0, 0, 1, '2019-09-20 14:40:16'),
+(824, 65, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(825, 67, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(826, 25, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(827, 59, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(828, 53, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(829, 57, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(830, 11, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(831, 55, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(832, 17, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(833, 21, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(834, 23, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(835, 3, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(836, 7, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(837, 19, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16'),
+(838, 15, 1, 1, 1, 1, 1, 1, 1, '2019-09-20 14:40:16');
 
 -- --------------------------------------------------------
 
@@ -2336,6 +2809,7 @@ CREATE TABLE `personas` (
   `plazo_pago` int(11) DEFAULT NULL,
   `bloquear` tinyint(1) DEFAULT NULL,
   `cupo_credito` tinyint(1) DEFAULT NULL,
+  `vr_cupo_credito` int(11) NOT NULL DEFAULT '0',
   `retenedor_fuente` tinyint(1) DEFAULT NULL,
   `retenedor_iva` tinyint(1) DEFAULT NULL,
   `excluido_iva` int(11) DEFAULT NULL,
@@ -2349,6 +2823,7 @@ CREATE TABLE `personas` (
   `tipo_nacionalidad` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `departamento` int(11) NOT NULL,
   `municipio` int(11) NOT NULL,
+  `img` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_empresa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -2356,18 +2831,18 @@ CREATE TABLE `personas` (
 -- Volcado de datos para la tabla `personas`
 --
 
-INSERT INTO `personas` (`id`, `nombre`, `tipo_documento`, `num_documento`, `direccion`, `telefono1`, `telefono2`, `celular`, `email`, `email2`, `created_at`, `updated_at`, `regimen`, `representante`, `sexo`, `fec_nac`, `reside`, `tipo_persona`, `nombre1`, `nombre2`, `apellido1`, `apellido2`, `digito_verif`, `entidad`, `num_verif`, `autoretenedor`, `declarante`, `cliente`, `proveedor`, `id_vendedor`, `id_zona`, `plazo_pago`, `bloquear`, `cupo_credito`, `retenedor_fuente`, `retenedor_iva`, `excluido_iva`, `autoretefuente`, `autoreteiva`, `autoreteica`, `id_banco`, `num_cuenta_banco`, `tipo_cuenta`, `representante_cuenta`, `tipo_nacionalidad`, `departamento`, `municipio`, `id_empresa`) VALUES
-(1, 'Cristhiam', 'CEDULA', '1123201184', 'ccc', NULL, NULL, NULL, 'ccmonpan@hotmail.com', NULL, '2018-08-01 05:00:00', '2019-05-22 01:05:37', '', '', '', '0000-00-00', '', 'Natural', 'Cristhiam', 'Camilo', 'Monsalve', '', 0, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 1),
-(2, 'Jessica Murcia', 'NIT', '33333', 'lllllll', '34444', NULL, NULL, 'cccc@jjjj.com', NULL, '2018-07-08 02:02:10', '2018-07-11 10:37:16', '', '', '', '0000-00-00', '', '', 'Jessica', '', 'Murcia', '', 0, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 1),
-(3, 'Domenick', 'CE', '1123', 'kkkkk', '9999', NULL, NULL, 'cjcjc@ssss.com', NULL, '2018-07-08 12:20:52', '2018-07-11 10:37:10', '', '', '', '0000-00-00', '', '', '', '', '', '', 0, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 1),
-(4, 'Provedor1', 'CC', '90088777', '87788', '32222', NULL, NULL, 'cccccc@jjj.com', NULL, '2018-07-09 23:07:14', '2018-07-11 10:36:52', '', '', '', '0000-00-00', '', '', '', '', '', '', 0, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 1),
-(5, 'Rifas x', 'NIT', '908888', 'sdfosdfoi', '454545', NULL, NULL, 'lsdfskdjf@dsfdsf.xom', NULL, '2018-07-11 11:22:21', '2018-09-21 12:44:12', 'Comun', 'lsdfskdjf@dsfdsf.xom', 'Otro', '2018-07-01', 'asdfasdf ad fasd fasdf asf4', 'Juridica', NULL, NULL, NULL, NULL, 0, NULL, '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 2),
-(6, '\'\'', 'CC', '45998888', 'jflasdjf aljsd flajsdf l', '3495959', NULL, NULL, 'htm@hot.com', NULL, '2018-08-04 07:49:37', '2018-08-04 07:49:37', 'Comun', NULL, 'Femenino', NULL, 'asdfasdfadsf', 'Natural', 'Marlon', '', 'Monsalve', '', 0, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 2),
-(7, NULL, 'CC', '3839', 'jkjk', '777', NULL, NULL, 'lues@gg.com', NULL, '2018-08-04 08:04:37', '2018-08-04 08:04:37', 'Comun', NULL, 'Masculino', NULL, 'dfsdfsdf', 'Natural', 'Luis', '', 'Monsalve', '', 0, '', '', 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 1),
-(8, 'Ismael', 'CC', '1085288369', 'barrio el jardin', '3203313824', NULL, NULL, 'fanfano312@hotmail.com', NULL, '2018-08-11 07:38:58', '2018-08-22 02:50:23', 'Simplificado', 'fanfano312@hotmail.com', 'Masculino', '1991-04-27', 'mocoa', 'Natural', 'ismael', NULL, 'cardenas', NULL, 0, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 1),
-(9, 'Fabian', 'CC', '123', '123', '123', NULL, NULL, 'sss', NULL, '2018-08-22 20:04:53', '2018-08-22 20:04:53', 'Simplificado', NULL, 'Femenino', '2001-04-18', 'xxxx', 'Natural', 'Oscar', 'Fabian', 'Franco', 'Pantoja', 0, '', '', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 1),
-(10, NULL, 'CC', '121212', NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-31 01:51:06', '2019-05-20 22:05:43', 'Simplificado', NULL, 'Masculino', NULL, 'wwwww', 'Natural', 'Pepito', NULL, 'perez', NULL, 0, NULL, '', 2, 2, NULL, NULL, 2, 2, 13, 0, 1, 1, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, '0', 0, 0, 1),
-(11, 'Evelin', 'CC', '1123314444', 'Lagos', NULL, NULL, NULL, 'bianeydiaz2013@gmail.com', NULL, '2019-05-20 22:12:06', '2019-08-06 02:21:59', '', NULL, '', NULL, '', '', NULL, NULL, NULL, NULL, 0, NULL, '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 0, 1);
+INSERT INTO `personas` (`id`, `nombre`, `tipo_documento`, `num_documento`, `direccion`, `telefono1`, `telefono2`, `celular`, `email`, `email2`, `created_at`, `updated_at`, `regimen`, `representante`, `sexo`, `fec_nac`, `reside`, `tipo_persona`, `nombre1`, `nombre2`, `apellido1`, `apellido2`, `digito_verif`, `entidad`, `num_verif`, `autoretenedor`, `declarante`, `cliente`, `proveedor`, `id_vendedor`, `id_zona`, `plazo_pago`, `bloquear`, `cupo_credito`, `vr_cupo_credito`, `retenedor_fuente`, `retenedor_iva`, `excluido_iva`, `autoretefuente`, `autoreteiva`, `autoreteica`, `id_banco`, `num_cuenta_banco`, `tipo_cuenta`, `representante_cuenta`, `tipo_nacionalidad`, `departamento`, `municipio`, `img`, `id_empresa`) VALUES
+(1, 'Cristhiam', 'CEDULA', '1123201184', 'ccc', NULL, NULL, NULL, 'ccmonpan@hotmail.com', NULL, '2018-08-01 05:00:00', '2019-05-22 01:05:37', '', '', '', '0000-00-00', '', 'Natural', 'Cristhiam', 'Camilo', 'Monsalve', '', 0, '', '', 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 'default.png', 1),
+(2, 'Jessica Murcia', 'NIT', '33333', 'lllllll', '34444', NULL, NULL, 'cccc@jjjj.com', NULL, '2018-07-08 02:02:10', '2018-07-11 10:37:16', '', '', '', '0000-00-00', '', '', 'Jessica', '', 'Murcia', '', 0, '', '', 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 'default.png', 1),
+(3, 'Domenick', 'CE', '1123', 'kkkkk', '9999', NULL, NULL, 'cjcjc@ssss.com', NULL, '2018-07-08 12:20:52', '2018-07-11 10:37:10', '', '', '', '0000-00-00', '', '', '', '', '', '', 0, '', '', 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 'default.png', 1),
+(4, 'Provedor1', 'CC', '90088777', '87788', '32222', NULL, NULL, 'cccccc@jjj.com', NULL, '2018-07-09 23:07:14', '2018-07-11 10:36:52', '', '', '', '0000-00-00', '', '', '', '', '', '', 0, '', '', 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 'default.png', 1),
+(5, 'Rifas x', 'NIT', '908888', 'sdfosdfoi', '454545', NULL, NULL, 'lsdfskdjf@dsfdsf.xom', NULL, '2018-07-11 11:22:21', '2018-09-21 12:44:12', 'Comun', 'lsdfskdjf@dsfdsf.xom', 'Otro', '2018-07-01', 'asdfasdf ad fasd fasdf asf4', 'Juridica', NULL, NULL, NULL, NULL, 0, NULL, '', 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 'default.png', 2),
+(6, '\'\'', 'CC', '45998888', 'jflasdjf aljsd flajsdf l', '3495959', NULL, NULL, 'htm@hot.com', NULL, '2018-08-04 07:49:37', '2018-08-04 07:49:37', 'Comun', NULL, 'Femenino', NULL, 'asdfasdfadsf', 'Natural', 'Marlon', '', 'Monsalve', '', 0, '', '', 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 'default.png', 2),
+(7, NULL, 'CC', '3839', 'jkjk', '777', NULL, NULL, 'lues@gg.com', NULL, '2018-08-04 08:04:37', '2018-08-04 08:04:37', 'Comun', NULL, 'Masculino', NULL, 'dfsdfsdf', 'Natural', 'Luis', '', 'Monsalve', '', 0, '', '', 2, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 'default.png', 1),
+(8, 'Ismael', 'CC', '1085288369', 'barrio el jardin', '3203313824', NULL, NULL, 'fanfano312@hotmail.com', NULL, '2018-08-11 07:38:58', '2018-08-22 02:50:23', 'Simplificado', 'fanfano312@hotmail.com', 'Masculino', '1991-04-27', 'mocoa', 'Natural', 'ismael', NULL, 'cardenas', NULL, 0, '', '', 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 'default.png', 1),
+(9, 'Fabian', 'CC', '123', '123', '123', NULL, NULL, 'sss', NULL, '2018-08-22 20:04:53', '2018-08-22 20:04:53', 'Simplificado', NULL, 'Femenino', '2001-04-18', 'xxxx', 'Natural', 'Oscar', 'Fabian', 'Franco', 'Pantoja', 0, '', '', 1, 1, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, 'default.png', 1),
+(10, NULL, 'CC', '121212', NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-31 01:51:06', '2019-05-20 22:05:43', 'Simplificado', NULL, 'Masculino', NULL, 'wwwww', 'Natural', 'Pepito', NULL, 'perez', NULL, 0, NULL, '', 2, 2, 0, 0, 2, 2, 13, 0, 1, 0, 1, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, '0', 0, 0, 'default.png', 1),
+(11, 'Evelin', 'CC', '1123314444', 'Lagos', '38209', NULL, NULL, 'bianeydiaz2013@gmail.com', NULL, '2019-05-20 22:12:06', '2019-09-25 22:24:30', 'Comun', 'bianeydiaz2013@gmail.com', 'Femenino', '0000-00-00', 'Puerto Asís', 'Juridica', 'Evelin', 'Bianey', 'Diaz', 'Tisoy', 0, 'null', 'n', 2, 1, 1, 0, 1, 1, 1000, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 'null', 'null', '', 0, 0, 'SESION-DE-FOTOS-PERFIL-PROFESIONAL-2.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -2394,38 +2869,43 @@ CREATE TABLE `plan_cuentas` (
   `id_cuenta_cierre` int(11) DEFAULT NULL,
   `evitar_saldo_negativo` tinyint(1) NOT NULL,
   `id_tercero` int(11) DEFAULT NULL,
-  `tipo_cuenta` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `tipo_cuenta_compra` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo_cuenta_salida_almacen` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `plan_cuentas`
 --
 
-INSERT INTO `plan_cuentas` (`id`, `codigo`, `nombre`, `naturaleza`, `tipo`, `corriente`, `banco`, `diferido`, `tercero`, `niif`, `id_empresa`, `condicion`, `created_at`, `updated_at`, `anio`, `id_cuenta_cierre`, `evitar_saldo_negativo`, `id_tercero`, `tipo_cuenta`) VALUES
-(1, '1', 'ACTIVOS', 'Debito', 'Titulo', 0, 0, 0, NULL, '1', 1, 1, NULL, '2019-06-26 02:17:58', 2018, 19, 0, 11, 'Cuenta compra'),
-(2, '2', 'PASIVOS', 'Credito', 'Titulo', NULL, 0, NULL, NULL, '2', 1, 1, '2018-06-16 20:43:36', '2018-06-16 20:43:36', 2018, NULL, 0, NULL, NULL),
-(3, '3', 'PATRIMONIO', 'Credito', 'Titulo', NULL, 0, NULL, NULL, '3', 1, 1, '2018-06-16 20:47:30', '2018-06-16 20:47:30', 2018, NULL, 0, NULL, NULL),
-(4, '110505', 'CAJA GENERAL', 'Debito', 'Detalle', 0, 1, NULL, NULL, '110505', 1, 1, '2018-07-09 21:32:18', '2019-06-18 01:22:14', 2018, NULL, 0, NULL, 'Cuenta compra'),
-(5, '11', 'DISPONIBLE', 'Debito', 'Titulo', 0, 0, NULL, NULL, '11', 1, 1, '2018-07-17 10:24:40', '2019-06-18 01:20:49', 2018, 1, 0, NULL, 'Cuenta compra'),
-(6, '1105', 'CAJA', 'Debito', 'Titulo', NULL, 0, NULL, NULL, '1105', 1, 1, '2018-07-17 10:25:18', '2018-07-17 10:31:04', 2018, NULL, 0, NULL, NULL),
-(8, '110515', 'CAJAS MENORES', 'Debito', 'Detalle', 1, 0, NULL, NULL, '110515', 1, 1, '2018-07-17 10:27:02', '2019-07-04 21:32:45', 2018, NULL, 0, NULL, 'Cuenta salida almacen'),
-(9, '1110', 'BANCOS', 'Debito', 'Titulo', NULL, 0, NULL, NULL, '1110', 1, 1, '2018-07-17 10:28:08', '2019-07-04 21:30:31', 2018, NULL, 0, NULL, 'Cuenta salida almacen'),
-(11, '111005', 'MONEDA NACIONAL - BANCOS', 'Debito', 'Detalle', 1, 1, NULL, NULL, '111005', 1, 1, '2018-07-17 10:29:49', '2018-08-30 00:06:54', 2018, NULL, 0, NULL, NULL),
-(12, '1115', 'REMESAS EN TRANSITO', 'Debito', 'Titulo', NULL, 0, NULL, NULL, '1115', 1, 1, '2018-07-17 10:30:17', '2018-07-17 10:32:51', 2018, NULL, 0, NULL, NULL),
-(13, '111505', 'MONEDA NACIONAL', 'Debito', 'Detalle', 1, 0, NULL, NULL, '111505', 1, 1, '2018-07-17 10:30:52', '2019-07-04 21:32:41', 2018, NULL, 0, NULL, 'Cuenta salida almacen'),
-(14, '1120', 'CUENTAS DE AHORRO', 'Debito', 'Titulo', NULL, 0, NULL, NULL, '1120', 1, 1, '2018-07-17 10:33:44', '2018-07-17 10:33:44', 2018, NULL, 0, NULL, NULL),
-(15, '112005', 'BANCOS', 'Debito', 'Detalle', 1, 0, NULL, NULL, '112005', 1, 1, '2018-07-17 10:34:41', '2018-07-17 10:34:41', 2018, NULL, 0, NULL, NULL),
-(16, '12', 'INVERSIONES', 'Debito', 'Titulo', NULL, 0, NULL, NULL, '12', 1, 1, '2018-07-17 10:38:46', '2018-07-17 10:38:46', 2018, NULL, 0, NULL, NULL),
-(17, '5', 'GASTOS', 'Debito', 'Titulo', 0, 0, NULL, NULL, '5', 1, 1, '2018-08-29 23:58:50', '2018-08-29 23:58:50', 2018, NULL, 0, NULL, NULL),
-(18, '51', 'OPERACIONES DE ADMINISTRACION', 'Debito', 'Titulo', NULL, 0, NULL, NULL, '51', 1, 1, '2018-08-29 23:59:19', '2018-08-29 23:59:19', 2018, NULL, 0, NULL, NULL),
-(19, '5110', 'HONORARIOS', 'Debito', 'Titulo', NULL, 0, NULL, NULL, '5110', 1, 1, '2018-08-30 00:00:01', '2018-08-30 00:00:01', 2018, NULL, 0, NULL, NULL),
-(20, '511095', 'OTROS HONORARIOS', 'Debito', 'Detalle', NULL, 0, NULL, NULL, '511095', 1, 1, '2018-08-30 00:00:49', '2018-08-30 00:00:49', 2018, NULL, 0, NULL, NULL),
-(21, '23', 'CUENTAS POR PAGAR', 'Credito', 'Titulo', NULL, 0, NULL, NULL, '23', 1, 1, '2018-08-30 00:20:37', '2018-08-30 00:20:37', 2018, NULL, 0, NULL, NULL),
-(22, '2335', 'COSTOS Y GASTOS POR PAGAR', 'Credito', 'Titulo', NULL, 0, NULL, NULL, '2335', 1, 1, '2018-08-30 00:21:11', '2018-08-30 00:21:11', 2018, NULL, 0, NULL, NULL),
-(23, '233525', 'HONORARIOS', 'Credito', 'Detalle', NULL, 0, NULL, NULL, '233525', 1, 1, '2018-08-30 00:21:42', '2018-08-30 00:21:42', 2018, NULL, 0, NULL, NULL),
-(24, '2365', 'RETENCION EN LA FUENTE', 'Credito', 'Titulo', NULL, 0, NULL, NULL, '2365', 2, 1, '2018-08-30 00:22:35', '2018-08-30 00:22:35', 2018, NULL, 0, NULL, NULL),
-(25, '236515', 'HONORARIOS (RTE FTE)', 'Credito', 'Detalle', NULL, 0, NULL, NULL, '236515', 2, 1, '2018-08-30 00:24:18', '2018-08-30 00:24:18', 2018, NULL, 0, NULL, NULL),
-(26, '23652501', 'RETENCION EN SERVICIOS DECLARANTE', 'Credito', 'Detalle', NULL, 0, NULL, NULL, '23652501', 1, 1, '2019-05-15 05:42:36', '2019-05-15 05:42:36', 2019, NULL, 0, NULL, NULL);
+INSERT INTO `plan_cuentas` (`id`, `codigo`, `nombre`, `naturaleza`, `tipo`, `corriente`, `banco`, `diferido`, `tercero`, `niif`, `id_empresa`, `condicion`, `created_at`, `updated_at`, `anio`, `id_cuenta_cierre`, `evitar_saldo_negativo`, `id_tercero`, `tipo_cuenta_compra`, `tipo_cuenta_salida_almacen`) VALUES
+(1, '1', 'ACTIVOS', 'Debito', 'Titulo', 0, 0, 0, NULL, '1', 1, 1, NULL, '2019-06-26 02:17:58', 2018, 19, 0, 11, 'Cuenta compra', NULL),
+(2, '2', 'PASIVOS', 'Credito', 'Titulo', NULL, 0, NULL, NULL, '2', 1, 1, '2018-06-16 20:43:36', '2018-06-16 20:43:36', 2018, NULL, 0, NULL, NULL, NULL),
+(3, '3', 'PATRIMONIO', 'Credito', 'Titulo', NULL, 0, NULL, NULL, '3', 1, 1, '2018-06-16 20:47:30', '2018-06-16 20:47:30', 2018, NULL, 0, NULL, NULL, NULL),
+(4, '110505', 'CAJA GENERAL', 'Debito', 'Detalle', 0, 1, NULL, NULL, '110505', 1, 1, '2018-07-09 21:32:18', '2019-06-18 01:22:14', 2018, NULL, 0, NULL, 'Cuenta compra', NULL),
+(5, '11', 'DISPONIBLE', 'Debito', 'Titulo', 0, 0, NULL, NULL, '11', 1, 1, '2018-07-17 10:24:40', '2019-06-18 01:20:49', 2018, 1, 0, NULL, 'Cuenta compra', NULL),
+(6, '1105', 'CAJA', 'Debito', 'Titulo', NULL, 0, NULL, NULL, '1105', 1, 1, '2018-07-17 10:25:18', '2018-07-17 10:31:04', 2018, NULL, 0, NULL, NULL, NULL),
+(8, '110515', 'CAJAS MENORES', 'Debito', 'Detalle', 1, 0, NULL, NULL, '110515', 1, 1, '2018-07-17 10:27:02', '2019-07-04 21:32:45', 2018, NULL, 0, NULL, 'Cuenta salida almacen', NULL),
+(9, '1110', 'BANCOS', 'Debito', 'Titulo', NULL, 0, NULL, NULL, '1110', 1, 1, '2018-07-17 10:28:08', '2019-07-04 21:30:31', 2018, NULL, 0, NULL, 'Cuenta salida almacen', NULL),
+(11, '111005', 'MONEDA NACIONAL - BANCOS', 'Debito', 'Detalle', 1, 1, NULL, NULL, '111005', 1, 1, '2018-07-17 10:29:49', '2018-08-30 00:06:54', 2018, NULL, 0, NULL, NULL, NULL),
+(12, '1115', 'REMESAS EN TRANSITO', 'Debito', 'Titulo', NULL, 0, NULL, NULL, '1115', 1, 1, '2018-07-17 10:30:17', '2018-07-17 10:32:51', 2018, NULL, 0, NULL, NULL, NULL),
+(13, '111505', 'MONEDA NACIONAL', 'Debito', 'Detalle', 1, 0, NULL, NULL, '111505', 1, 1, '2018-07-17 10:30:52', '2019-07-04 21:32:41', 2018, NULL, 0, NULL, 'Cuenta salida almacen', NULL),
+(14, '1120', 'CUENTAS DE AHORRO', 'Debito', 'Titulo', NULL, 0, NULL, NULL, '1120', 1, 1, '2018-07-17 10:33:44', '2018-07-17 10:33:44', 2018, NULL, 0, NULL, NULL, NULL),
+(15, '112005', 'BANCOS', 'Debito', 'Detalle', 1, 0, NULL, NULL, '112005', 1, 1, '2018-07-17 10:34:41', '2018-07-17 10:34:41', 2018, NULL, 0, NULL, NULL, NULL),
+(16, '12', 'INVERSIONES', 'Debito', 'Titulo', NULL, 0, NULL, NULL, '12', 1, 1, '2018-07-17 10:38:46', '2018-07-17 10:38:46', 2018, NULL, 0, NULL, NULL, NULL),
+(17, '5', 'GASTOS', 'Debito', 'Titulo', 0, 0, NULL, NULL, '5', 1, 1, '2018-08-29 23:58:50', '2018-08-29 23:58:50', 2018, NULL, 0, NULL, NULL, NULL),
+(18, '51', 'OPERACIONES DE ADMINISTRACION', 'Debito', 'Titulo', NULL, 0, NULL, NULL, '51', 1, 1, '2018-08-29 23:59:19', '2018-08-29 23:59:19', 2018, NULL, 0, NULL, NULL, NULL),
+(19, '5110', 'HONORARIOS', 'Debito', 'Titulo', NULL, 0, NULL, NULL, '5110', 1, 1, '2018-08-30 00:00:01', '2018-08-30 00:00:01', 2018, NULL, 0, NULL, NULL, NULL),
+(20, '511095', 'OTROS HONORARIOS', 'Debito', 'Detalle', NULL, 0, NULL, NULL, '511095', 1, 1, '2018-08-30 00:00:49', '2018-08-30 00:00:49', 2018, NULL, 0, NULL, NULL, NULL),
+(21, '23', 'CUENTAS POR PAGAR', 'Credito', 'Titulo', NULL, 0, NULL, NULL, '23', 1, 1, '2018-08-30 00:20:37', '2018-08-30 00:20:37', 2018, NULL, 0, NULL, NULL, NULL),
+(22, '2335', 'COSTOS Y GASTOS POR PAGAR', 'Credito', 'Titulo', NULL, 0, NULL, NULL, '2335', 1, 1, '2018-08-30 00:21:11', '2018-08-30 00:21:11', 2018, NULL, 0, NULL, NULL, NULL),
+(23, '233525', 'HONORARIOS', 'Credito', 'Detalle', NULL, 0, NULL, NULL, '233525', 1, 1, '2018-08-30 00:21:42', '2018-08-30 00:21:42', 2018, NULL, 0, NULL, NULL, NULL),
+(24, '2365', 'RETENCION EN LA FUENTE', 'Credito', 'Titulo', NULL, 0, NULL, NULL, '2365', 2, 1, '2018-08-30 00:22:35', '2018-08-30 00:22:35', 2018, NULL, 0, NULL, NULL, NULL),
+(25, '236515', 'HONORARIOS (RTE FTE)', 'Credito', 'Detalle', NULL, 0, NULL, NULL, '236515', 2, 1, '2018-08-30 00:24:18', '2018-08-30 00:24:18', 2018, NULL, 0, NULL, NULL, NULL),
+(26, '23652501', 'RETENCION EN SERVICIOS DECLARANTE', 'Credito', 'Detalle', NULL, 0, NULL, NULL, '23652501', 1, 1, '2019-05-15 05:42:36', '2019-05-15 05:42:36', 2019, NULL, 0, NULL, NULL, NULL),
+(27, '14350501', 'PROUCTOS GRAVADOS AL 19%', 'Debito', 'Detalle', NULL, 0, NULL, NULL, '14350501', 1, 1, '2019-09-29 02:29:20', '2019-09-29 02:29:20', 2019, NULL, 0, 7, 'Cuenta compra', NULL),
+(28, '14350501', 'PROUCTOS GRAVADOS AL 19%', 'Debito', 'Detalle', NULL, 0, NULL, NULL, '14350501', 1, 1, '2019-09-29 02:29:20', '2019-09-29 02:29:20', 2019, NULL, 0, 7, 'Cuenta compra', NULL),
+(29, '41750501', 'DEVOLUCION EN VENTAS GRAVADAS AL 19%', 'Debito', 'Detalle', NULL, 0, NULL, NULL, '41750501', 1, 1, '2019-09-29 02:45:20', '2019-09-29 02:45:20', 2019, NULL, 0, NULL, NULL, NULL),
+(30, '23679001', 'IMPUESTO AL CONSUMO 8%', 'Credito', 'Detalle', NULL, 0, NULL, NULL, '23679001', 1, 1, '2019-09-29 02:49:34', '2019-09-29 02:49:34', 2019, NULL, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2448,7 +2928,11 @@ CREATE TABLE `plan_cuentas_categorias` (
 
 INSERT INTO `plan_cuentas_categorias` (`id`, `id_plan_cuentas`, `id_categoria`, `usu_crea`, `created_at`, `updated_at`) VALUES
 (13, 1, 2, 1, '2019-06-26 02:17:58', '2019-06-26 02:17:58'),
-(14, 1, 3, 1, '2019-06-26 02:17:58', '2019-06-26 02:17:58');
+(14, 1, 3, 1, '2019-06-26 02:17:58', '2019-06-26 02:17:58'),
+(15, 28, 2, 1, '2019-09-29 02:29:21', '2019-09-29 02:29:21'),
+(16, 27, 2, 1, '2019-09-29 02:29:20', '2019-09-29 02:29:20'),
+(17, 28, 1, 1, '2019-09-29 02:29:21', '2019-09-29 02:29:21'),
+(18, 27, 1, 1, '2019-09-29 02:29:21', '2019-09-29 02:29:21');
 
 -- --------------------------------------------------------
 
@@ -2466,6 +2950,22 @@ CREATE TABLE `presentacion` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `presentacion`
+--
+
+INSERT INTO `presentacion` (`id`, `nombre`, `estado`, `id_empresa`, `usu_crea`, `created_at`, `updated_at`) VALUES
+(1, 'Presentación 1', 1, 1, 1, NULL, NULL),
+(2, 'Presentación 3', 1, 1, 1, NULL, '2019-02-13 01:40:48'),
+(3, 'Presentación 2', 1, 1, 1, '2019-02-13 01:41:13', '2019-08-06 02:28:03'),
+(6, '444444444444', 1, 2, 1, '2019-02-15 02:33:25', '2019-05-28 02:06:17'),
+(7, 'Presentacion 4', 1, 1, 1, '2019-08-09 21:17:49', '2019-08-09 21:31:00'),
+(8, 'Presentacion 5', 1, 1, 1, '2019-08-09 21:19:46', '2019-08-09 21:29:57'),
+(9, 'dghk', 0, 1, 1, '2019-08-22 01:32:07', '2019-08-22 01:41:32'),
+(10, 'hdftjh', 0, 1, 1, '2019-08-22 01:39:01', '2019-08-22 01:41:26'),
+(11, '5491849123654', 0, 1, 1, '2019-08-22 01:40:04', '2019-08-22 01:41:20'),
+(12, 'Caja', 1, 1, 1, '2019-09-29 02:54:13', '2019-09-29 02:54:13');
+
 -- --------------------------------------------------------
 
 --
@@ -2474,6 +2974,7 @@ CREATE TABLE `presentacion` (
 
 CREATE TABLE `productos_asociados` (
   `id` int(11) NOT NULL,
+  `codigo` varchar(50) NOT NULL,
   `id_presentacion` int(11) NOT NULL,
   `unidades` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
@@ -2483,6 +2984,15 @@ CREATE TABLE `productos_asociados` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `productos_asociados`
+--
+
+INSERT INTO `productos_asociados` (`id`, `codigo`, `id_presentacion`, `unidades`, `id_producto`, `estado`, `usu_crea`, `id_empresa`, `created_at`, `updated_at`) VALUES
+(15, '899', 9, 10, 34, 1, 1, 1, '2019-10-04 16:00:06', '2019-09-26 21:03:33'),
+(16, '8992', 2, 3, 34, 1, 1, 1, '2019-10-04 21:23:19', '2019-10-04 21:23:19'),
+(18, '899', 12, 45, 34, 0, 1, 1, '2019-10-04 20:51:22', '2019-10-05 01:51:22');
 
 -- --------------------------------------------------------
 
@@ -2498,6 +3008,60 @@ CREATE TABLE `productos_iva` (
   `usu_crea` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `productos_iva`
+--
+
+INSERT INTO `productos_iva` (`id`, `id_iva`, `tipo_iva`, `id_producto`, `usu_crea`) VALUES
+(30, 1, 'Compra', 1, 1),
+(31, 6, 'Venta', 1, 1),
+(32, 7, 'Devoluciones compra', 1, 1),
+(33, 4, 'Devoluciones Venta', 1, 1),
+(34, 1, 'Compra', 18, 1),
+(35, 2, 'Venta', 18, 1),
+(36, 3, 'Devoluciones compra', 18, 1),
+(37, 4, 'Devoluciones Venta', 18, 1),
+(42, 5, 'Compra', 19, 1),
+(43, 2, 'Venta', 19, 1),
+(44, 3, 'Devoluciones compra', 19, 1),
+(45, 4, 'Devoluciones Venta', 19, 1),
+(54, 1, 'Compra', 21, 1),
+(55, 2, 'Venta', 21, 1),
+(56, 7, 'Devoluciones compra', 21, 1),
+(57, 8, 'Devoluciones Venta', 21, 1),
+(58, 5, 'Compra', 20, 1),
+(59, 6, 'Venta', 20, 1),
+(60, 3, 'Devoluciones compra', 20, 1),
+(61, 4, 'Devoluciones Venta', 20, 1),
+(82, 5, 'Compra', 24, 1),
+(83, 2, 'Venta', 24, 1),
+(84, 3, 'Devoluciones compra', 24, 1),
+(85, 8, 'Devoluciones Venta', 24, 1),
+(198, 5, 'Compra', 2, 1),
+(199, 6, 'Venta', 2, 1),
+(200, 7, 'Devoluciones compra', 2, 1),
+(201, 4, 'Devoluciones Venta', 2, 1),
+(206, 9, 'Compra', 30, 1),
+(207, 2, 'Venta', 30, 1),
+(208, 3, 'Devoluciones compra', 30, 1),
+(209, 8, 'Devoluciones Venta', 30, 1),
+(274, 1, 'Compra', 33, 1),
+(275, 10, 'Venta', 33, 1),
+(276, 3, 'Devoluciones compra', 33, 1),
+(277, 4, 'Devoluciones Venta', 33, 1),
+(282, 1, 'Compra', 31, 1),
+(283, 10, 'Venta', 31, 1),
+(284, 3, 'Devoluciones compra', 31, 1),
+(285, 12, 'Devoluciones Venta', 31, 1),
+(318, 5, 'Compra', 34, 1),
+(319, 2, 'Venta', 34, 1),
+(320, 11, 'Devoluciones compra', 34, 1),
+(321, 4, 'Devoluciones Venta', 34, 1),
+(342, 13, 'Compra', 35, 1),
+(343, 14, 'Venta', 35, 1),
+(344, 18, 'Devoluciones compra', 35, 1),
+(345, 20, 'Devoluciones Venta', 35, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -2509,8 +3073,35 @@ CREATE TABLE `productos_tarifarios` (
   `id_tarifario` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `valor` int(11) NOT NULL,
-  `asociado` int(11) NOT NULL
+  `asociado` tinyint(1) NOT NULL,
+  `idPresentacionAsociada` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `productos_tarifarios`
+--
+
+INSERT INTO `productos_tarifarios` (`id`, `id_tarifario`, `id_producto`, `valor`, `asociado`, `idPresentacionAsociada`) VALUES
+(45, 2, 1, 100, 0, NULL),
+(46, 2, 2, 100, 0, NULL),
+(47, 2, 7, 100, 0, NULL),
+(48, 2, 8, 100, 0, NULL),
+(49, 2, 19, 100, 0, NULL),
+(50, 2, 20, 100, 0, NULL),
+(51, 2, 21, 100, 0, NULL),
+(52, 2, 24, 100, 0, NULL),
+(53, 2, 25, 100, 0, NULL),
+(54, 2, 30, 100, 0, NULL),
+(55, 2, 31, 100, 0, NULL),
+(56, 2, 33, 100, 0, NULL),
+(58, 2, 34, 91000, 1, 15),
+(60, 2, 36, 650000, 0, NULL),
+(61, 2, 37, 650000, 0, NULL),
+(62, 2, 38, 650000, 0, NULL),
+(66, 2, 34, 800, 0, NULL),
+(67, 2, 34, 120000, 1, 16),
+(68, 2, 34, 0, 1, 17),
+(69, 2, 34, 3, 1, 18);
 
 -- --------------------------------------------------------
 
@@ -2542,7 +3133,7 @@ CREATE TABLE `retenciones` (
 INSERT INTO `retenciones` (`id`, `retencion`, `cuenta`, `tipo_cuenta`, `autoretenedor`, `declarante`, `monto_base`, `tipo_mov`, `porcentaje`, `id_empresa`, `estado`, `usu_crea`, `created_at`, `updated_at`) VALUES
 (1, 'CAJA EGRESOS', 6, 'Debito', 1, 1, 1000, 1, 10, 1, 1, 1, '2019-05-10 16:57:03', '2019-05-17 01:12:38'),
 (2, 'PASIVOS EGRESO', 2, 'Credito', 2, 2, 4, 1, 6, 1, 1, 1, '2019-05-11 00:18:52', '2019-05-17 01:11:38'),
-(3, 'ACTIVOS INGRESO', 1, 'Debito', 0, 0, 1, 2, 4, 1, 1, 1, '2019-05-11 00:18:52', '2019-05-17 01:11:18'),
+(3, 'ACTIVOS INGRESO', 1, 'Debito', 0, 0, 1, 2, 4, 1, 1, 1, '2019-05-11 00:18:52', '2019-08-22 00:45:42'),
 (4, 'ACTIVOS INGRESOnjkjknkj', 1, 'Debito', 0, 0, 1, 2, 4, 2, 1, 1, '2019-05-11 00:18:52', '2019-05-17 01:11:18');
 
 -- --------------------------------------------------------
@@ -2601,36 +3192,40 @@ CREATE TABLE `roles_permisos` (
 --
 
 INSERT INTO `roles_permisos` (`id`, `id_rol`, `id_modulo`, `id_empresa`, `lectura`, `escritura`, `edicion`, `anular`, `imprimir`, `usu_crea`, `estado`, `created_at`, `updated_at`) VALUES
-(309, 1, 16, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:26', '2019-07-26 22:04:26'),
-(310, 1, 15, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:26', '2019-07-26 22:04:26'),
-(311, 1, 21, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:26', '2019-07-26 22:04:26'),
-(312, 1, 25, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:26', '2019-07-26 22:04:26'),
-(313, 1, 20, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:26', '2019-07-26 22:04:26'),
-(314, 1, 17, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(315, 1, 24, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(316, 1, 18, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(317, 1, 14, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(318, 1, 22, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(319, 1, 19, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(320, 1, 23, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(321, 1, 5, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(322, 1, 13, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(323, 1, 29, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(324, 1, 30, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(325, 1, 26, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(326, 1, 28, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(327, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(328, 1, 27, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(329, 1, 9, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(330, 1, 11, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(331, 1, 12, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(332, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(333, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(334, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(335, 1, 4, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(336, 1, 10, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(337, 1, 7, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27'),
-(338, 1, 8, 1, 1, 1, 1, 1, 1, 1, 1, '2019-07-26 22:04:27', '2019-07-26 22:04:27');
+(370, 1, 16, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:09', '2019-09-21 00:34:09'),
+(371, 1, 15, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(372, 1, 25, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(373, 1, 30, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(374, 1, 20, 1, 1, 1, 1, 1, 1, 1, 0, '2019-09-21 00:34:10', '2019-09-26 21:54:50'),
+(375, 1, 17, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(376, 1, 24, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(377, 1, 18, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(378, 1, 14, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(379, 1, 31, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(380, 1, 21, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(381, 1, 22, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(382, 1, 19, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(383, 1, 23, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(384, 1, 32, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(385, 1, 33, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(386, 1, 34, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(387, 1, 5, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(388, 1, 13, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(389, 1, 29, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:10', '2019-09-21 00:34:10'),
+(390, 1, 26, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:11', '2019-09-21 00:34:11'),
+(391, 1, 28, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:11', '2019-09-21 00:34:11'),
+(392, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:11', '2019-09-21 00:34:11'),
+(393, 1, 27, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:11', '2019-09-21 00:34:11'),
+(394, 1, 9, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:11', '2019-09-21 00:34:11'),
+(395, 1, 11, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:11', '2019-09-21 00:34:11'),
+(396, 1, 12, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:11', '2019-09-21 00:34:11'),
+(397, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:11', '2019-09-21 00:34:11'),
+(398, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:11', '2019-09-21 00:34:11'),
+(399, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:11', '2019-09-21 00:34:11'),
+(400, 1, 4, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:11', '2019-09-21 00:34:11'),
+(401, 1, 10, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:11', '2019-09-21 00:34:11'),
+(402, 1, 7, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:11', '2019-09-21 00:34:11'),
+(403, 1, 8, 1, 1, 1, 1, 1, 1, 1, 1, '2019-09-21 00:34:11', '2019-09-21 00:34:11');
 
 -- --------------------------------------------------------
 
@@ -2653,6 +3248,71 @@ CREATE TABLE `stock` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `stock`
+--
+
+INSERT INTO `stock` (`id`, `id_producto`, `id_facturacion`, `id_usuario`, `fec_crea`, `cantidad`, `tipo_movimiento`, `sumatoria`, `condicion`, `id_empresa`, `created_at`, `updated_at`) VALUES
+(1, 1, NULL, 1, '2019-05-30 15:04:19', 100, 1, 100.00, 1, 1, '2019-05-30 20:04:19', '2019-05-30 20:04:19'),
+(2, 2, NULL, 1, '2019-05-30 15:06:27', 50, 1, 50.00, 1, 1, '2019-05-30 20:06:27', '2019-05-30 20:06:27'),
+(4, 2, NULL, 1, '2019-06-05 20:23:54', 5, 2, 0.00, 1, 1, '2019-06-06 01:23:54', '2019-06-06 01:23:54'),
+(5, 2, NULL, 1, '2019-06-05 20:39:56', 2, 3, 0.00, 1, 1, '2019-06-06 01:39:56', '2019-06-06 01:39:56'),
+(6, 2, NULL, 1, '2019-06-05 21:28:45', 10, 2, 0.00, 1, 1, '2019-06-06 02:28:45', '2019-06-06 02:28:45'),
+(7, 1, NULL, 1, '2019-06-06 15:16:25', 1, 2, 0.00, 1, 1, '2019-06-06 20:16:25', '2019-06-06 20:16:25'),
+(8, 2, NULL, 1, '2019-06-06 15:16:25', 1, 2, 0.00, 1, 1, '2019-06-06 20:16:25', '2019-06-06 20:16:25'),
+(24, 1, NULL, 1, '2019-06-08 00:44:51', 1, 2, 0.00, 1, 1, '2019-06-08 05:44:51', '2019-06-08 05:44:51'),
+(25, 2, NULL, 1, '2019-06-08 00:44:51', 1, 2, 0.00, 1, 1, '2019-06-08 05:44:51', '2019-06-08 05:44:51'),
+(26, 1, NULL, 1, '2019-06-08 00:59:00', 10, 2, 0.00, 1, 1, '2019-06-08 05:59:00', '2019-06-08 05:59:00'),
+(27, 2, NULL, 1, '2019-06-08 00:59:00', 10, 2, 0.00, 1, 1, '2019-06-08 05:59:00', '2019-06-08 05:59:00'),
+(29, 1, NULL, 1, '2019-06-10 14:10:13', 1, 2, 0.00, 1, 1, '2019-06-10 19:10:13', '2019-06-10 19:10:13'),
+(31, 1, NULL, 1, '2019-06-10 14:57:47', 1, 2, 0.00, 1, 1, '2019-06-10 19:57:47', '2019-06-10 19:57:47'),
+(35, 1, NULL, 1, '2019-06-17 21:55:05', 1, 2, 0.00, 1, 1, '2019-06-18 02:55:05', '2019-06-18 02:55:05'),
+(36, 1, NULL, 1, '2019-06-17 22:05:38', 1, 2, 0.00, 1, 1, '2019-06-18 03:05:38', '2019-06-18 03:05:38'),
+(37, 1, NULL, 1, '2019-06-21 16:41:27', 1, 2, 0.00, 1, 1, '2019-06-21 21:41:27', '2019-06-21 21:41:27'),
+(38, 2, NULL, 1, '2019-06-27 13:52:40', 1, 2, 0.00, 1, 1, '2019-06-27 18:52:40', '2019-06-27 18:52:40'),
+(39, 2, NULL, 1, '2019-06-27 13:53:57', 1, 2, 0.00, 1, 1, '2019-06-27 18:53:57', '2019-06-27 18:53:57'),
+(40, 19, NULL, 1, '2019-06-28 21:39:06', 100, 1, 100.00, 1, 1, '2019-06-29 02:39:06', '2019-06-29 02:39:06'),
+(41, 20, NULL, 1, '2019-06-28 21:42:25', 11, 1, 11.00, 1, 1, '2019-06-29 02:42:25', '2019-06-29 02:42:25'),
+(42, 21, NULL, 1, '2019-06-28 21:43:11', 100, 1, 100.00, 1, 1, '2019-06-29 02:43:11', '2019-06-29 02:43:11'),
+(45, 1, NULL, 1, '2019-07-04 16:34:12', 1, 2, 0.00, 1, 1, '2019-07-04 21:34:12', '2019-07-04 21:34:12'),
+(46, 1, NULL, 1, '2019-07-04 22:00:42', 1, 2, 0.00, 1, 1, '2019-07-05 03:00:42', '2019-07-05 03:00:42'),
+(47, 1, NULL, 1, '2019-07-04 22:01:58', 28, 2, 0.00, 1, 1, '2019-07-05 03:01:58', '2019-07-05 03:01:58'),
+(58, 30, NULL, 1, '2019-07-12 21:44:23', 0, 1, 0.00, 1, 1, '2019-07-13 02:44:23', '2019-07-13 02:44:23'),
+(59, 31, NULL, 1, '2019-07-15 16:32:27', 1000, 1, 1000.00, 1, 1, '2019-07-15 21:32:27', '2019-07-15 21:32:27'),
+(61, 33, NULL, 1, '2019-07-17 22:22:04', 100, 1, 100.00, 1, 1, '2019-07-18 03:22:04', '2019-07-18 03:22:04'),
+(64, 33, NULL, 1, '2019-08-06 15:56:14', 1, 2, 0.00, 1, 0, '2019-08-06 20:56:14', '2019-08-06 20:56:14'),
+(65, 33, NULL, 1, '2019-08-06 15:56:14', 1, 2, 0.00, 1, 0, '2019-08-06 20:56:14', '2019-08-06 20:56:14'),
+(74, 33, NULL, 1, '2019-08-06 21:38:17', 1, 2, 0.00, 1, 0, '2019-08-07 02:38:17', '2019-08-07 02:38:17'),
+(75, 33, NULL, 1, '2019-08-06 21:38:18', 2, 2, 0.00, 1, 0, '2019-08-07 02:38:18', '2019-08-07 02:38:18'),
+(76, 33, NULL, 1, '2019-08-08 17:30:18', 10, 2, 0.00, 1, 0, '2019-08-08 22:30:18', '2019-08-08 22:30:18'),
+(77, 33, NULL, 1, '2019-08-08 17:30:18', 20, 2, 0.00, 1, 0, '2019-08-08 22:30:18', '2019-08-08 22:30:18'),
+(79, 33, NULL, 1, '2019-08-09 01:51:15', 2, 2, 0.00, 1, 0, '2019-08-09 06:51:15', '2019-08-09 06:51:15'),
+(80, 1, NULL, 1, '2019-08-13 16:43:33', 1, 2, 0.00, 1, 0, '2019-08-13 21:43:33', '2019-08-13 21:43:33'),
+(81, 1, 4, 1, '2019-08-15 15:32:09', 1, 4, 0.00, 1, 0, '2019-08-15 20:32:09', '2019-08-15 20:32:09'),
+(88, 1, 1, 1, '2019-08-26 17:24:29', 1, 4, 0.00, 1, 0, '2019-08-26 22:24:29', '2019-08-26 22:24:29'),
+(89, 33, 1, 1, '2019-08-26 17:24:29', 2, 4, 0.00, 1, 0, '2019-08-26 22:24:29', '2019-08-26 22:24:29'),
+(90, 1, 1, 1, '2019-08-27 22:08:04', 1, 4, 0.00, 1, 0, '2019-08-28 03:08:04', '2019-08-28 03:08:04'),
+(91, 33, 1, 1, '2019-08-27 22:08:04', 2, 4, 0.00, 1, 0, '2019-08-28 03:08:04', '2019-08-28 03:08:04'),
+(92, 1, 1, 1, '2019-08-27 22:09:34', 1, 4, 0.00, 1, 0, '2019-08-28 03:09:34', '2019-08-28 03:09:34'),
+(93, 33, 1, 1, '2019-08-27 22:09:34', 2, 4, 0.00, 1, 0, '2019-08-28 03:09:34', '2019-08-28 03:09:34'),
+(94, 1, 1, 1, '2019-08-27 22:09:47', 1, 4, 0.00, 1, 0, '2019-08-28 03:09:47', '2019-08-28 03:09:47'),
+(95, 33, 1, 1, '2019-08-27 22:09:47', 2, 4, 0.00, 1, 0, '2019-08-28 03:09:47', '2019-08-28 03:09:47'),
+(96, 33, 5, 1, '2019-09-02 16:39:21', 1, 4, 0.00, 1, 0, '2019-09-02 21:39:21', '2019-09-02 21:39:21'),
+(97, 33, 6, 1, '2019-09-02 17:17:01', 1, 4, 0.00, 1, 0, '2019-09-02 22:17:01', '2019-09-02 22:17:01'),
+(98, 33, 6, 1, '2019-09-02 17:17:01', 2, 4, 0.00, 1, 0, '2019-09-02 22:17:01', '2019-09-02 22:17:01'),
+(99, 33, 6, 1, '2019-09-02 17:17:01', 3, 4, 0.00, 1, 0, '2019-09-02 22:17:01', '2019-09-02 22:17:01'),
+(100, 21, 7, 1, '2019-09-02 22:03:56', 1, 4, 0.00, 1, 0, '2019-09-03 03:03:56', '2019-09-03 03:03:56'),
+(101, 21, 7, 1, '2019-09-02 22:03:56', 2, 4, 0.00, 1, 0, '2019-09-03 03:03:56', '2019-09-03 03:03:56'),
+(102, 21, 7, 1, '2019-09-02 22:03:56', 3, 4, 0.00, 1, 0, '2019-09-03 03:03:56', '2019-09-03 03:03:56'),
+(103, 34, NULL, 1, '2019-09-04 22:01:16', 1000, 1, 1000.00, 1, 1, '2019-09-05 03:01:16', '2019-09-05 03:01:16'),
+(104, 35, NULL, 1, '2019-09-04 22:01:36', 1000, 1, 1000.00, 1, 1, '2019-09-05 03:01:36', '2019-09-05 03:01:36'),
+(105, 34, 8, 1, '2019-09-28 20:26:20', 10, 4, 0.00, 1, 0, '2019-09-29 01:26:20', '2019-09-29 01:26:20'),
+(106, 34, 8, 1, '2019-09-28 20:46:18', 10, 4, 0.00, 1, 0, '2019-09-29 01:46:18', '2019-09-29 01:46:18'),
+(107, 34, 8, 1, '2019-09-28 20:49:42', 10, 4, 0.00, 1, 0, '2019-09-29 01:49:42', '2019-09-29 01:49:42'),
+(108, 34, 8, 1, '2019-09-28 20:54:25', 10, 4, 0.00, 1, 0, '2019-09-29 01:54:25', '2019-09-29 01:54:25'),
+(109, 34, 8, 1, '2019-09-28 20:56:34', 10, 4, 0.00, 1, 0, '2019-09-29 01:56:34', '2019-09-29 01:56:34'),
+(110, 35, NULL, 1, '2019-10-02 15:40:23', 10, 1, 10.00, 1, 1, '2019-10-02 20:40:23', '2019-10-02 20:40:23');
+
 -- --------------------------------------------------------
 
 --
@@ -2668,6 +3328,22 @@ CREATE TABLE `und_medidas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `und_medidas`
+--
+
+INSERT INTO `und_medidas` (`id`, `nombre`, `estado`, `id_empresa`, `usu_crea`, `created_at`, `updated_at`) VALUES
+(1, 'Unidad 1', 1, 1, 1, NULL, '2019-05-28 02:22:51'),
+(2, 'Unidad 2', 1, 1, 1, NULL, NULL),
+(3, 'Unidad 3', 1, 2, 1, '2019-02-13 02:00:08', '2019-05-27 19:42:39'),
+(4, 'Unidad 3', 1, 1, 1, '2019-08-09 21:38:59', '2019-08-09 21:39:13'),
+(5, 'Unidad 4', 1, 1, 1, '2019-08-09 21:39:24', '2019-08-09 21:39:50'),
+(6, 'unidad6', 1, 1, 1, '2019-08-22 01:42:01', '2019-08-22 01:42:01'),
+(7, 'unidad7', 0, 1, 1, '2019-08-22 01:42:12', '2019-08-22 01:52:48'),
+(8, 'Unidad8', 0, 1, 1, '2019-08-22 01:42:30', '2019-08-22 01:52:17'),
+(9, 'Unidad9', 0, 1, 1, '2019-08-22 01:43:20', '2019-08-22 01:49:50'),
+(10, 'Unidad', 1, 1, 1, '2019-09-29 02:53:42', '2019-09-29 02:53:42');
 
 -- --------------------------------------------------------
 
@@ -2690,7 +3366,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `usuario`, `password`, `condicion`, `idrol`, `remember_token`, `empresas_id`) VALUES
-(1, 'cristhiam', '$2y$10$uINPVrLKmyXN4/5/0ScOJOVpxtPwUcBcxxQMBQdiI14KQbl6I/Bqu', 1, 1, 'ufKecV9OK8QYHzkCAM7kBpwiRFKBP7ez9lTODZbWaixNLaOxFTycI2aYgMk0', 1),
+(1, 'cristhiam', '$2y$10$uINPVrLKmyXN4/5/0ScOJOVpxtPwUcBcxxQMBQdiI14KQbl6I/Bqu', 1, 1, 'tVZJiDUFhTZLFmWm7xBkkWYzjFom39Wex5IRAXuYJ9mWLeOr1JhzjAoLoPNP', 1),
 (9, 'fabian', '$2a$04$sFjAmm8DXjqbVqFSljmMmOj2EMwEFJpodtSBx61eCq5c4CM4pCI8a', 1, 1, 'DzQkQzGW65CdQbUwclj62zg3eLdMln0DkUnPfT2KM94bpVaYeWdIqzKLxeFh', 2),
 (8, 'ismael', '$2a$04$sFjAmm8DXjqbVqFSljmMmOj2EMwEFJpodtSBx61eCq5c4CM4pCI8a', 1, 1, 'wo8sErJvqxHw6lqjANBc726TFZ77DUE4FjoCr8shrQh3weAFc5OU99HVPQJH', 1),
 (2, 'jessica', '$2a$04$sFjAmm8DXjqbVqFSljmMmOj2EMwEFJpodtSBx61eCq5c4CM4pCI8a', 1, 1, 'M7JgIZYa1SfrgoD3GAQy53NSngaceRtHydF3OSnE2I6TB5MlGfJBsDc7f63e', 1);
@@ -2720,11 +3396,25 @@ INSERT INTO `zona` (`id`, `zona`, `observacion`, `estado`, `id_empresa`, `usu_cr
 (1, 'Zona 1', 'lajflkaj', 1, 1, 1, '2019-05-20 19:34:32', '2019-05-20 19:52:59'),
 (2, 'Zona 2', NULL, 1, 1, 1, '2019-05-20 19:52:52', '2019-05-20 19:52:52'),
 (3, 'Zona 3', 'ksksksksks', 1, 1, 1, '2019-05-20 19:53:08', '2019-05-28 21:46:19'),
-(4, 'Zona 2', NULL, 1, 2, 1, '2019-05-20 19:52:52', '2019-05-20 19:52:52');
+(4, 'Zona 2', NULL, 1, 2, 1, '2019-05-20 19:52:52', '2019-05-20 19:52:52'),
+(5, 'Zona 4', NULL, 1, 1, 1, '2019-08-22 01:32:31', '2019-08-22 01:32:31'),
+(6, 'Zona 5', NULL, 1, 1, 1, '2019-08-22 01:34:29', '2019-08-22 01:47:49');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `abono_cobrar`
+--
+ALTER TABLE `abono_cobrar`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `abono_pagar`
+--
+ALTER TABLE `abono_pagar`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `articulos`
@@ -2797,6 +3487,18 @@ ALTER TABLE `cuentas`
   ADD KEY `usuario` (`usuario`);
 
 --
+-- Indices de la tabla `cuentas_x_cobrar`
+--
+ALTER TABLE `cuentas_x_cobrar`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `cuentas_x_pagar`
+--
+ALTER TABLE `cuentas_x_pagar`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
@@ -2863,6 +3565,18 @@ ALTER TABLE `evidencias_ingresos`
 -- Indices de la tabla `facturacion`
 --
 ALTER TABLE `facturacion`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `facturacion_num_factura_unique` (`num_factura`),
+  ADD KEY `facturacion_id_tercero_foreign` (`id_tercero`),
+  ADD KEY `facturacion_id_usuario_foreign` (`id_usuario`),
+  ADD KEY `facturacion_usu_registra_foreign` (`usu_registra`),
+  ADD KEY `facturacion_usu_envia_foreign` (`usu_envia`),
+  ADD KEY `facturacion_usu_anula_foreign` (`usu_anula`);
+
+--
+-- Indices de la tabla `facturacion_otra`
+--
+ALTER TABLE `facturacion_otra`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `facturacion_num_factura_unique` (`num_factura`),
   ADD KEY `facturacion_id_tercero_foreign` (`id_tercero`),
@@ -3070,46 +3784,58 @@ ALTER TABLE `zona`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `abono_cobrar`
+--
+ALTER TABLE `abono_cobrar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT de la tabla `abono_pagar`
+--
+ALTER TABLE `abono_pagar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
 -- AUTO_INCREMENT de la tabla `articulos`
 --
 ALTER TABLE `articulos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `bancos`
 --
 ALTER TABLE `bancos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `cajas`
 --
 ALTER TABLE `cajas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `cajas_cierres`
 --
 ALTER TABLE `cajas_cierres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `colaboradores`
 --
 ALTER TABLE `colaboradores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `concentraciones`
 --
 ALTER TABLE `concentraciones`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `conf_formatos`
@@ -3121,13 +3847,25 @@ ALTER TABLE `conf_formatos`
 -- AUTO_INCREMENT de la tabla `con_tarifarios`
 --
 ALTER TABLE `con_tarifarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+
+--
+-- AUTO_INCREMENT de la tabla `cuentas_x_cobrar`
+--
+ALTER TABLE `cuentas_x_cobrar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+
+--
+-- AUTO_INCREMENT de la tabla `cuentas_x_pagar`
+--
+ALTER TABLE `cuentas_x_pagar`
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
@@ -3139,19 +3877,19 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT de la tabla `detalle_egresos`
 --
 ALTER TABLE `detalle_egresos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_facturacion`
 --
 ALTER TABLE `detalle_facturacion`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_ingresos`
 --
 ALTER TABLE `detalle_ingresos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT de la tabla `docs_formatos`
@@ -3163,7 +3901,7 @@ ALTER TABLE `docs_formatos`
 -- AUTO_INCREMENT de la tabla `egresos`
 --
 ALTER TABLE `egresos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `empresas`
@@ -3175,31 +3913,37 @@ ALTER TABLE `empresas`
 -- AUTO_INCREMENT de la tabla `evidencias_egresos`
 --
 ALTER TABLE `evidencias_egresos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `evidencias_ingresos`
 --
 ALTER TABLE `evidencias_ingresos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `facturacion`
 --
 ALTER TABLE `facturacion`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `facturacion_otra`
+--
+ALTER TABLE `facturacion_otra`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `formatos`
 --
 ALTER TABLE `formatos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT de la tabla `formatos_procesos`
 --
 ALTER TABLE `formatos_procesos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `informes_contables`
@@ -3211,13 +3955,13 @@ ALTER TABLE `informes_contables`
 -- AUTO_INCREMENT de la tabla `ingresos`
 --
 ALTER TABLE `ingresos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de la tabla `iva`
 --
 ALTER TABLE `iva`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -3229,25 +3973,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `modelo_contable`
 --
 ALTER TABLE `modelo_contable`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `modulos`
 --
 ALTER TABLE `modulos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `modulos_empresas`
 --
 ALTER TABLE `modulos_empresas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT de la tabla `modulos_empresas_usuarios`
 --
 ALTER TABLE `modulos_empresas_usuarios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=757;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=839;
 
 --
 -- AUTO_INCREMENT de la tabla `municipios`
@@ -3271,37 +4015,37 @@ ALTER TABLE `personas`
 -- AUTO_INCREMENT de la tabla `plan_cuentas`
 --
 ALTER TABLE `plan_cuentas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `plan_cuentas_categorias`
 --
 ALTER TABLE `plan_cuentas_categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `presentacion`
 --
 ALTER TABLE `presentacion`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `productos_asociados`
 --
 ALTER TABLE `productos_asociados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `productos_iva`
 --
 ALTER TABLE `productos_iva`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=346;
 
 --
 -- AUTO_INCREMENT de la tabla `productos_tarifarios`
 --
 ALTER TABLE `productos_tarifarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT de la tabla `retenciones`
@@ -3319,67 +4063,25 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `roles_permisos`
 --
 ALTER TABLE `roles_permisos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=339;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=404;
 
 --
 -- AUTO_INCREMENT de la tabla `stock`
 --
 ALTER TABLE `stock`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT de la tabla `und_medidas`
 --
 ALTER TABLE `und_medidas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `zona`
 --
 ALTER TABLE `zona`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `modulos`
---
-ALTER TABLE `modulos`
-  ADD CONSTRAINT `modulos_usu_crea_foreign` FOREIGN KEY (`usu_crea`) REFERENCES `users` (`id`);
-
---
--- Filtros para la tabla `modulos_empresas`
---
-ALTER TABLE `modulos_empresas`
-  ADD CONSTRAINT `modulos_empresas_ibfk_1` FOREIGN KEY (`usu_crea`) REFERENCES `users` (`id`);
-
---
--- Filtros para la tabla `modulos_empresas_usuarios`
---
-ALTER TABLE `modulos_empresas_usuarios`
-  ADD CONSTRAINT `modulos_empresas_usuarios_ibfk_1` FOREIGN KEY (`usu_crea`) REFERENCES `users` (`id`);
-
---
--- Filtros para la tabla `municipios`
---
-ALTER TABLE `municipios`
-  ADD CONSTRAINT `municipios_ibfk_1` FOREIGN KEY (`id_departamento`) REFERENCES `departamentos` (`id`);
-
---
--- Filtros para la tabla `roles_permisos`
---
-ALTER TABLE `roles_permisos`
-  ADD CONSTRAINT `roles_permisos_ibfk_1` FOREIGN KEY (`usu_crea`) REFERENCES `users` (`id`);
-
---
--- Filtros para la tabla `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`empresas_id`) REFERENCES `empresas` (`id`),
-  ADD CONSTRAINT `users_id_foreign` FOREIGN KEY (`id`) REFERENCES `personas` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `users_idrol_foreign` FOREIGN KEY (`idrol`) REFERENCES `roles` (`id`);
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
