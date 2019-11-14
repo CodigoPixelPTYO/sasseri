@@ -18,7 +18,7 @@
                                 <i class="icon-plus"></i>&nbsp;Nuevo
                             </button>
 
-                            <template v-if="permisosUser.actualizar">
+                            <!--<template v-if="permisosUser.actualizar">
                                 <button v-if="id_caja_facturacion!=0" type="button" @click="mostrarDetalle('cierres_caja','cerrar_caja')" v-show="listado==1" class="btn btn-primary">
                                     <i class="icon-plus"></i>&nbsp;Cerrar caja
                                 </button>
@@ -33,7 +33,7 @@
                                 <button v-else type="button" v-show="listado==1" class="btn btn-secondary">
                                     <i class="icon-plus"></i>&nbsp;Abrir caja
                                 </button>
-                            </template>
+                            </template>-->
                         </div>
                         <div class="col-md-6 float-right">
                             <span v-if="nom_caja_cierre_facturacion && nom_caja_cierre_facturacion!=''" v-text="'Usted esta en la caja: '+nom_caja_cierre_facturacion"></span>
@@ -808,7 +808,7 @@
             <!-- Fin Modal buscar tercero -->
 
             <!-- Modal actualizar cierre de caja -->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modalCierreCaja}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <!--<div class="modal fade" tabindex="-1" :class="{'mostrar' : modalCierreCaja}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -893,7 +893,7 @@
                                                 </button>
                                                 <button v-else type="button" class="btn btn-secondary btn-sm">
                                                     <i class="icon-eye"></i>
-                                                </button> &nbsp;
+                                                </button> &nbsp;-->
 
                                                 <!--<button v-if="permisosUser.actualizar && cierre_caja.estado" type="button" @click="mostrarDetalle('cierres_caja','actualizar',cierre_caja)" class="btn btn-warning btn-sm">
                                                     <i class="icon-pencil"></i>
@@ -902,7 +902,7 @@
                                                     <i class="icon-pencil"></i>
                                                 </button> &nbsp;-->
 
-                                                <template v-if="permisosUser.actualizar">
+                                                <!--<template v-if="permisosUser.actualizar">
                                                     <button v-if="cierre_caja.estado==1" type="button" class="btn btn-warning btn-sm" @click="mostrarDetalle('cierres_caja','cerrar_caja',cierre_caja)">
                                                         <i class="fa fa-window-close"></i>
                                                     </button>
@@ -987,7 +987,7 @@
                             <button type="button" v-if="tipoAccionCierre==1" class="btn btn-primary" @click="registrarCierreXCaja()">Guardar</button>
                             <button type="button" v-if="tipoAccionCierre==2" class="btn btn-primary" @click="cerrarCierreXCaja(id_cierre_caja_facturacion)">Cerrar Caja</button>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </main>
@@ -1397,7 +1397,16 @@
 
                     if(ban==0 || ban==1)
                     {
-                        me.mostrarDetalle('cierres_caja','registrar');
+                        // me.mostrarDetalle('cierres_caja','registrar');
+                        Swal.fire({
+                            // toast: true,
+                            // position: 'top-end',
+                            type: 'error',
+                            title: 'Abir caja',
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 1700
+                        })
                     }
                     else
                     {
@@ -1417,7 +1426,16 @@
 
                         if(ban==2)
                         {
-                            me.mostrarDetalle('cierres_caja','listar_cierres',me.arrayCierresXCajas[0]);
+                            // me.mostrarDetalle('cierres_caja','listar_cierres',me.arrayCierresXCajas[0]);
+                            Swal.fire({
+                                // toast: true,
+                                // position: 'top-end',
+                                type: 'error',
+                                title: 'Abir caja',
+                                position: 'center',
+                                showConfirmButton: false,
+                                timer: 1700
+                            })
                         }
                     }
                 })

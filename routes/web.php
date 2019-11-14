@@ -369,10 +369,20 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/cajas/desactivar', 'CajasController@desactivar');
         Route::put('/cajas/activar', 'CajasController@activar');
 
+        Route::get('/cajas_admin', 'CajasAdminController@index');
+        Route::post('/cajas_admin/registrar', 'CajasAdminController@store');
+        Route::put('/cajas_admin/actualizar', 'CajasAdminController@update');
+        Route::get('/cajas_admin/selectCajasAdmin', 'CajasAdminController@selectCajasAdmin');
+        Route::get('/cajas_admin/listarCajasAdmin', 'CajasAdminController@listarCajasAdmin');
+        Route::get('/cajas_admin/listarCajerosAdmin', 'CajasAdminController@listarCajerosAdmin');
+        Route::put('/cajas_admin/desactivar', 'CajasAdminController@desactivar');
+        Route::put('/cajas_admin/activar', 'CajasAdminController@activar');
+
         Route::get('/cierres_caja', 'CierresXCajaController@index');
         Route::post('/cierres_caja/registrar', 'CierresXCajaController@store');
         Route::put('/cierres_caja/actualizar', 'CierresXCajaController@update');
         Route::get('/cierres_caja/SelectCierreXCaja', 'CierresXCajaController@SelectCierreXCaja');
+        Route::get('/cierres_caja/consultarCierreXCaja', 'CierresXCajaController@consultarCierreXCaja');
         Route::get('/cierres_caja/consultarCajas', 'CierresXCajaController@consultarCajas');
         Route::put('/cierres_caja/desactivar', 'CierresXCajaController@desactivar');
         Route::put('/cierres_caja/activar', 'CierresXCajaController@activar');

@@ -68,7 +68,16 @@ class CajasController extends Controller
 
         $cajas = Cajas::select('id','nombre')->where('id_empresa','=',$id_empresa)->orderBy('nombre', 'asc')->get();
         
-        return ['cajas' => $cajas];
+        $cajas2 = [];
+        if(isset($request->id_caja))
+        {
+            $cajas2 = Cajas::select('id','nombre')->where('id','=',$request->id_caja)->get();
+        }
+        
+        return [
+            'cajas' => $cajas,
+            'cajas2' => $cajas2
+        ];
     }
 
     public function store(Request $request)

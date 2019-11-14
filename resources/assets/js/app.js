@@ -50,6 +50,7 @@ Vue.component('con_tarifario', require('./components/ConTarifario.vue'));
 Vue.component('iva', require('./components/Iva.vue'));
 Vue.component('formato_procesos', require('./components/FormatoProceso.vue'));
 Vue.component('cajas', require('./components/Cajas.vue'));
+Vue.component('cajas_admin', require('./components/CajasAdmin.vue'));
 Vue.component('cierrescaja', require('./components/CierresXCaja.vue'));
 Vue.component('informes', require('./components/Informes.vue'));
 Vue.component('cuentasxcobrar', require('./components/CuentasxCobrar.vue'));
@@ -62,7 +63,8 @@ const app = new Vue({
         menu : 0,
         // ruta : 'http://192.168.0.100/laravel_estudio/sistema2/public',
         // ruta : 'http://localhost/laravel_estudio/sistema2/public',
-        ruta : 'http://localhost/sistema2/public',
+        // ruta : 'http://localhost/sistema2/public',
+        ruta : 'http://fractalagenciadigital.com/sistema/public',
         permisosUser : []
     },
 

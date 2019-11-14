@@ -64,6 +64,16 @@ class CierresXCajaController extends Controller
         return ['cierres_caja' => $cierres_caja];
     }
 
+    public function consultarCierreXCaja(Request $request){
+        // if (!$request->ajax()) return redirect('/');
+        $id_empresa = $request->session()->get('id_empresa');
+        $id_usuario = Auth::user()->id;
+
+        $cierres_caja = CierresXCaja::where('id_caja','=',$request->id)->orderBy('id','desc')->limit(1)->get();
+        
+        return ['cierres_caja' => $cierres_caja];
+    }
+
     public function consultarCajas(Request $request){
         // if (!$request->ajax()) return redirect('/');
         $id_empresa = $request->session()->get('id_empresa');
@@ -106,7 +116,7 @@ class CierresXCajaController extends Controller
         $cierres_caja->obs_gastos = $request->obs_gastos;
         $cierres_caja->vr_software = 0;
         $cierres_caja->vr_final = $request->vr_final;
-        $cierres_caja->usu_crea = $id_usuario;
+        $cierres_caja->usu_crea = $request->id_cajero;
         $cierres_caja->id_empresa = $id_empresa;
         $cierres_caja->save();
     }
