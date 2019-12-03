@@ -61,7 +61,7 @@ const app = new Vue({
     el: '#app', 
     data :{
         menu : 0,
-        // ruta : 'http://192.168.0.100/laravel_estudio/sistema2/public',
+        // ruta : 'http://192.168.0.115/laravel_estudio/sistema2/public',
         // ruta : 'http://localhost/laravel_estudio/sistema2/public',
         // ruta : 'http://localhost/sistema2/public',
         ruta : 'http://fractalagenciadigital.com/sistema/public',

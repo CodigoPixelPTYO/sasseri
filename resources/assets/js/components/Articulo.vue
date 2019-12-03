@@ -375,6 +375,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
+                                    <img v-if="`${$refs.inputFileImg}`" :src="`${refs.inputFileImg.value}`" height="40" width="40">
                                 </div>
                             </div>
                             <!--<div class="row">
